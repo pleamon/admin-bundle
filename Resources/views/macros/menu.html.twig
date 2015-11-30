@@ -22,7 +22,7 @@
     {% for subItem in menu.items %}
         {% if subItem.route == _route %}
             {% set active = true %}
-        {% elseif subItem.route == default %}
+        {% elseif default and subItem.route == default %}
             {% set active = true %}
         {% endif %}
     {% endfor %}
