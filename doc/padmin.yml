@@ -1,0 +1,18 @@
+p_admin:
+    title: 示例
+    search:
+        route: test
+        text: 搜索
+    menus:
+        home:
+            route: example_oa_homepage
+            label: <span class='label label-warning pull-right'>16/24</span>
+            icon: 'fa fa-th-large'
+            text: 首页
+        usermanager:
+            text: 用户管理
+            icon: 'fa fa-diamond'
+            items:
+                list:
+                    route: example_oa_userlist
+                    text: 用户列表
