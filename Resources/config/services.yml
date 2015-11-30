@@ -1,0 +1,21 @@
+parameters:
+    p.admin.admin_pool.class: P\AdminBundle\Service\AdminPool
+    p.admin.listener.filter_route_role.class: P\AdminBundle\Listener\FilterRouteRoleListener
+    p.admin.twig.array_extensions.class: P\AdminBundle\Twig\ArrayExtension
+services:
+    p_admin.pool:
+        class: %p.admin.admin_pool.class%
+        arguments: 
+            - @service_container
+
+    p_admin.listener.filter_route_role:
+        class: %p.admin.listener.filter_route_role.class%
+        arguments:
+            - @service_container
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    p_admin.twig.array_extensions:
+        class: %p.admin.twig.array_extensions.class%
+        tags:
+            - { name: twig.extension }

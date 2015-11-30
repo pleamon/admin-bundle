@@ -1,0 +1,7 @@
+{% extends 'PAdminBundle:layout:base.html.twig' %}
+
+{% import 'PAdminBundle:macros:menu.html.twig' as menus %}
+
+{% block menus %}
+    {{ menus.render_menus(admin_menus) }}
+{% endblock %}

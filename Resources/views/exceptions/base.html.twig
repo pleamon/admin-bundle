@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>404</title>
+
+    {% stylesheets filter="cssrewrite"
+    '@PAdminBundle/Resources/public/css/bootstrap.min.css'
+    '@PAdminBundle/Resources/public/font-awesome/css/font-awesome.css'
+    '@PAdminBundle/Resources/public/css/animate.css'
+    '@PAdminBundle/Resources/public/css/style.css'
+    %}
+    <link rel="stylesheet" type="text/css" href="{{ asset(asset_url) }}" />
+    {% endstylesheets %}
+
+
+
+</head>
+
+<body class="gray-bg">
+
+
+    <div class="middle-box text-center animated fadeInDown">
+        <h1>{% block error_code %}{% endblock %}</h1>
+        <h3 class="font-bold">{% block error_info %}{% endblock %}</h3>
+
+        <div class="error-desc">
+            <div>
+                {% block error_desc %}
+                {% endblock %}
+            </div>
+            <br />
+            <div>
+                {% block error_option %}
+                <form class="form-inline m-t" role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search for page">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    {% javascripts
+    '@PAdminBundle/Resources/public/js/jquery-2.1.1.js'
+    '@PAdminBundle/Resources/public/js/bootstrap.min.js'
+    %}
+    <script type="text/javascript" src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
+
+</body>
+
+</html>

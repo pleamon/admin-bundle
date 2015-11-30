@@ -1,0 +1,11 @@
+{% extends 'PAdminBundle:exceptions:base.html.twig' %}
+{% block error_code %}404{% endblock %}
+{% block error_info %}Page Not Found{% endblock %}
+{% block error_desc %}
+Sorry, but the page you are looking for has note been found. Try checking the URL for error, then hit the refresh button on your browser or try found something else in our app.
+{% endblock %}
+
+{% block error_option %}
+<a href="{{ app.request.headers.get('referer') }}" class="btn btn-primary">返回上一页</a>
+<a href="/" class="btn btn-primary">返回首页</a>
+{% endblock %}

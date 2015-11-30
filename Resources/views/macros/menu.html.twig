@@ -1,0 +1,70 @@
+{% macro render_item(key, menu) %}
+{% import _self as menus%}
+
+{% set _route   = app.request.get('_route') %}
+{% set default  = admin_pool.getRoute(_route).options.default|default(null) %}
+{% set roles    = admin_pool.getRoute(menu.route).options.role|default([]) %}
+
+{% set active = false %}
+{% set href = '#' %}
+
+{% if menu.url %}
+    {% set href = menu.url %}
+{% elseif menu.route %}
+    {% set href = path(menu.route) %}
+{% endif %}
+
+{% if _route == menu.route %}
+    {% set active = true %}
+{% elseif default and default == menu.route %}
+    {% set active = true %}
+{% elseif menu.items is defined %}
+    {% for subItem in menu.items %}
+        {% if subItem.route == _route %}
+            {% set active = true %}
+        {% elseif subItem.route == default %}
+            {% set active = true %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% set hasRole = true %}
+{% if roles|length %}
+    {% set hasRole = app.user.roles|arrayIntersect(roles)|length > 0 %}
+{% endif %}
+
+{% if hasRole %}
+<li class="{{ active ? 'active' : ''}}">
+    <a href="{{ href }}">
+        {% if menu.icon %}
+            <i class="{{ menu.icon }}"></i>
+        {% endif %}
+        {% if menu.children is defined %}
+        {{ menu.text }}
+        {% else %}
+        <span class="nav-label">{{ menu.text }}</span>
+        {% endif %}
+        {% if menu.items|default(null) %}
+            <span class="fa arrow"></span>
+        {% endif %}
+        {% if menu.label|default(null) %}
+            {{ menu.label|raw }}
+        {% endif %}
+    </a>
+    {% if menu.items|default(null) %}
+        <ul class="nav nav-second-level collapse">
+            {% for subItem in menu.items %}
+                {{ menus.render_item(key, subItem) }}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</li>
+{% endif %}
+{% endmacro %}
+
+{% macro render_menus(menus) %}
+{% import _self as _menus %}
+    {% for key, menu in menus %}
+        {{ _menus.render_item(key, menu) }}
+    {% endfor %}
+{% endmacro %}

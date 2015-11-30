@@ -1,0 +1,11 @@
+{% extends 'PAdminBundle:exceptions:base.html.twig' %}
+{% block error_code %}403{% endblock %}
+{% block error_info %}权限不足{% endblock %}
+{% block error_desc %}
+您没有权限访问这个页面
+{% endblock %}
+
+{% block error_option %}
+<a href="{{ app.request.headers.get('referer') }}" class="btn btn-primary">返回上一页</a>
+<a href="/" class="btn btn-primary">返回首页</a>
+{% endblock %}

@@ -1,0 +1,21 @@
+{
+    "name": "p/admin-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "李冰凌",
+            "email": "pleamon.li@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "P\\AdminBundle\\": ""
+        }
+    }
+}
