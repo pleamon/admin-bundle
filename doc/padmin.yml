@@ -3,6 +3,7 @@ p_admin:
     search:
         route: test
         text: 搜索
+    base_template: "ExampleOaBundle::standard_layout.html.twig"
     menus:
         home:
             route: example_oa_homepage

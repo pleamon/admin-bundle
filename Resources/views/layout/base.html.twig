@@ -9,11 +9,17 @@
     {% stylesheets filter="cssrewrite"
     '@PAdminBundle/Resources/public/css/bootstrap.min.css'
     '@PAdminBundle/Resources/public/font-awesome/css/font-awesome.css'
+    '@PAdminBundle/Resources/public/css/plugins/select2/select2.min.css'
     '@PAdminBundle/Resources/public/css/animate.css'
     '@PAdminBundle/Resources/public/css/style.css'
     %}
     <link rel="stylesheet" type="text/css" href="{{ asset(asset_url) }}" />
     {% endstylesheets %}
+    {% javascripts
+    '@PAdminBundle/Resources/public/js/jquery-2.1.1.js'
+    %}
+    <script type="text/javascript" src="{{ asset(asset_url) }}"></script>
+    {% endjavascripts %}
 
 </head>
 <body>
@@ -108,12 +114,13 @@
 
 <!-- Mainly scripts -->
     {% javascripts
-    '@PAdminBundle/Resources/public/js/jquery-2.1.1.js'
     '@PAdminBundle/Resources/public/js/bootstrap.min.js'
     '@PAdminBundle/Resources/public/js/plugins/metisMenu/jquery.metisMenu.js'
     '@PAdminBundle/Resources/public/js/plugins/slimscroll/jquery.slimscroll.min.js'
     '@PAdminBundle/Resources/public/js/inspinia.js'
     '@PAdminBundle/Resources/public/js/plugins/pace/pace.min.js'
+    '@PAdminBundle/Resources/public/js/plugins/select2/select2.full.min.js'
+    '@PAdminBundle/Resources/public/js/padmin.js'
     %}
     <script type="text/javascript" src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}

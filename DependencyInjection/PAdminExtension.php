@@ -24,6 +24,7 @@ class PAdminExtension extends Extension
         $container->setParameter('p.admin.menus', $config['menus']);
         $container->setParameter('p.admin.title', $config['title']);
         $container->setParameter('p.admin.search', $config['search']);
+        $container->setParameter('p.admin.base_template', $config['base_template']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
