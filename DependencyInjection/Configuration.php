@@ -40,6 +40,7 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('PAdminBundle:layout:layout.html.twig')
                 ->end()
                 ->arrayNode('search')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('text')->defaultValue('')->end()
                         ->scalarNode('route')->defaultValue('')->end()
