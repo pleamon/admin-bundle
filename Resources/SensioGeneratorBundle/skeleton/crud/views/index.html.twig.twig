@@ -1,0 +1,68 @@
+{% block extends %}
+{{ "{% extends 'PAdminBundle:layout:ibox.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% block ibox_title -%}列表{% endblock %}" }}
+{{
+"{% block ibox_tools -%}
+    <a class=\"btn btn-outline btn-info\" href=\"{{ path(\"" ~ route_name_prefix ~ "_new\") }}\">创建</a>
+{% endblock %}"
+}}
+{{ "{% block ibox_content -%}" }}
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label class="control-label" for="">{{ entity }}</label>
+            <input type="text" id="" name="" value="" placeholder="{{ entity }}" class="form-control">
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            {%- for field, metadata in fields %}
+                <th>{{ field|capitalize }}</th>
+            {%- endfor %}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{ '{% for entity in entities %}' }}
+            <tr>
+
+        {%- for field, metadata in fields %}
+            {%- if loop.first and ('show' in actions) %}
+
+                <td><a href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { 'id': entity."~ identifier ~" }) }}" }}">{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</a></td>
+
+            {%- elseif metadata.type in ['date', 'datetime'] %}
+
+                <td>{{ '{% if entity.' ~ field|replace({'_': ''}) ~ ' %}{{ entity.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}{% endif %}' }}</td>
+
+            {%- else %}
+
+                <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</td>
+
+            {%- endif %}
+
+            {%- if loop.last %}
+
+                <td>
+
+                    {%- include "crud/views/others/actions.html.twig.twig" %}
+
+                </td>
+
+            {%- endif %}
+        {%- endfor %}
+
+            </tr>
+        {{ '{% endfor %}' }}
+        </tbody>
+    </table>
+</div>
+{{ "{% endblock %}" }}
+{% endblock body %}

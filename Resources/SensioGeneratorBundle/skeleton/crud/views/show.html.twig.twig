@@ -1,0 +1,45 @@
+{% block extends %}
+{{ "{% extends 'PAdminBundle:layout:ibox.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+
+{{ "{% block ibox_title -%}编辑{% endblock %}" }}
+
+{{
+"{% block ibox_tools -%}
+    <a class=\"btn btn-outline btn-info\" href=\"{{ path(\"" ~ route_name_prefix ~ "\") }}\">返回列表</a>
+{% endblock %}"
+}}
+
+
+{{ "{% block ibox_content -%}" }}
+    <table class="table">
+        <tbody>
+        {%- for field, metadata in fields %}
+
+            <tr>
+                <th>{{ field|capitalize }}</th>
+
+            {%- if metadata.type in ['date', 'datetime'] %}
+
+                <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}' }}</td>
+
+            {%- else %}
+
+                <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</td>
+
+            {%- endif %}
+
+            </tr>
+
+        {%- endfor %}
+
+        </tbody>
+    </table>
+
+    {% set hide_edit, hide_delete = true, false %}
+    {% include 'crud/views/others/record_actions.html.twig.twig' %}
+
+{{ "{% endblock %}" }}
+{% endblock body %}

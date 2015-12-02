@@ -1,0 +1,26 @@
+{% block extends %}
+{{ "{% extends 'PAdminBundle:layout:ibox.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+
+{{ "{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}" }}
+{{ "{% form_theme delete_form 'bootstrap_3_layout.html.twig' %}" }}
+
+{{ "{% block ibox_title -%}编辑{% endblock %}" }}
+{{
+"{% block ibox_tools -%}
+    <a class=\"btn btn-outline btn-info\" href=\"{{ path(\"" ~ route_name_prefix ~ "\") }}\">返回列表</a>
+{% endblock %}"
+}}
+
+{{ "{% block ibox_content -%}" }}
+
+    {{ '{{ form(edit_form) }}' }}
+
+    {% set hide_edit, hide_delete = true, false %}
+
+    {{ '{{ form(delete_form) }}' }}
+
+{{ "{% endblock %}" }}
+{% endblock body %}
