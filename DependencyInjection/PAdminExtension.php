@@ -21,10 +21,10 @@ class PAdminExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $container->setParameter('p.admin.menus', $config['menus']);
-        $container->setParameter('p.admin.title', $config['title']);
-        $container->setParameter('p.admin.search', $config['search']);
-        $container->setParameter('p.admin.base_template', $config['base_template']);
+        $container->setParameter('p.admin.menus', isset($config['menus'])?$config['menus']:'');
+        $container->setParameter('p.admin.title', isset($config['title'])?$config['title']:'');
+        $container->setParameter('p.admin.search', isset($config['search'])?$config['search']:'');
+        $container->setParameter('p.admin.base_template', isset($config['base_template'])?$config['base_template']:'');
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
