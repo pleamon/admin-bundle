@@ -20,7 +20,7 @@
 
     {% set hide_edit, hide_delete = true, false %}
 
-    {{ '{{ form(delete_form) }}' }}
+    {{ '{{ form(delete_form, {attr: {style:"display: inline-block;"}}) }}' }}
 
 {{ "{% endblock %}" }}
 {% endblock body %}

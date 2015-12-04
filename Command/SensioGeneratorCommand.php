@@ -23,7 +23,7 @@ class SensioGeneratorCommand extends GenerateDoctrineCrudCommand
         if (null === $this->generator) {
             $this->generator = $this->createGenerator();
             $this->generator->setSkeletonDirs(array(
-                __DIR__.'/../Resources/skeleton/crud'
+                __DIR__.'/../Resources/SensioGeneratorBundle/skeleton'
             ));
         }
 
