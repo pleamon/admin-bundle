@@ -13,3 +13,15 @@ services:
             - @service_container
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    p_admin.assetic.config_loader:
+        class: %assetic.config_loader.class%
+        tags:
+            - { name: assetic.formula_loader, alias: config}
+
+    p_admin.assetic.config_resource:
+        class: %assetic.config_resource.class%
+        tags:
+            - { name: assetic.formula_resource, loader: config}
+        arguments:
+            - { type: collection }

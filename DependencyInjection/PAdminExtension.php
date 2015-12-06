@@ -44,6 +44,27 @@ class PAdminExtension extends Extension
         $container->setParameter('assetic.bundles', $asseticBundles);
     }
 
+    public function addAssetsInputs($container)
+    {
+        $formulae = array(
+            'font_css' => array(
+                array('@PAdminBundle/Resources/public/googlefonts/fonts.css'),
+                array(),
+                array('googlefonts/fonts.css')
+            ),
+            'font1' => array (
+                array('@PAdminBundle/Resources/public/googlefonts/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf'),
+                array (),
+                array (
+                    //'output' => 'googlefonts/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf'
+                    'output' => 'test'
+                )
+            )
+        );
+
+        //$container->getDefinition('assetic.config_resource')->replaceArgument(0, $formulae);
+    }
+
     public function setParameterToTwig($container, $config)
     {
         //$def = $container->getDefinition('twig');
