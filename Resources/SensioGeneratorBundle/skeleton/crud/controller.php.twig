@@ -18,6 +18,8 @@ use {{ namespace }}\Entity\{{ entity }};
 {% if 'new' in actions or 'edit' in actions %}
 use {{ namespace }}\Form\{{ entity }}Type;
 {% endif %}
+
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 {% endblock use_statements %}
 
 /**
