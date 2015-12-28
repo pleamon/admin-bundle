@@ -4,13 +4,13 @@ parameters:
 services:
     p_admin.pool:
         class: %p.admin.admin_pool.class%
-        arguments: 
-            - @service_container
+        arguments:
+            - '@service_container'
 
     p_admin.listener.filter_route_role:
         class: %p.admin.listener.filter_route_role.class%
         arguments:
-            - @service_container
+            - '@service_container'
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
