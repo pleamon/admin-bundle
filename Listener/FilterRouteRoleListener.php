@@ -26,7 +26,8 @@ class FilterRouteRoleListener
             return;
         }
 
-        $request = $this->container->get('request');
+        $requestStack = $this->container->get('request_stack');
+        $request = $requestStack->getCurrentRequest();
         $router = $this->container->get('router')->getRouteCollection();
 
         $_route = $request->get('_route');
