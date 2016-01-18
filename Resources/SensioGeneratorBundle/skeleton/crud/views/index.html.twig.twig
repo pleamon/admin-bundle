@@ -24,9 +24,13 @@
         <thead>
             <tr>
             {%- for field, metadata in fields %}
-                <th>{{ field|capitalize }}</th>
+
+                <th>{{ '{{ "' ~ field|capitalize ~ '"|trans }}' }}</th>
+
             {%- endfor %}
-                <th>Actions</th>
+
+                <th>{{ '{{ "Actions"|trans }}' }}</th>
+
             </tr>
         </thead>
         <tbody>
