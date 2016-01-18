@@ -19,7 +19,8 @@
         {%- for field, metadata in fields %}
 
             <tr>
-                <th>{{ field|capitalize }}</th>
+
+                <th>{{ '{{ "' ~ field|capitalize ~ '"|trans }}' }}</th>
 
             {%- if metadata.type in ['date', 'datetime'] %}
 
