@@ -1,0 +1,35 @@
+<div class="dataTables_wrapper form-inline dt-bootstrap">
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    {% block table_head %}
+                        {% for field in fields %}
+                        <th>{{ field.label|trans }}</th>
+                        {% endfor %}
+                    {% endblock %}
+                </tr>
+            </thead>
+            <tbody>
+            {% block table_body %}
+                {% for data in datas %}
+                <tr>
+                    {% for value in data %}
+                    <td>
+                        {{ value }}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            {% endblock %}
+            </tbody>
+        </table>
+    </div>
+
+    {% block table_tools %}
+    {% if tools is defined %}
+    {{ tools|raw }}
+    {% endif %}
+    {% endblock %}
+</div>
+

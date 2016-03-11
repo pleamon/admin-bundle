@@ -1,0 +1,11 @@
+{% extends 'PAdminBundle:layout:ibox.html.twig' %}
+
+{% block ibox_content %}
+
+    {% block table_filter %}
+
+    {% endblock %}
+
+    {% embed 'PAdminBundle:form:__list.html.twig' %}
+    {% endembed %}
+{% endblock %}

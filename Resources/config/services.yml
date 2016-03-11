@@ -25,3 +25,9 @@ services:
             - { name: assetic.formula_resource, loader: config}
         arguments:
             - { type: collection }
+
+    p.render.table.list:
+        class: P\AdminBundle\Service\TableList
+        arguments:
+            - @service_container
+            - @templating
