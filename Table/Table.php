@@ -77,7 +77,7 @@ class Table
     public function render()
     {
         $this->load();
-        return $this->templating->render('PAdminBundle:Form:__list.html.twig', array(
+        return $this->templating->render('PAdminBundle:form:__list.html.twig', array(
             'fields' => $this->fields,
             'datas' => $this->datas,
             'tools' => $this->tools
