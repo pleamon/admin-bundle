@@ -31,8 +31,11 @@ class FilterRouteRoleListener
 
         $_route = $request->get('_route');
         $route = $router->get($_route);
+        if($route == null) {
+            return;
+        }
         $routeOptions = $route->getOptions();
-        
+
         if(array_key_exists('role', $routeOptions)) {
             $roles = $routeOptions['role'];
             $security = $this->container->get('security.context');
