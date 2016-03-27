@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>404</title>
+    <title>{% block title %}ops-oops{% endblock %}</title>
 
     {% stylesheets filter="cssrewrite"
     '@PAdminBundle/Resources/public/css/bootstrap.min.css'
@@ -16,13 +16,9 @@
     %}
     <link rel="stylesheet" type="text/css" href="{{ asset(asset_url) }}" />
     {% endstylesheets %}
-
-
-
 </head>
 
 <body class="gray-bg">
-
 
     <div class="middle-box text-center animated fadeInDown">
         <h1>{% block error_code %}{% endblock %}</h1>
