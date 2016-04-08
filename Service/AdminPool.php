@@ -26,4 +26,14 @@ class AdminPool
     {
         return $this->container->get('router')->getRouteCollection()->get($route);
     }
+
+    public function get($name)
+    {
+        return $this->container->get($name);
+    }
+
+    public function getParameter($name)
+    {
+        return $this->container->getParameter($name);
+    }
 }

@@ -27,9 +27,12 @@ class FilterRouteRoleListener
         }
 
         $request = $this->container->get('request');
+        $_route = $request->get('_route');
+        if(empty($_route)) {
+            return;
+        }
         $router = $this->container->get('router')->getRouteCollection();
 
-        $_route = $request->get('_route');
         $route = $router->get($_route);
         if($route == null) {
             return;
