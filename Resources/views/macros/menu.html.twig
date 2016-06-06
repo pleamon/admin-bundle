@@ -65,6 +65,8 @@
 {% macro render_menus(menus) %}
 {% import _self as _menus %}
     {% for key, menu in menus %}
-        {{ _menus.render_item(key, menu) }}
+        {% if menu.roles|length == 0 or app.user.roles|arrayIntersect(menu.roles)|length > 0 %}
+            {{ _menus.render_item(key, menu) }}
+        {% endif %}
     {% endfor %}
 {% endmacro %}

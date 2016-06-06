@@ -55,7 +55,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('text')->defaultValue('')->end()
                         ->scalarNode('label')->defaultValue('')->end()
                         ->scalarNode('icon')->defaultValue('')->end()
-                        ->arrayNode('role')
+                        ->arrayNode('roles')
                             ->defaultValue(array())
                             ->prototype('scalar')->end()
                         ->end()
