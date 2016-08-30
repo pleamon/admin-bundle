@@ -5,7 +5,7 @@ services:
     p_admin.pool:
         class: %p.admin.admin_pool.class%
         arguments: 
-            - @service_container
+            - "@service_container"
 
     p_admin.listener.filter_route_role:
         class: %p.admin.listener.filter_route_role.class%
@@ -29,5 +29,5 @@ services:
     p.render.table.list:
         class: P\AdminBundle\Service\TableList
         arguments:
-            - @service_container
-            - @templating
+            - "@service_container"
+            - "@templating"
