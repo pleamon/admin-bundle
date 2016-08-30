@@ -10,7 +10,7 @@ services:
     p_admin.listener.filter_route_role:
         class: %p.admin.listener.filter_route_role.class%
         arguments:
-            - @service_container
+            - "@service_container"
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
