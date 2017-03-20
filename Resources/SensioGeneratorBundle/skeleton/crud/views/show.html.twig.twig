@@ -1,5 +1,6 @@
 {% block extends %}
 {{ "{% extends 'PAdminBundle:layout:ibox.html.twig' %}" }}
+{{ "{% trans_default_domain " ~ '"" %}' }}
 {% endblock extends %}
 
 {% block body %}
@@ -19,8 +20,7 @@
         {%- for field, metadata in fields %}
 
             <tr>
-
-                <th>{{ '{{ "' ~ field|capitalize ~ '"|trans }}' }}</th>
+                <th>{{ "'" ~ field ~ "'|trans" }}</th>
 
             {%- if metadata.type in ['date', 'datetime'] %}
 
@@ -44,3 +44,4 @@
 
 {{ "{% endblock %}" }}
 {% endblock body %}
+

@@ -1,5 +1,6 @@
 {% block extends %}
 {{ "{% extends 'PAdminBundle:layout:ibox.html.twig' %}" }}
+{{ "{% trans_default_domain " ~ '"" %}' }}
 {% endblock extends %}
 
 {% block body %}
@@ -25,11 +26,11 @@
             <tr>
             {%- for field, metadata in fields %}
 
-                <th>{{ '{{ "' ~ field|capitalize ~ '"|trans }}' }}</th>
+                <th>{{ "'" ~ field ~ "'|trans"}}</th>
 
             {%- endfor %}
 
-                <th>{{ '{{ "Actions"|trans }}' }}</th>
+                <th>Actions</th>
 
             </tr>
         </thead>
@@ -70,3 +71,4 @@
 </div>
 {{ "{% endblock %}" }}
 {% endblock body %}
+
