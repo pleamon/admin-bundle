@@ -1,4 +1,8 @@
 assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
     assets:
         font_css:
             inputs: '@PAdminBundle/Resources/public/googlefonts/fonts.css'

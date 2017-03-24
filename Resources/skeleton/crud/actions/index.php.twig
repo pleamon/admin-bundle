@@ -1,0 +1,64 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Lists all {{ entity }} entities.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/", name="{{ route_name_prefix }}")
+     * @Method("GET")
+     * @Template()
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function indexAction(Request $request, $page = 1)
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        $em = $this->getDoctrine()->getManager();
+
+        $qb = $em->getRepository('{{ bundle }}:{{ entity }}')->createQueryBuilder('{{ entity|lower }}');
+
+        $count = $em->getRepository('{{ bundle }}:{{ entity }}')->createQueryBuilder('{{ entity|lower }}')
+            ->select('COUNT({{ entity|lower }}.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+
+        ${{ entity|lower }} = new {{entity}}();
+
+        $form = $this->createFormBuilder(${{ entity|lower }})
+            ->add('submit', SubmitType::class, array('label' => 'query', 'attr' => array('class' => 'btn btn-primary')))
+            ->setAction($this->generateUrl('{{ entity|lower }}'))
+            ->setMethod('POST')
+            ->getForm()
+            ;
+
+
+        $form->handleRequest($request);
+        if($form->isSubmitted()) {
+        }
+
+        list($entities, $pagination) = $this->get('p.paginator')->query($qb, $page, null, $count);
+        $tools = $this->get('p.paginator')->renderView($pagination);
+
+{% endblock method_body %}
+
+{% block method_return %}
+{% if 'annotation' == format %}
+        return array(
+            'entities' => $entities,
+            'tools' => $tools,
+            'form' => $form->createView(),
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:index.html.twig', array(
+            'entities' => $entities,
+            'tools' => $tools,
+            'form' => $form->createView(),
+        ));
+{% endif %}
+{% endblock method_return %}
+    }

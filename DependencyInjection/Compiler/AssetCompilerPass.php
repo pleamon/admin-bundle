@@ -73,22 +73,22 @@ class AssetCompilerPass implements CompilerPassInterface
             'font9' => array(
                 array('@PAdminBundle/Resources/public/font-awesome/fonts/fontawesome-webfont.woff2'),
                 array(),
-                array('output' => 'fonts/fontawesome-webfont.woff2'),
+                array('output' => 'Resources/public/font-awesome/fonts/fontawesome-webfont.woff2'),
             ),
             'font10' => array(
                 array('@PAdminBundle/Resources/public/font-awesome/fonts/fontawesome-webfont.woff'),
                 array(),
-                array('output' => 'fonts/fontawesome-webfont.woff'),
+                array('output' => 'Resources/public/font-awesome/fonts/fontawesome-webfont.woff'),
             ),
             'font11' => array(
                 array('@PAdminBundle/Resources/public/font-awesome/fonts/fontawesome-webfont.ttf'),
                 array(),
-                array('output' => 'fonts/fontawesome-webfont.ttf'),
+                array('output' => 'Resources/public/font-awesome/fonts/fontawesome-webfont.ttf'),
             ),
             'font12' => array(
                 array('@PAdminBundle/Resources/public/font-awesome/fonts/fontawesome-webfont.svg'),
                 array(),
-                array('output' => 'fonts/fontawesome-webfont.svg'),
+                array('output' => 'Resources/public/font-awesome/fonts/fontawesome-webfont.svg'),
             )
         );
     }

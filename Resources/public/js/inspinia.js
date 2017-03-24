@@ -28,6 +28,7 @@ $(document).ready(function () {
         setTimeout(function () {
             ibox.resize();
             ibox.find('[id^=map-]').resize();
+            $("select").select2();
         }, 50);
     });
 

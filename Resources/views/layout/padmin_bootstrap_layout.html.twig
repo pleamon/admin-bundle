@@ -1,0 +1,37 @@
+{% use "bootstrap_3_layout.html.twig" %}
+
+{% block form_row -%}
+<div class="col-sm-6">
+    <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+</div>
+{%- endblock form_row %}
+
+{% block button_row -%}
+<div class="col-sm-6">
+    <div class="form-group">
+        {{- form_widget(form) -}}
+    </div>
+</div>
+{%- endblock button_row %}
+
+{% block checkbox_row -%}
+<div class="col-sm-6">
+    <div class="form-group{% if not valid %} has-error{% endif %}">
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+</div>
+{%- endblock checkbox_row %}
+
+{% block radio_row -%}
+<div class="col-sm-6">
+    <div class="form-group{% if not valid %} has-error{% endif %}">
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+</div>
+{%- endblock radio_row %}

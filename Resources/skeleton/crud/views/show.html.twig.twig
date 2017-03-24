@@ -1,14 +1,15 @@
 {% block extends %}
 {{ "{% extends 'PAdminBundle:layout:ibox.html.twig' %}" }}
+{{ "{% trans_default_domain '" ~ bundle ~ "' %}" }}
 {% endblock extends %}
 
 {% block body %}
 
-{{ "{% block ibox_title -%}编辑{% endblock %}" }}
+{{ "{% block ibox_title -%} {{ 'edit'|trans({}, 'messages') }}{% endblock %}" }}
 
 {{
 "{% block ibox_tools -%}
-    <a class=\"btn btn-outline btn-info\" href=\"{{ path(\"" ~ route_name_prefix ~ "\") }}\">返回列表</a>
+    <a class=\"btn btn-outline btn-info\" href=\"{{ path(\"" ~ route_name_prefix ~ "\") }}\">{{ 'back to list'|trans({}, 'messages') }}</a>
 {% endblock %}"
 }}
 
@@ -20,7 +21,7 @@
 
             <tr>
 
-                <th>{{ '{{ "' ~ field|capitalize ~ '"|trans }}' }}</th>
+                <th>{{ "{{ '" ~ entity|lower ~ "." ~ field ~ "'|trans }}" }}</th>
 
             {%- if metadata.type in ['date', 'datetime'] %}
 
@@ -44,3 +45,4 @@
 
 {{ "{% endblock %}" }}
 {% endblock body %}
+

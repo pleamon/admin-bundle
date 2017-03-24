@@ -12,6 +12,16 @@ class AdminPool
         $this->container = $container;
     }
 
+    public function get($name)
+    {
+        return $this->container->get($name);
+    }
+
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
     public function getMenus()
     {
         return $this->container->getParameter('p_admin.menus');
@@ -26,4 +36,10 @@ class AdminPool
     {
         return $this->container->get('router')->getRouteCollection()->get($route);
     }
+
+    public function getParameter($name)
+    {
+        return $this->container->getParameter($name);
+    }
+
 }

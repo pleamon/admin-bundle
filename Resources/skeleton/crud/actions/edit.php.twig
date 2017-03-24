@@ -61,7 +61,7 @@
             'method' => 'PUT',
         ));
 
-        $form->add('submit', SubmitType::class, array('label' => '更新', 'attr' => array('class' => 'btn btn-primary')));
+        $form->add('submit', SubmitType::class, array('label' => 'update', 'translation_domain' => 'messages', 'attr' => array('class' => 'btn btn-primary')));
 
         return $form;
     }

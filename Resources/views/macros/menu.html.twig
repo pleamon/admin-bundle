@@ -2,8 +2,8 @@
 {% import _self as menus%}
 
 {% set _route   = app.request.get('_route') %}
-{% set default  = admin_pool.getRoute(_route).options.default|default(null) %}
-{% set roles    = admin_pool.getRoute(menu.route).options.role|default([]) %}
+{% set default  = p.getRoute(_route).options.default|default(null) %}
+{% set roles    = p.getRoute(menu.route).options.role|default([]) %}
 
 {% set active = false %}
 {% set href = '#' %}

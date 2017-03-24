@@ -1,0 +1,6 @@
+fos_oauth_server:
+    db_driver: propel
+    client_class:        P\OAuthBundle\Entity\Client
+    access_token_class:  P\OAuthBundle\Entity\AccessToken
+    refresh_token_class: P\OAuthBundle\Entity\RefreshToken
+    auth_code_class:     P\OAuthBundle\Entity\AuthCode
