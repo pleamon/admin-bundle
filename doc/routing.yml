@@ -1,14 +1,19 @@
+p_admin:
+    resource: "@PAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 p_user:
     resource: "@PUserBundle/Resources/config/routing.yml"
-    prefix:     /
+    prefix:     /admin
 
 fos_user_security:
+    prefix: /admin
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
 fos_user_registration:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-    prefix: /register
+    prefix: /admin/register
 
 fos_user_reseting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-    prefix: /resetting
+    prefix: /admin/resetting

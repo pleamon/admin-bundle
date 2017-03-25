@@ -62,27 +62,3 @@ p_admin:
                 notification:
                     route: notification
                     text: 通知
-        agile:
-            text: 敏捷板
-            icon: 'fa fa-diamond'
-            items:
-                agile_home:
-                    route: p_agile_board_homepage
-                    text: agile
-                agile_category:
-                    route: agilecategory
-                    text: 分类
-                agile_tag:
-                    route: agiletag
-                    text: 标签
-                agile:
-                    route: agile
-                    text: 敏捷板
-                    #        websocket:
-                    #            text: Websocket
-                    #            icon: 'fa fa-diamond'
-                    #            items:
-                    #                websocket:
-                    #                    route: p_websocket_client
-                    #                    text: websocket client
-
