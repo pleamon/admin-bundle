@@ -62,3 +62,13 @@ services:
             - '@doctrine.orm.default_entity_manager'
     p.curl:
         class: P\AdminBundle\Service\Curl
+
+    p.markdown:
+        class: P\AdminBundle\Service\MarkdownParsedown
+
+    p.markdown_extension:
+        class: P\AdminBundle\Service\MarkdownParsedownExtension
+        tags:
+            - { name: twig.extension }
+        arguments:
+            - "@service_container"
