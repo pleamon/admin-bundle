@@ -1,0 +1,14 @@
+P\AdminBundle\Entity\ArticleCategory:
+    type: entity
+    table: article_category
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        name:
+            type: string
+            length: 255
+

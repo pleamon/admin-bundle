@@ -1,0 +1,28 @@
+P\AdminBundle\Entity\Notification:
+    type: entity
+    table: notification
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToOne:
+        category:
+            targetEntity: NotificationCategory
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+
+    fields:
+        level:
+            type: integer
+        title:
+            type: string
+            length: 255
+        message:
+            type: text
+            length: 5000
+        status:
+            type: integer
+        createdAt:
+            type: datetime

@@ -1,0 +1,77 @@
+{% block p_editor_widget %}
+
+{% stylesheets filter="cssrewrite"
+    '@PAdminBundle/Resources/public/css/plugins/summernote/summernote.css'
+    '@PAdminBundle/Resources/public/css/plugins/summernote/summernote-bs3.css'
+    '@PMarkdownBundle/Resources/public/css/highlight.monokai-sublime.css'
+%}
+<link rel="stylesheet" type="text/css" href="{{ asset(asset_url) }}" />
+{% endstylesheets %}
+
+{% javascripts
+    '@PAdminBundle/Resources/public/js/plugins/summernote/summernote.min.js'
+    '@PMarkdownBundle/Resources/public/js/marked.min.js'
+    '@PMarkdownBundle/Resources/public/js/highlight.min.js'
+    %}
+<script type="text/javascript" src="{{ asset(asset_url) }}"></script>
+{% endjavascripts %}
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+
+<style>
+    .markdown-editor,
+    textarea.markdown-editor.form-control,
+    .markdown-preview {
+        border: 1px solid #bbb;
+        height: 320px;
+        vertical-align: top;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .markdown-preview {
+        overflow-y: scroll;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-6">
+    <div name="{{ full_name }}"
+        {% for name, value in attr %}
+        {{ name }}="{{ value }}"
+        {% endfor %}
+    >{{ value }}</div>
+</div>
+    <div class="col-md-6">
+    <div class="markdown-preview">{{ value|markdown|raw }}</div>
+</div>
+</div>
+
+<script>
+$(document).ready(function(){
+    var cache;
+    $(".p_editor").on("change", function(e) {
+        if(this.value == 2) {
+            $(".p_editor").summernote();
+        } else {
+            $(".p_editor").destroy();
+        }
+    });
+    $(".markdown-editor").on("keyup", function() {
+        if(cache == $(this).val()) {
+            return;
+        }
+        cache = $(this).val();
+        $(".markdown-preview").html(marked($(this).val()));
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+    });
+    $(".markdown-editor").on("scroll", function() {
+        $(".markdown-preview").scrollTop(this.scrollTop);
+    });
+});
+</script>
+
+{% endblock %}

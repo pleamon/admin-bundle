@@ -1,0 +1,60 @@
+{% set startPage = 1 %}
+{% set endPage = pagination.pageCount == 0 ? 1 : pagination.pageCount %}
+{% set startPage = 1 %}
+{% set endPage = pagination.pageCount == 0 ? 1 : pagination.pageCount %}
+{% if pagination.pageCount > 5 %}
+    {% if pagination.page - 2 >= 2 %}
+        {% set startPage = pagination.page - 2 %}
+    {% endif %}
+    {% if pagination.page >= pagination.pageCount %}
+        {% set startPage = startPage - 2 %}
+    {% elseif pagination.page + 1 >= pagination.pageCount %}
+        {% set startPage = startPage - 1 %}
+    {% endif %}
+
+{% endif %}
+
+<hr />
+<div class="row">
+    <div class="col-sm-5">
+        <div class="dataTables_info">{{ pagination.page }} / {{ pagination.pageCount }} 页 </div>
+    </div>
+    <div class="col-sm-7">
+        <div class="dataTables_paginate paging_simple_numbers">
+            <ul class="pagination">
+
+            {% if pagination.page == 1 %}
+            <li class="paginate_button previous disabled">
+                <a>上一页</a>
+            </li>
+            {% else %}
+            <li class="paginate_button previous">
+                <a href="{{ path(route, {page: 1 }|merge(routeParams))}}" >第一页</a>
+            </li>
+            <li class="paginate_button previous">
+                <a href="{{ path(route, {page: pagination.page - 1 }|merge(routeParams))}}" >上一页</a>
+            </li>
+            {% endif %}
+
+            {% for idx in range(startPage, endPage) if (pagination.page > 3 and idx <= pagination.page + 2) or (pagination.page < 5 and idx <= 5) %}
+                <li class="paginate_button {% if pagination.page == idx %}active{% endif %}">
+                    <a href="{{ path(route, {page: idx}|merge(routeParams)) }}">{{ idx }}</a>
+                </li>
+            {% endfor %}
+
+            {% if pagination.page == pagination.pageCount %}
+            <li class="paginate_button next disabled">
+                <a>下一页</a>
+            </li>
+            {% else %}
+            <li class="paginate_button next">
+                <a href="{{ path(route, {page: pagination.page + 1 }|merge(routeParams))}}">下一页</a>
+            </li>
+            <li class="paginate_button next">
+                <a href="{{ path(route, {page: pagination.pageCount }|merge(routeParams))}}">最后一页</a>
+            </li>
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>

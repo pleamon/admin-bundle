@@ -1,0 +1,44 @@
+notification:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:Notification:index", page: 1}
+    requirements:
+        page: \d*
+
+notification_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:Notification:show" }
+    options:
+        default: notification
+
+notification_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:Notification:new" }
+    options:
+        default: notification
+
+notification_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:Notification:create" }
+    methods:  POST
+    options:
+        default: notification
+
+notification_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:Notification:edit" }
+    options:
+        default: notification
+
+notification_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:Notification:update" }
+    methods:  [POST, PUT]
+    options:
+        default: notification
+
+notification_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:Notification:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: notification

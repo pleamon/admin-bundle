@@ -1,0 +1,43 @@
+p_notification_notification_category:
+    resource: "@PAdminBundle/Resources/config/routing/notificationcategory.yml"
+    prefix:   /notification_category
+
+p_notification_notification:
+    resource: "@PAdminBundle/Resources/config/routing/notification.yml"
+    prefix:   /notification
+
+p_file_file:
+    resource: "@PAdminBundle/Resources/config/routing/file.yml"
+    prefix:   /file
+
+p_file_filetag:
+    resource: "@PAdminBundle/Resources/config/routing/filetag.yml"
+    prefix:   /filetag
+
+p_file_filecategory:
+    resource: "@PAdminBundle/Resources/config/routing/filecategory.yml"
+    prefix:   /filecategory
+
+p_file_download:
+    path:     /file/download/{category}/{filename}
+    defaults: { _controller: PAdminBundle:FileDownload:Download }
+
+p_file_preview:
+    path:     /file/preview/{category}/{filename}
+    defaults: { _controller: PAdminBundle:FilePreview:index }
+
+p_file_home:
+    path:     /home
+    defaults: { _controller: PAdminBundle:FileHome:index }
+
+p_article_articlecategory:
+    resource: "@PAdminBundle/Resources/config/routing/articlecategory.yml"
+    prefix:   /articlecategory
+
+p_article_articletag:
+    resource: "@PAdminBundle/Resources/config/routing/articletag.yml"
+    prefix:   /articletag
+
+p_article_article:
+    resource: "@PAdminBundle/Resources/config/routing/article.yml"
+    prefix:   /article

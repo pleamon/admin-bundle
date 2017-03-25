@@ -1,0 +1,44 @@
+filecategory:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:FileCategory:index", page: 1}
+    requirements:
+        page: \d*
+
+filecategory_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:FileCategory:show" }
+    options:
+        default: filecategory
+
+filecategory_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:FileCategory:new" }
+    options:
+        default: filecategory
+
+filecategory_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:FileCategory:create" }
+    methods:  POST
+    options:
+        default: filecategory
+
+filecategory_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:FileCategory:edit" }
+    options:
+        default: filecategory
+
+filecategory_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:FileCategory:update" }
+    methods:  [POST, PUT]
+    options:
+        default: filecategory
+
+filecategory_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:FileCategory:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: filecategory

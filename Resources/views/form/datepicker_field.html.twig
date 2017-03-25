@@ -1,0 +1,37 @@
+{% block p_datepicker_widget %}
+
+{% stylesheets filter="cssrewrite"
+'@PAdminBundle/Resources/public/css/bootstrap-datetimepicker.min.css'
+%}
+<link rel="stylesheet" type="text/css" href="{{ asset(asset_url) }}" />
+{% endstylesheets %}
+
+{% javascripts
+'@PAdminBundle/Resources/public/js/datepicker/bootstrap-datetimepicker.min.js'
+'@PAdminBundle/Resources/public/js/datepicker/locales/bootstrap-datetimepicker.zh-CN.js'
+%}
+<script type="text/javascript" src="{{ asset(asset_url) }}"></script>
+{% endjavascripts %}
+
+<div class="form-group p-type-date-picker">
+    {{ block('label') }}
+    <div class="input-group date">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <input name="{{ full_name }}" {{ attr.readonly ? "readonly='readonly'" : '' }} type="text" class="form-control" {{ attr.disabled ? 'disabled' : ''}} value="{{ data|date(view_format) }}"/>
+    </div>
+</div>
+<script>
+$(function() {
+    $(".p-type-date-picker .input-group").datetimepicker({
+        format: '{{ date_format }}',
+        language:  'zh-CN',
+        todayBtn:  true,
+        autoclose: true,
+        todayHighlight: true,
+        startView: '{{ startView }}',
+        minView: '{{ endView }}',
+    });
+});
+</script>
+
+{% endblock %}

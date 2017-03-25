@@ -1,0 +1,11 @@
+{% block p_label_widget %}
+    {% spaceless %}
+    <label 
+        {% for name, attribute in attr %}
+        {{ name }}="{{ attribute }}"
+        {% endfor %}
+        >{{ value }}</label>
+    {% endspaceless %}
+{% endblock %}
+
+

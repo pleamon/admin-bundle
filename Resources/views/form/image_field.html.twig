@@ -1,0 +1,25 @@
+{% block p_image_widget %}
+    {% spaceless %}
+        {% if file_path is not null %}
+        <a id="{{ id }}" href="#">
+            <img
+            {% for name, attribute in attr %}
+                {{ name }}="{{ attribute }}" 
+            {% endfor %}
+            src="{{ asset(file_path) }}" />
+        </a>
+        <script>
+            (function(a_id) {
+                var $a = $("#" + a_id);
+                $a.on("click", function(e) {
+                    if($("#preview_img").size() > 0) return;
+                    $("<img id='preview_img' src='" + $a.find("img").attr("src") + "' style='position: absolute; top: 0px; left: 0px; z-index: 999999;'></img>")
+                    .on("click", function() {
+                        $(this).remove();
+                    }).appendTo($("body"));
+                });
+            })("{{id}}");
+        </script>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'PAdminBundle:layout:ibox.html.twig' %}
+{% trans_default_domain 'PAdminBundle' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block content -%}
+
+{% stylesheets filter="cssrewrite"
+'@PAdminBundle/Resources/public/css/plugins/dataTables/dataTables.bootstrap.css'
+%}
+<link rel="stylesheet" type="text/css" href="{{ asset(asset_url) }}" />
+{% endstylesheets %}
+
+{% if form.children|length > 2 %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox collapsed">
+            <div class="ibox-title">
+                <h5>{{ 'query'|trans({}, 'messages') }}</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content" id="abc">
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>{{ 'list'|trans({}, 'messages') }}</h5>
+                <div class="ibox-tools">
+                    <a class="btn btn-outline btn-info" href="{{ path("articletag_new") }}">{{ 'new'|trans({}, 'messages') }}</a>
+                </div>
+            </div>
+            <div class="ibox-content p-md">
+                <div class="dataTables_wrapper form-inline dt-bootstrap">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'articletag.id'|trans }}</th>
+                                    <th>{{ 'articletag.name'|trans }}</th>
+                                    <th>{{ 'actions'|trans({}, 'messages') }}</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for entity in entities %}
+                                <tr>
+                                    <td><a href="{{ path('articletag_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                                    <td>{{ entity.name }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                        <a class="btn btn-primary" href="{{ path('articletag_show', { 'id': entity.id }) }}">
+                                            {{ 'show'|trans({}, 'messages') }}
+                                        </a>
+                                        <a class="btn btn-primary" href="{{ path('articletag_edit', { 'id': entity.id }) }}">
+                                            {{ 'edit'|trans({}, 'messages') }}
+                                        </a>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {{ tools|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

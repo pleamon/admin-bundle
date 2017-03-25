@@ -1,0 +1,44 @@
+articletag:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:ArticleTag:index", page: 1}
+    requirements:
+        page: \d*
+
+articletag_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:ArticleTag:show" }
+    options:
+        default: articletag
+
+articletag_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:ArticleTag:new" }
+    options:
+        default: articletag
+
+articletag_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:ArticleTag:create" }
+    methods:  POST
+    options:
+        default: articletag
+
+articletag_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:ArticleTag:edit" }
+    options:
+        default: articletag
+
+articletag_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:ArticleTag:update" }
+    methods:  [POST, PUT]
+    options:
+        default: articletag
+
+articletag_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:ArticleTag:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: articletag

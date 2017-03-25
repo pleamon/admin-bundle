@@ -1,0 +1,8 @@
+{% block p_recaptcha_widget %}
+    {% spaceless %}
+    <div class="g-recaptcha" data-sitekey="{{ sitekey }}"></div>
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl={{ lang }}"></script>
+    {% endspaceless %}
+{% endblock %}
+
+

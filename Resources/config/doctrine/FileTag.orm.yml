@@ -1,0 +1,18 @@
+P\AdminBundle\Entity\FileTag:
+    type: entity
+    table: file_tag
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    manyToMany:
+        files:
+            targetEntity: File
+            mappedBy: tags
+
+    fields:
+        name:
+            type: string
+            length: 50

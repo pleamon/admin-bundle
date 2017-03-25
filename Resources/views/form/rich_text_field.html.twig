@@ -1,0 +1,33 @@
+{% block p_rich_text_widget %}
+
+{% stylesheets filter="cssrewrite"
+    '@PAdminBundle/Resources/public/css/plugins/summernote/summernote.css'
+    '@PAdminBundle/Resources/public/css/plugins/summernote/summernote-bs3.css'
+%}
+<link rel="stylesheet" type="text/css" href="{{ asset(asset_url) }}" />
+{% endstylesheets %}
+
+{% javascripts
+    '@PAdminBundle/Resources/public/js/plugins/summernote/summernote.min.js'
+    %}
+<script type="text/javascript" src="{{ asset(asset_url) }}"></script>
+{% endjavascripts %}
+
+<style>
+.note-editor .note-editable {
+    min-height: 300px;
+    border: 1px solid #ebebeb;
+}
+</style>
+
+<div class="row">
+    <textarea style="border: 1px solid red;" class="summernote" name="{{ full_name }}" >{{ value }}</textarea>
+</div>
+
+<script>
+$(document).ready(function() {
+    $(".summernote").summernote();
+});
+</script>
+
+{% endblock %}

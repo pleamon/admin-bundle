@@ -1,27 +1,63 @@
 parameters:
     p.admin.admin_pool.class: P\AdminBundle\Service\AdminPool
     p.admin.listener.filter_route_role.class: P\AdminBundle\Listener\FilterRouteRoleListener
+
+    p.notification.levels: ['info', 'debug', 'warning', 'error', 'fatal']
+    p.notification.status: ['隐藏', '正常']
+
+    p.twig.array_extensions.class: P\AdminBundle\Extension\ArrayExtension
+
+    p.file_types:
+        image: ['jpg', 'png', 'gif']
+        document: ['txt', 'doc', 'docx', 'xls', 'xlsx']
+        audio: ['mp4', 'mp3']
+
+    p.article.status: ['隐藏', '显示']
+
 services:
-    p_admin.pool:
+    p.admin.pool:
         class: "%p.admin.admin_pool.class%"
         arguments:
             - '@service_container'
 
-    p_admin.listener.filter_route_role:
+    p.admin.listener.filter_route_role:
         class: "%p.admin.listener.filter_route_role.class%"
         arguments:
             - '@service_container'
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
-    p_admin.assetic.config_loader:
+    p.admin.assetic.config_loader:
         class: "%assetic.config_loader.class%"
         tags:
             - { name: assetic.formula_loader, alias: config}
 
-    p_admin.assetic.config_resource:
+    p.admin.assetic.config_resource:
         class: "%assetic.config_resource.class%"
         tags:
             - { name: assetic.formula_resource, loader: config}
         arguments:
             - { type: collection }
+
+    p.paginator:
+        class: P\AdminBundle\Service\Paginator
+        arguments: 
+            - "@service_container"
+            - "@templating"
+            - "@request_stack"
+
+    p.notification:
+        class: P\AdminBundle\Service\Notification
+        arguments: ["@doctrine.orm.default_entity_manager"]
+
+    p.twig.array_extension:
+        class: %p.twig.array_extensions.class%
+        tags:
+            - { name: twig.extension }
+
+    p.file.category:
+        class: P\FileBundle\Service\FileCategory
+        arguments:
+            - '@service_container'
+            - '@doctrine.orm.default_entity_manager'
+

@@ -1,0 +1,103 @@
+{% block p_region_widget %}
+{% spaceless %}
+
+{% javascripts
+    '@PAdminBundle/Resources/public/js/region.js'
+%}
+<script type="text/javascript" src="{{ asset(asset_url) }}"></script>
+{% endjavascripts %}
+<div>
+    <select id="{{ id }}_province" class="region-province" style="width: 30%; margin-right: 3%;">
+    </select>
+    <select id="{{ id }}_city" class="region-city" style="width: 30%; margin-right: 3%;">
+    </select>
+    <select id="{{ id }}_street" name="{{ full_name }}" class="region-street" style="width: 30%; margin-right: 3%;">
+    </select>
+</div>
+<script>
+    (function() {
+        var id                  = "{{ id }}";
+        var selected_province   = {{ selected_province }} || 0;
+        var selected_city       = {{ selected_city }} || 0;
+        var selected_street     = {{ selected_street }} || 0;
+        var $province           = $("select#{{id}}_province");
+        var $city               = $("select#{{id}}_city");
+        var $street             = $("select#{{id}}_street");
+
+        function get_province() {
+            var html = ""
+            $.each(provinces, function(k, v) {
+                html += "<option value='" + v.id + "'>" + v.text + "</option>";
+            });
+            return html;
+        }
+
+        function get_city(pid) {
+            var html = "";
+            $.each(citys, function(k, v) {
+                if(v.parent == pid) {
+                    html += "<option value='" + v.id + "'>" + v.text + "</option>";
+                }
+            });
+            return html;
+        }
+
+        function get_street(cid) {
+            var html = "";
+            $.each(streets, function(k, v) {
+                if(v.parent == cid) {
+                    html += "<option value='" + v.id + "'>" + v.text + "</option>";
+                }
+            });
+            return html;
+        }
+
+        html_province = get_province();
+        html_city = get_city(selected_province);
+        html_street = get_street(selected_city);
+
+        function init() {
+            $province.append(html_province);
+            $city.append(html_city);
+            $street.append(html_street);
+
+            $province.val(selected_province);
+            $city.val(selected_city);
+            $street.val(selected_street);
+        }
+
+        $province.on("change", function(e) {
+            $city.change();
+        });
+
+        $city.on("change", function(e) {
+            new_selected_province = $(".region-province").val();
+            if(new_selected_province != selected_province) {
+                selected_province = new_selected_province;
+                html_city = get_city(selected_province);
+                $city.empty();
+                $city.append(html_city);
+            }
+            $street.change();
+        });
+
+
+        $street.on("change", function(e) {
+            new_selected_city = $(".region-city").val();
+            if(new_selected_city != selected_city) {
+                selected_city = new_selected_city
+                html_street = get_street(selected_city);
+                $street.empty();
+                $street.append(html_street);
+            }
+        });
+
+        init();
+        if(!selected_province) {
+            $province.val(0);
+            $province.change();
+        }
+    })();
+</script>
+{% endspaceless %}
+{% endblock %}

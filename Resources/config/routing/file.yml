@@ -1,0 +1,44 @@
+file:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:File:index", page: 1}
+    requirements:
+        page: \d*
+
+file_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:File:show" }
+    options:
+        default: file
+
+file_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:File:new" }
+    options:
+        default: file
+
+file_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:File:create" }
+    methods:  POST
+    options:
+        default: file
+
+file_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:File:edit" }
+    options:
+        default: file
+
+file_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:File:update" }
+    methods:  [POST, PUT]
+    options:
+        default: file
+
+file_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:File:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: file

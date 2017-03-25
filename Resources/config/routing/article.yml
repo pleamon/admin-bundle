@@ -1,0 +1,44 @@
+article:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:Article:index", page: 1}
+    requirements:
+        page: \d*
+
+article_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:Article:show" }
+    options:
+        default: article
+
+article_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:Article:new" }
+    options:
+        default: article
+
+article_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:Article:create" }
+    methods:  POST
+    options:
+        default: article
+
+article_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:Article:edit" }
+    options:
+        default: article
+
+article_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:Article:update" }
+    methods:  [POST, PUT]
+    options:
+        default: article
+
+article_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:Article:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: article

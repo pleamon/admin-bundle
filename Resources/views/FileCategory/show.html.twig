@@ -1,0 +1,43 @@
+{% extends 'PAdminBundle:layout:ibox.html.twig' %}
+{% trans_default_domain 'PFileBundle' %}
+
+
+{% block ibox_title -%} {{ 'edit'|trans({}, 'messages') }}{% endblock %}
+
+{% block ibox_tools -%}
+    <a class="btn btn-outline btn-info" href="{{ path("filecategory") }}">{{ 'back to list'|trans({}, 'messages') }}</a>
+{% endblock %}
+
+
+{% block ibox_content -%}
+    <table class="table">
+        <tbody>
+            <tr>
+
+                <th>{{ 'filecategory.id'|trans }}</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'filecategory.name'|trans }}</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'filecategory.keyName'|trans }}</th>
+                <td>{{ entity.keyName }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'filecategory.dir'|trans }}</th>
+                <td>{{ entity.dir }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a class="btn btn-primary" href="{{ path('filecategory_edit', { 'id': entity.id }) }}"> {{ 'edit'|trans({}, 'messages') }} </a>
+        {{ form(delete_form, {attr: {style:"display: inline-block;", class: "delete-action"}}) }}
+
+
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% block p_upload_image_widget %}
+    {% spaceless %}
+    {% if data %}
+    <img class="p_preview {{ attr.class }}" style="{{ attr.style }}" src="{{ file_path }}">
+    {% endif %}
+    <input class="form-control" type="file" name="{{ name }}" value="" onchange="preview(this)">
+    <script>
+        function preview(element) {
+            var file = element.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(e){
+                $(element).prev().attr("src", this.result);
+            }
+        }
+    </script>
+    {% endspaceless %}
+{% endblock %}

@@ -1,0 +1,17 @@
+P\AdminBundle\Entity\NotificationCategory:
+    type: entity
+    table: notification_category
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+
+    fields:
+        nkey:
+            type: string
+            length: 255
+        name:
+            type: string
+            length: 255

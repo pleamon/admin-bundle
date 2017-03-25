@@ -14,7 +14,7 @@ class AssetCompilerPass implements CompilerPassInterface
     {
         $formulae = $this->getFonts();
         $formulae = array_merge($formulae, $this->getPng());
-        $container->getDefinition('p_admin.assetic.config_resource')->replaceArgument(0, $formulae);
+        $container->getDefinition('p.admin.assetic.config_resource')->replaceArgument(0, $formulae);
     }
 
     public function getFonts()
@@ -89,7 +89,38 @@ class AssetCompilerPass implements CompilerPassInterface
                 array('@PAdminBundle/Resources/public/font-awesome/fonts/fontawesome-webfont.svg'),
                 array(),
                 array('output' => 'Resources/public/font-awesome/fonts/fontawesome-webfont.svg'),
+            ),
+            'font13' => array(
+                array('@PAdminBundle/Resources/public/fonts/glyphicons-halflings-regular.woff'),
+                array(),
+                array('output' => 'fonts/glyphicons-halflings-regular.woff')
+            ),
+            'font14' => array(
+                array('@PAdminBundle/Resources/public/font-awesome/fonts/fontawesome-webfont.woff2'),
+                array(),
+                array('output' => 'fonts/fontawesome-webfont.woff2'),
+            ),
+            'font15' => array(
+                array('@PAdminBundle/Resources/public/font-awesome/fonts/fontawesome-webfont.woff'),
+                array(),
+                array('output' => 'fonts/fontawesome-webfont.woff'),
+            ),
+            'font16' => array(
+                array('@PAdminBundle/Resources/public/font-awesome/fonts/fontawesome-webfont.ttf'),
+                array(),
+                array('output' => 'fonts/fontawesome-webfont.ttf'),
+            ),
+            'font17' => array(
+                array('@PAdminBundle/Resources/public/font-awesome/fonts/fontawesome-webfont.svg'),
+                array(),
+                array('output' => 'fonts/fontawesome-webfont.svg'),
+            ),
+            'font_18' => array(
+                array('@PAdminBundle/Resources/public/fonts/glyphicons-halflings-regular.woff'),
+                array(),
+                array('output' => 'fonts/glyphicons-halflings-regular.woff')
             )
+
         );
     }
 

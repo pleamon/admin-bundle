@@ -1,0 +1,56 @@
+notification:
+    id: id
+    category: 通知类型
+    level: 级别
+    title: 标题
+    message: 内容
+    status: 状态
+    createdAt: 创建时间
+
+notificationcategory:
+    id: id
+    nkey: key
+    name: 通知类型
+
+file:
+    id: id
+    category: 文件类别
+    tags: 标签
+    filename: 文件名
+    suffix: 后缀
+    size: 大小
+    md5: md5
+    createdat: 上传时间
+    actions: 操作
+    name: 分类名称
+    dir: 目录
+    createdAt: 创建时间
+
+filecategory:
+    id: id
+    name: 类别名称
+    keyName: 键
+    keyname: 键
+    dir: 目录
+
+filetag:
+    id: id
+    name: 标签
+
+article:
+    id: id
+    title: 标题
+    content: 正文
+    category: 分类
+    readCount: 阅读次数
+    tags: 标签
+    createdAt: 创建时间
+    status: 状态
+
+articlecategory:
+    id: id
+    name: 分类
+
+articletag:
+    id: id
+    name: 标签

@@ -1,0 +1,24 @@
+P\AdminBundle\Entity\FileCategory:
+    type: entity
+    table: file_category
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    oneToMany:
+        files:
+            targetEntity: File
+            mappedBy: category
+
+    fields:
+        name:
+            type: string
+            length: 50
+        keyName:
+            type: string
+            length: 20
+        dir:
+            type: string
+            length: 255

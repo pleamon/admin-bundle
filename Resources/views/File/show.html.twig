@@ -1,0 +1,52 @@
+{% extends 'PAdminBundle:layout:ibox.html.twig' %}
+{% trans_default_domain 'PFileBundle' %}
+
+
+{% block ibox_title -%} {{ 'edit'|trans({}, 'messages') }}{% endblock %}
+
+{% block ibox_tools -%}
+    <a class="btn btn-outline btn-info" href="{{ path("file") }}">{{ 'back to list'|trans({}, 'messages') }}</a>
+{% endblock %}
+
+
+{% block ibox_content -%}
+    <table class="table">
+        <tbody>
+            <tr>
+
+                <th>{{ 'file.id'|trans }}</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'file.filename'|trans }}</th>
+                <td>{{ entity.filename }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'file.suffix'|trans }}</th>
+                <td>{{ entity.suffix }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'file.md5'|trans }}</th>
+                <td>{{ entity.md5 }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'file.size'|trans }}</th>
+                <td>{{ entity.size }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'file.createdAt'|trans }}</th>
+                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a class="btn btn-primary" href="{{ path('file_edit', { 'id': entity.id }) }}"> {{ 'edit'|trans({}, 'messages') }} </a>
+{{ form(delete_form, {attr: {style:"display: inline-block;", class: "delete-action"}}) }}
+
+{% endblock %}
+

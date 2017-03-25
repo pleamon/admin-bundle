@@ -1,0 +1,53 @@
+{% extends 'PAdminBundle:layout:ibox.html.twig' %}
+{% trans_default_domain 'PAdminBundle' %}
+
+
+{% block ibox_title -%} {{ 'edit'|trans({}, 'messages') }}{% endblock %}
+
+{% block ibox_tools -%}
+    <a class="btn btn-outline btn-info" href="{{ path("notification") }}">{{ 'back to list'|trans({}, 'messages') }}</a>
+{% endblock %}
+
+
+{% block ibox_content -%}
+    <table class="table">
+        <tbody>
+            <tr>
+
+                <th>{{ 'notification.id'|trans }}</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'notification.level'|trans }}</th>
+                <td>{{ entity.level }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'notification.title'|trans }}</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'notification.message'|trans }}</th>
+                <td>{{ entity.message }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'notification.status'|trans }}</th>
+                <td>{{ entity.status }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'notification.createdAt'|trans }}</th>
+                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a class="btn btn-primary" href="{{ path('notification_edit', { 'id': entity.id }) }}"> {{ 'edit'|trans({}, 'messages') }} </a>
+{{ form(delete_form, {attr: {style:"display: inline-block;", class: "delete-action"}}) }}
+
+
+{% endblock %}
+

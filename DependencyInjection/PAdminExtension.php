@@ -25,16 +25,36 @@ class PAdminExtension extends Extension
         $container->setParameter('p.admin.title', $config['title']);
         $container->setParameter('p.admin.search', $config['search']);
         $container->setParameter('p.admin.base_template', isset($config['base_template'])?$config['base_template']:'');
+        $container->setParameter('p.paginator.template', $config['paginator_template']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
         $this->addAssetsBundle($container);
+        $this->addFormThemes($container);
         $this->setParameterToTwig($container, $config);
     }
 
     public function setMenuTemplate($container)
     {
         $container->setParameter('knp_menu.renderer.twig.template', $container->getParameter('p.sidebar.template'));
+    }
+
+    public function addFormThemes($container)
+    {
+        $themes = $container->getParameter('twig.form.resources');
+        $themes = array_merge($themes, array(
+            'PAdminBundle:Form:image_field.html.twig',
+            'PAdminBundle:Form:upload_image_field.html.twig',
+            'PAdminBundle:Form:label_field.html.twig',
+            'PAdminBundle:Form:custom_field.html.twig',
+            'PAdminBundle:Form:region_field.html.twig',
+            'PAdminBundle:Form:datepicker_field.html.twig',
+            'PAdminBundle:Form:datetimepicker_field.html.twig',
+            'PAdminBundle:Form:editor_field.html.twig',
+            'PAdminBundle:Form:rich_text_field.html.twig',
+            'PAdminBundle:Form:recaptcha_field.html.twig',
+        ));
+        $container->setParameter('twig.form.resources', $themes);
     }
 
     public function addAssetsBundle($container)

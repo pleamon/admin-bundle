@@ -1,0 +1,16 @@
+P\AdminBundle\Entity\ArticleTag:
+    type: entity
+    table: article_tag
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: tags
+    fields:
+        name:
+            type: string
+            length: 255

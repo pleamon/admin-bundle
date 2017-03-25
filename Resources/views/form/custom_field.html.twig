@@ -1,0 +1,11 @@
+{% block p_custom_widget %}
+    {% spaceless %}
+    <{{ element }} 
+        {% for name, attribute in attr %}
+        {{ name }}="{{ attribute }}"
+        {% endfor %}
+        >{{ data }}</{{ element }}>
+    {% endspaceless %}
+{% endblock %}
+
+

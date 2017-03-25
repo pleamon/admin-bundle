@@ -1,0 +1,44 @@
+articlecategory:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:ArticleCategory:index", page: 1}
+    requirements:
+        page: \d*
+
+articlecategory_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:ArticleCategory:show" }
+    options:
+        default: articlecategory
+
+articlecategory_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:ArticleCategory:new" }
+    options:
+        default: articlecategory
+
+articlecategory_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:ArticleCategory:create" }
+    methods:  POST
+    options:
+        default: articlecategory
+
+articlecategory_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:ArticleCategory:edit" }
+    options:
+        default: articlecategory
+
+articlecategory_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:ArticleCategory:update" }
+    methods:  [POST, PUT]
+    options:
+        default: articlecategory
+
+articlecategory_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:ArticleCategory:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: articlecategory

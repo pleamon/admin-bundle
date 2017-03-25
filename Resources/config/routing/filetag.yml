@@ -1,0 +1,44 @@
+filetag:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:FileTag:index", page: 1}
+    requirements:
+        page: \d*
+
+filetag_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:FileTag:show" }
+    options:
+        default: filetag
+
+filetag_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:FileTag:new" }
+    options:
+        default: filetag
+
+filetag_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:FileTag:create" }
+    methods:  POST
+    options:
+        default: filetag
+
+filetag_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:FileTag:edit" }
+    options:
+        default: filetag
+
+filetag_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:FileTag:update" }
+    methods:  [POST, PUT]
+    options:
+        default: filetag
+
+filetag_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:FileTag:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: filetag
