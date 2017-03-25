@@ -3,15 +3,15 @@
 {% stylesheets filter="cssrewrite"
     '@PAdminBundle/Resources/public/css/plugins/summernote/summernote.css'
     '@PAdminBundle/Resources/public/css/plugins/summernote/summernote-bs3.css'
-    '@PMarkdownBundle/Resources/public/css/highlight.monokai-sublime.css'
+    '@PAdminBundle/Resources/public/css/highlight.monokai-sublime.css'
 %}
 <link rel="stylesheet" type="text/css" href="{{ asset(asset_url) }}" />
 {% endstylesheets %}
 
 {% javascripts
     '@PAdminBundle/Resources/public/js/plugins/summernote/summernote.min.js'
-    '@PMarkdownBundle/Resources/public/js/marked.min.js'
-    '@PMarkdownBundle/Resources/public/js/highlight.min.js'
+    '@PAdminBundle/Resources/public/js/marked.min.js'
+    '@PAdminBundle/Resources/public/js/highlight.min.js'
     %}
 <script type="text/javascript" src="{{ asset(asset_url) }}"></script>
 {% endjavascripts %}
