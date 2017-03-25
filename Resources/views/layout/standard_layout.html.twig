@@ -14,10 +14,10 @@
 <li> {% block navbar_title %} PAdmin {% endblock %} </li>
 <li class="dropdown">
     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-        <i class="fa fa-bell"></i>  <span class="label label-primary">{{ p.get('p.notification').getCount(null, 'notification')}}</span>
+        <i class="fa fa-bell"></i>  <span class="label label-primary">{{ padmin.get('p.notification').getCount(null, 'notification')}}</span>
     </a>
     <ul class="dropdown-menu dropdown-alerts">
-        {% for notification in p.get('p.notification').getMessages(null, 'notification') %}
+        {% for notification in padmin.get('p.notification').getMessages(null, 'notification') %}
         <li>
             <a href="{{ path("notification_show", {id: notification.id}) }}">
             <div>
@@ -53,12 +53,12 @@
 
 {% block footer %}
 <div class="pull-right">
-    {% block system_info %}
+    {% block footer_right %}
     10GB of <strong>250GB</strong> Free.
     {% endblock %}
 </div>
 <div>
-    {% block copyright %}
+    {% block footer_left %}
     <strong>Copyright</strong> PAdmin Company &copy; 2014-2015
     {% endblock %}
 </div>

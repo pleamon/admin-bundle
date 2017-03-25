@@ -1,3 +1,7 @@
+p_homepage:
+    path:     /
+    defaults: { _controller: PAdminBundle:Dashboard:index }
+
 p_notification_notification_category:
     resource: "@PAdminBundle/Resources/config/routing/notificationcategory.yml"
     prefix:   /notification_category
@@ -17,15 +21,6 @@ p_file_filetag:
 p_file_filecategory:
     resource: "@PAdminBundle/Resources/config/routing/filecategory.yml"
     prefix:   /filecategory
-
-p_file_download:
-    path:     /file/download/{category}/{filename}
-    defaults: { _controller: PAdminBundle:FileDownload:Download }
-
-p_file_preview:
-    path:     /file/preview/{category}/{filename}
-    defaults: { _controller: PAdminBundle:FilePreview:index }
-
 p_file_home:
     path:     /home
     defaults: { _controller: PAdminBundle:FileHome:index }

@@ -42,3 +42,13 @@ file_delete:
     methods:  [POST, DELETE]
     options:
         default: file
+
+file_download:
+    path:     /download/{category}/{filename}
+    defaults: { _controller: PAdminBundle:FileDownload:Download }
+
+file_preview:
+    path:     /preview/{category}/{filename}
+    defaults: { _controller: PAdminBundle:FilePreview:index }
+
+

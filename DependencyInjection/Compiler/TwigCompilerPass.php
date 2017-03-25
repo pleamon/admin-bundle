@@ -24,7 +24,7 @@ class TwigCompilerPass implements CompilerPassInterface
         $definition->addMethodCall('addGlobal', array('admin_menus', $admin_menus));
         $definition->addMethodCall('addGlobal', array('admin_title', $admin_title));
         $definition->addMethodCall('addGlobal', array('admin_search', $admin_search));
-        $definition->addMethodCall('addGlobal', array('base_template', $base_template));
-        $definition->addMethodCall('addGlobal', array('p', new Reference('p.admin.pool')));
+        $definition->addMethodCall('addGlobal', array('admin_base_template', $base_template));
+        $definition->addMethodCall('addGlobal', array('padmin', new Reference('p.admin.pool')));
     }
 }

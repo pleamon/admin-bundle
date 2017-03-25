@@ -21,6 +21,7 @@ class PAdminExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+
         $container->setParameter('p.admin.menus', $config['menus']);
         $container->setParameter('p.admin.title', $config['title']);
         $container->setParameter('p.admin.search', $config['search']);
