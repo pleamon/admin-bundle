@@ -33,7 +33,7 @@ assetic:
             output: 'googlefonts/zN7GBFwfMP4uA6AR0HCoLQ.ttf'
         font9:
             inputs: '@PAdminBundle/Resources/public/font-awesome/fonts/fontawesome-webfont.woff2'
-            output: 'fonts/fontawesome-webfont.woff2'
+            output: '/fonts/fontawesome-webfont.woff2'
         png1:
             inputs: '@PAdminBundle/Resources/public/css/patterns/header-profile.png'
             output: '/Resources/public/css/patterns/header-profile.png'

@@ -1,2 +1,2 @@
 <a class="btn btn-primary" href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { 'id': entity.id }) }}" }}"> {{ "{{ 'edit'|trans({}, 'messages') }}" }} </a>
-{{ '{{ form(delete_form, {attr: {style:"display: inline-block;"}}) }}' }}
+{{ '{{ form(delete_form, {attr: {style:"display: inline-block;", "class": "delete-action"}}) }}' }}

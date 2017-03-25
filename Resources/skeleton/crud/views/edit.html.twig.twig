@@ -20,9 +20,7 @@
 
     {% set hide_edit, hide_delete = true, false %}
 
-    {{ '{{ form(delete_form, {attr: {style:"display: inline-block;", "onsubmit": "return deleteEntity();"}}) }}' }}
-
-    {% include 'crud/views/others/delete_script.html.twig.twig' %}
+    {{ '{{ form(delete_form, {attr: {style:"display: inline-block;", "class": "delete-action"}}) }}' }}
 
 {{ "{% endblock %}" }}
 {% endblock body %}

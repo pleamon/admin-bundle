@@ -3,10 +3,10 @@ p_admin:
     search:
         route: test
         text: 搜索
-    base_template: "ExampleOaBundle::standard_layout.html.twig"
+    base_template: "PAdminBundle:layout:standard_layout.html.twig"
     menus:
         home:
-            route: example_oa_homepage
+            route: test
             label: <span class='label label-warning pull-right'>16/24</span>
             icon: 'fa fa-th-large'
             text: 首页
@@ -15,5 +15,65 @@ p_admin:
             icon: 'fa fa-diamond'
             items:
                 list:
-                    route: example_oa_userlist
+                    route: user
                     text: 用户列表
+                group:
+                    route: group
+                    text: 用户组
+        article:
+            text: 文章管理
+            icon: 'fa fa-diamond'
+            items:
+                article_category:
+                    route: articlecategory
+                    text: 文章分类
+                article_tag:
+                    route: articletag
+                    text: 文章标签
+                article:
+                    route: article
+                    text: 文章
+        file:
+            text: 文件管理
+            icon: 'fa fa-diamond'
+            items:
+                file_category:
+                    route: filecategory
+                    text: 文件分类
+                file:
+                    route: file
+                    text: 文件
+        notification:
+            text: 消息中心
+            icon: 'fa fa-diamond'
+            items:
+                notification_category:
+                    route: notificationcategory
+                    text: 通知分类
+                notification:
+                    route: notification
+                    text: 通知
+        agile:
+            text: 敏捷板
+            icon: 'fa fa-diamond'
+            items:
+                agile_home:
+                    route: p_agile_board_homepage
+                    text: agile
+                agile_category:
+                    route: agilecategory
+                    text: 分类
+                agile_tag:
+                    route: agiletag
+                    text: 标签
+                agile:
+                    route: agile
+                    text: 敏捷板
+                    #        websocket:
+                    #            text: Websocket
+                    #            icon: 'fa fa-diamond'
+                    #            items:
+                    #                websocket:
+                    #                    route: p_websocket_client
+                    #                    text: websocket client
+
