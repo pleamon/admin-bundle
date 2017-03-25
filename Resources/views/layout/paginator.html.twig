@@ -17,7 +17,7 @@
 <hr />
 <div class="row">
     <div class="col-sm-5">
-        <div class="dataTables_info">{{ pagination.page }} / {{ pagination.pageCount }} 页 </div>
+        <div class="dataTables_info">{{ pagination.page }} / {{ pagination.pageCount == 0 ? 1 : pagination.pageCount }} 页 </div>
     </div>
     <div class="col-sm-7">
         <div class="dataTables_paginate paging_simple_numbers">
