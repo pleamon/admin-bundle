@@ -1,0 +1,25 @@
+P\AdminBundle\Entity\Region:
+    type: entity
+    table: region
+    id:
+        id:
+            type: integer
+    manyToOne:
+        parent:
+            targetEntity: Region
+            inversedBy: childs
+            joinColumn:
+                name: parent_id
+                referencedColumnName: id
+
+    oneToMany:
+        childs:
+            targetEntity: Region
+            mappedBy: parent
+    fields:
+        name:
+            type: string
+            length: 20
+        type:
+            type: integer
+

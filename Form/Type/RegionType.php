@@ -10,8 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\CallbackTransformer;
 
-use P\RegionBundle\Entity\Region;
-use P\RegionBundle\Exception\NotFoundRegionException;
+use P\AdminBundle\Entity\Region;
+use P\AdminBundle\Exception\NotFoundRegionException;
 
 
 class RegionType extends AbstractType
@@ -27,7 +27,7 @@ class RegionType extends AbstractType
         $this->container = $container;
         $this->em = $this->container->get('doctrine');
 
-        $regionRepository = $this->em->getRepository('PRegionBundle:Region');
+        $regionRepository = $this->em->getRepository('PAdminBundle:Region');
         $provinces = $regionRepository->createQueryBuilder('r')
             ->where('r.type = 1')
             ->getQuery()
@@ -52,7 +52,7 @@ class RegionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'class' => 'P\RegionBundle\Entity\Region',
+            'class' => 'P\AdminBundle\Entity\Region',
             'choices' => $this->streects,
             'attr' => array(
                 'style' => 'font-size: 25px',
@@ -65,7 +65,7 @@ class RegionType extends AbstractType
         $data = $builder->getData();
         $region = null;
         if(is_numeric($data)) {
-            $region = $this->em->getRepository('PRegionBundle:Region')->find($data);
+            $region = $this->em->getRepository('PAdminBundle:Region')->find($data);
         } else if($data instanceof Region) {
             $region = $data;
         }

@@ -14,7 +14,7 @@ class UploadImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            //'class' => 'P\FileBundle\Entity\File',
+            //'class' => 'P\AdminBundle\Entity\File',
             'attr' => array(
                 'style' => 'height: 150px; width: 150px;',
                 'class' => 'form-control',
@@ -26,7 +26,7 @@ class UploadImageType extends AbstractType
     {
         $data = $form->getData();
         $path = null;
-        if($data instanceof \P\FileBundle\Entity\File) {
+        if($data instanceof \P\AdminBundle\Entity\File) {
             $path = $data->getAccessPath();
         }
         if(is_string($data)) {
@@ -36,29 +36,10 @@ class UploadImageType extends AbstractType
             $path = $options['file_path'];
         }
         $view->vars['file_path'] = $path;
-        /*
-        if(array_key_exists('image_path', $options)) {
-            $parentData = $form->getParent()->getData();
-            if(null != $parentData) {
-                $accessor = PropertyAccess::createPropertyAccessor();
-                $imageUrl = $accessor->getValue($parentData, $options['images_path']);
-            } else {
-                $imageUrl = null;
-            }
-            $view->vars['images_url'] = $imageUrl;
-        }
-         */
     }
 
     public function getBlockPrefix()
     {
         return 'p_upload_image';
     }
-
-    /*
-    public function getParent()
-    {
-        return 'entity';
-    }
-     */
 }

@@ -25,7 +25,7 @@ class ImageType extends AbstractType
     {
         $data = $form->getData();
         $path = null;
-        if($data instanceof \P\FileBundle\Entity\File) {
+        if($data instanceof \P\AdminBundle\Entity\File) {
             $dir = $data->getCategory()->getDir();
             $path = $dir . $data->getMd5();
         }
@@ -36,18 +36,6 @@ class ImageType extends AbstractType
             $path = $options['file_path'];
         }
         $view->vars['file_path'] = $path;
-        /*
-        if(array_key_exists('image_path', $options)) {
-            $parentData = $form->getParent()->getData();
-            if(null != $parentData) {
-                $accessor = PropertyAccess::createPropertyAccessor();
-                $imageUrl = $accessor->getValue($parentData, $options['images_path']);
-            } else {
-                $imageUrl = null;
-            }
-            $view->vars['images_url'] = $imageUrl;
-        }
-         */
     }
 
     public function getBlockPrefix()

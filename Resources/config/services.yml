@@ -60,4 +60,5 @@ services:
         arguments:
             - '@service_container'
             - '@doctrine.orm.default_entity_manager'
-
+    p.curl:
+        class: P\AdminBundle\Service\Curl
