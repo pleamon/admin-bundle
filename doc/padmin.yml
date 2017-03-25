@@ -6,10 +6,10 @@ p_admin:
     base_template: "PAdminBundle:layout:standard_layout.html.twig"
     menus:
         home:
-            route: test
+            route: p_homepage
             label: <span class='label label-warning pull-right'>16/24</span>
             icon: 'fa fa-th-large'
-            text: 首页
+            text: 仪表盘
         usermanager:
             text: 用户管理
             icon: 'fa fa-diamond'
@@ -17,6 +17,9 @@ p_admin:
                 list:
                     route: user
                     text: 用户列表
+                role:
+                    route: role
+                    text: 权限
                 group:
                     route: group
                     text: 用户组
@@ -37,9 +40,15 @@ p_admin:
             text: 文件管理
             icon: 'fa fa-diamond'
             items:
+                file_home:
+                    route: p_file_home
+                    text: 文件管理
                 file_category:
                     route: filecategory
                     text: 文件分类
+                file_tag:
+                    route: filetag
+                    text: 文件标签
                 file:
                     route: file
                     text: 文件

@@ -9,11 +9,10 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "p/notification-bundle": "^3.0",
         "p/user-bundle": "^3.0",
         "php": ">=5.3.0"
     },
-    "require": {
+    "require-dev": {
     },
     "autoload": {
         "psr-4": {
