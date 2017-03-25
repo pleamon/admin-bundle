@@ -63,8 +63,6 @@ class PAdminExtension extends Extension
         $asseticBundles = $container->getParameter('assetic.bundles');
         array_merge($asseticBundles, array(
             'PAdminBundle',
-            'PFileBundle',
-            'PNotificationBundle',
         ));
         $container->setParameter('assetic.bundles', $asseticBundles);
     }
