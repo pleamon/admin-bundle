@@ -1,7 +1,38 @@
 {% extends 'PAdminBundle:layout:base.html.twig' %}
 
-{% import 'PAdminBundle:macros:menu.html.twig' as menus %}
-
 {% block menus %}
-    {{ menus.render_menus(admin_menus) }}
+{% set route = app.request.get('_route') %}
+{% set active = 0 %}
+{% for parent in padmin.menuParents %}
+    {% if active == 0 %}
+        {% for menu in parent.items %}
+            {% if menu.route == route %}
+                {% set active = 1 %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <li class="{% if parent.route == route or active == 1 %}active{% endif %}">
+        <a href="{{ parent.route ? path(parent.route) : '#' }}">
+            <i class="{{ parent.icon.name }}"></i>
+            <span class="nav-label">{{ parent.text }}</span>
+            {% if parent.items|length > 0 %}
+            <span class="fa arrow"></span>
+            {% endif %}
+        </a>
+        {% if parent.items|length > 0 %}
+        <ul class="nav nav-second-level collapse">
+            {% for menu in parent.items %}
+            <li class="{% if active == 1 and menu.route == route %}active{% set active = 2 %}{% endif %}">
+                <a href="{{ path(menu.route) }}">
+                    {% if menu.icon %}
+                        <i class="{{ menu.icon.name }}"></i>
+                    {% endif %}
+                    {{ menu.text }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </li>
+{% endfor %}
 {% endblock %}

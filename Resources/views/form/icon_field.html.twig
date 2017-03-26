@@ -1,0 +1,14 @@
+{% block p_icon_widget %}
+    {% spaceless %}
+    <select class="icon_type" name="{{ full_name }}">
+        {% if not required %}
+        <option></option>
+        {% endif %}
+        {% for icon in choices %}
+            <option value="{{ icon.value }}" {% if data and icon.value == data.id %}selected{% endif %}>{{ icon.label }}</option>
+        {% endfor %}
+    </select>
+    {% endspaceless %}
+{% endblock %}
+
+

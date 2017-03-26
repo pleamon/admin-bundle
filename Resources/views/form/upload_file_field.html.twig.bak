@@ -1,0 +1,89 @@
+{% block p_upload_file_row %}
+    {% spaceless %}
+    {% set uniqid = random() %}
+        <div class="row fileupload" id="row_id_{{ uniqid }}">
+            <div class="col-sm-3 b-r"><h3 class="m-t-none m-b">上传文件</h3>
+                <div role="form">
+                    {% for child in form.children %}
+                    <div class="form-group">
+                        <label>{{ form_label(child) }}</label>
+                        {{ form_widget(child) }}
+                    </div>
+                    {% endfor %}
+                    <label>选择文件</label>
+                    <a href="javascript:;" class="btn btn-block btn-info file-show-btn">选择文件
+                        <input class="form-control hidden upload-file-btn" type="file" name="{{ name }}" value="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-3 b-r">
+                <h3>文件信息</h3>
+                <table class="table table-stripped small m-t-md">
+                    <tbody>
+                        <tr>
+                            <td class="no-borders preview_text filename">
+                                {% if data %}
+                                    文件名: <code>{{ data.filename }}</code>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="preview_text filesize">
+                                {% if data %}文件大小: <code>{{ data.size }}</code>{% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="preview filetype">
+                                {% if data %}文件类型: <code>{{ data.mimeType }}</code>{% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6">
+                <h3>图片预览</h3>
+                {% if data and data.mimeType == 'image/jpeg' %}
+                    <img class="preview_img" src="{{ data.accessPath }}" width="250px" />
+                {% else %}
+                    <img class="preview_img" width="250px" />
+                    <div class="jumbotron">
+                        <h1>拖拽文件到此处</h1>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <hr />
+    <script>
+    $(function() {
+        var row_id = "row_id_{{ uniqid }}";
+        var row = $("#" + row_id);
+
+        var form_id = "{{ parent.vars.id }}";
+        $("form[name=" + form_id + "]").attr("enctype", 'multipart/form-data');
+
+        var file_drop = row[0];
+        file_drop.addEventListener(
+            'dragover',
+            function handleDragOver(evt) {
+                evt.stopPropagation()
+                evt.preventDefault()
+                evt.dataTransfer.dropEffect = 'copy'
+            },
+            false
+        )
+        file_drop.addEventListener(
+            'drop',
+            function(evt) {
+                evt.stopPropagation()
+                evt.preventDefault()
+                var files = evt.dataTransfer.files  // FileList object.
+                row.find(".upload-file-btn").prop('files', files);
+                var file = files[0]                 // File     object.
+                row.find(".jumbotron").hide();
+            },
+            false
+        )
+    }());
+    </script>
+    {% endspaceless %}
+    {% endblock %}

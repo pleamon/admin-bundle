@@ -25,7 +25,7 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $qb = $em->getRepository('PAdminBundle:Article')->createQueryBuilder('article');
+        $qb = $em->getRepository('PAdminBundle:Article')->createQueryBuilder('article')->orderBy('article.createdAt', 'desc');
 
         $count = $em->getRepository('PAdminBundle:Article')->createQueryBuilder('article')
             ->select('COUNT(article.id)')

@@ -1,0 +1,19 @@
+<div class="modal-header">
+    {% block modal_header %}
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        {% block modal_icon %}<i class="fa fa-file modal-icon"></i>{% endblock %}
+        <h4 class="modal-title">{% block modal_title %}{% endblock %}</h4>
+        <small></small>
+    {% endblock %}
+</div>
+
+<div class="modal-body">
+    {% block modal_content %}
+    {% endblock %}
+</div>
+<div class="modal-footer">
+    {% block modal_footer %}
+        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+    {% endblock %}
+</div>
+

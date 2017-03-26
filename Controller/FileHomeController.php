@@ -71,10 +71,12 @@ class FileHomeController extends Controller
         ));
     }
 
-    private function createCreateForm(File $entity)
+    private function createCreateForm($entity)
     {
+        $route = $this->get('request_stack')->getCurrentRequest()->get('_route');
         $form = $this->createForm(FileType::class, $entity, array(
-            'action' => $this->generateUrl('file_create'),
+            'container' => $this->container,
+            'action' => $this->generateUrl('file_create', array('callback' => $route)),
             'method' => 'POST',
         ));
 
@@ -82,5 +84,4 @@ class FileHomeController extends Controller
 
         return $form;
     }
-
 }

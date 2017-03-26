@@ -19,10 +19,10 @@
     <ul class="dropdown-menu dropdown-alerts">
         {% for notification in padmin.get('p.notification').getMessages(null, 'notification') %}
         <li>
-            <a href="{{ path("notification_show", {id: notification.id}) }}">
+            <a href="{{ path("notification_timeline") }}">
             <div>
-                <i class="fa fa-envelope fa-fw"></i> {{ notification.title}}
-                <span class="pull-right text-muted small">{{ notification.message}}</span>
+                <i class="{{ notification.icon }} fa-fw"></i> {{ notification.title}}
+                <span class="pull-right text-muted small">{{ notification.message|raw }}</span>
             </div>
         </a>
         </li>

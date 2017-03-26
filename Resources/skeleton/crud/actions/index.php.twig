@@ -19,7 +19,7 @@
 {% block method_body %}
         $em = $this->getDoctrine()->getManager();
 
-        $qb = $em->getRepository('{{ bundle }}:{{ entity }}')->createQueryBuilder('{{ entity|lower }}');
+        $qb = $em->getRepository('{{ bundle }}:{{ entity }}')->createQueryBuilder('{{ entity|lower }}')->orderBy('{{ entity|lower }}.id', 'desc');
 
         $count = $em->getRepository('{{ bundle }}:{{ entity }}')->createQueryBuilder('{{ entity|lower }}')
             ->select('COUNT({{ entity|lower }}.id)')

@@ -25,7 +25,7 @@ class NotificationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $qb = $em->getRepository('PAdminBundle:Notification')->createQueryBuilder('notification');
+        $qb = $em->getRepository('PAdminBundle:Notification')->createQueryBuilder('notification')->orderBy('notification.createdAt', 'desc');
 
         $count = $em->getRepository('PAdminBundle:Notification')->createQueryBuilder('notification')
             ->select('COUNT(notification.id)')
@@ -250,5 +250,20 @@ class NotificationController extends Controller
             ->add('submit', SubmitType::class, array('label' => 'delete', 'translation_domain' => 'messages', 'attr' => array('class' => 'btn btn-danger delete-action')))
             ->getForm()
         ;
+    }
+
+    public function timelineAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('PAdminBundle:NotificationCategory')->findAll();
+        $notifications = $em->getRepository('PAdminBundle:Notification')->createQueryBuilder('notification')
+            ->orderBy('notification.createdAt', 'desc')
+            ->getQuery()
+            ->getResult();
+
+        return $this->render('PAdminBundle:Notification:timeline.html.twig', array(
+            'categories' => $categories,
+            'notifications' => $notifications,
+        ));
     }
 }

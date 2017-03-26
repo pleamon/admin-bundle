@@ -9,8 +9,14 @@ P\AdminBundle\Entity\Notification:
     manyToOne:
         category:
             targetEntity: NotificationCategory
+            inversedBy: notifications
             joinColumn:
                 name: category_id
+                referencedColumnName: id
+        icon:
+            targetEntity: Icon
+            joinColumn:
+                name: icon_id
                 referencedColumnName: id
 
     fields:

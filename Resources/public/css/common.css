@@ -1,9 +1,38 @@
 .select2-container {
     width: 100% !important;
     padding: 0;
+}
+.modal .select2-container {
     z-index: 2300;
 }
 
 .collapse-link {
     cursor: pointer;
+}
+
+.preview_text {
+    padding-right: 10px;
+}
+
+.file .file-name {
+    word-wrap: break-word;
+}
+.fileupload.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.fileupload.row > [class*='col-'] {
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+    .modal-dialog {
+        width: 900px;
+    }
+}
+.nav-second-level li a {
+    padding-left: 45px;
 }

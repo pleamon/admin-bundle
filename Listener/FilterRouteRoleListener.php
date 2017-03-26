@@ -9,9 +9,15 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class FilterRouteRoleListener
 {
-    var $container;
-    public function __construct(ContainerInterface $container) {
+    private $container;
+    private $em;
+    private $authorizationChecker;
+    private $request;
+    public function __construct(ContainerInterface $container, $em, $authorizationChecker, $requestStack) {
         $this->container = $container;
+        $this->em = $em;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->request = $requestStack->getCurrentRequest();
     }
 
     public function onKernelController(FilterControllerEvent $event) {
@@ -26,21 +32,20 @@ class FilterRouteRoleListener
             return;
         }
 
-        $requestStack = $this->container->get('request_stack');
-        $request = $requestStack->getCurrentRequest();
-        $router = $this->container->get('router')->getRouteCollection();
+        $route = $this->request->get('_route');
+        $menu = $this->em->getRepository('PAdminBundle:AdminMenu')->findOneByRoute($route);
 
-        $_route = $request->get('_route');
-        $route = $router->get($_route);
-        $routeOptions = $route->getOptions();
+        if(empty($menu)) {
+            return;
+        }
 
-        if(array_key_exists('role', $routeOptions)) {
-            $roles = $routeOptions['role'];
-            $security = $this->container->get('security.context');
-            $user = $security->getToken()->getUser();
-            if(!array_intersect($user->getRoles(), $roles)) {
-                throw new AccessDeniedException();
-            }
+        $roles = array();
+        foreach($menu->getRoles() as $role) {
+            array_push($roles, $role->getName());
+        }
+
+        if (false === $this->authorizationChecker->isGranted($roles)) {
+            throw new AccessDeniedException();
         }
     }
 }

@@ -103,4 +103,3 @@ class FileTag
         return $this->files;
     }
 }
-

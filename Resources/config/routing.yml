@@ -2,6 +2,14 @@ p_homepage:
     path:     /
     defaults: { _controller: PAdminBundle:Dashboard:index }
 
+p_admin_menu:
+    resource: "@PAdminBundle/Resources/config/routing/adminmenu.yml"
+    prefix:   /menu
+
+p_admin_config:
+    path:    /config
+    defaults: { _controller: PAdminBundle:AdminConfig:index }
+
 p_notification_notification_category:
     resource: "@PAdminBundle/Resources/config/routing/notificationcategory.yml"
     prefix:   /notification_category
@@ -36,3 +44,7 @@ p_article_articletag:
 p_article_article:
     resource: "@PAdminBundle/Resources/config/routing/article.yml"
     prefix:   /article
+
+p_admin_icon:
+    resource: "@PAdminBundle/Resources/config/routing/icon.yml"
+    prefix:   /icon

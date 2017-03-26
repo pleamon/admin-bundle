@@ -1,0 +1,51 @@
+{% extends admin_base_template %}
+{% trans_default_domain 'PAdminBundle' %}
+
+{% block content %}
+{% set colors = ['navy-bg', 'blue-bg', 'lazur-bg', 'yellow-bg', 'red-bg'] %}
+<div class="tabs-container">
+    <ul class="nav nav-tabs">
+        {% for index, category in categories %}
+        <li class="{{ index == 0 ? 'active' : '' }}">
+            <a data-toggle="tab" href="#taba-{{ index }}">{{ category.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="tab-content">
+        {% for index, category in categories %}
+        <div id="taba-{{ index }}" class="tab-pane {{ index == 0 ? 'active' : '' }}">
+            <div class="panel-body">
+                <div class="row animated fadeInRight">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content" id="ibox-content">
+                                <div id="vertical-timeline" class="vertical-container dark-timeline">
+                                    {% for notification in category.notifications %}
+                                    <div class="vertical-timeline-block">
+                                        <div class="vertical-timeline-icon {{ colors[notification.level] }}">
+                                            <i class="fa fa-briefcase"></i>
+                                        </div>
+
+                                        <div class="vertical-timeline-content">
+                                            <h2>{{ notification.title }}</h2>
+                                            <p>
+                                            {{ notification.message|raw }}
+                                            </p>
+                                            <span class="vertical-date">
+                                                <small>{{ notification.createdAt|date('Y-m-d H:i:s') }}</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

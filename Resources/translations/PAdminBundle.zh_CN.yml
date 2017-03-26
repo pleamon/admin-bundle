@@ -1,6 +1,19 @@
+adminmenu:
+    id: id
+    name: name
+    text: text
+    label: label
+    route: route
+    parent: parent
+    items: items
+    roles: roles
+    icon: icon
+    sort: sort
+
 notification:
     id: id
     category: 通知类型
+    icon: icon
     level: 级别
     title: 标题
     message: 内容
@@ -18,6 +31,7 @@ file:
     tags: 标签
     filename: 文件名
     suffix: 后缀
+    mimetype: mime type
     size: 大小
     md5: md5
     createdat: 上传时间
@@ -54,3 +68,9 @@ articlecategory:
 articletag:
     id: id
     name: 标签
+
+icon:
+    id: id
+    show: 展示
+    type: 类型
+    name: 名称

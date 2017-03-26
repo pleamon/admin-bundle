@@ -119,8 +119,22 @@ class AssetCompilerPass implements CompilerPassInterface
                 array('@PAdminBundle/Resources/public/fonts/glyphicons-halflings-regular.woff'),
                 array(),
                 array('output' => 'fonts/glyphicons-halflings-regular.woff')
-            )
-
+            ),
+            'font_19' => array(
+                array('@PAdminBundle/Resources/public/css/plugins/summernote/font/summernote.eot'),
+                array(),
+                array('output' => 'Resources/public/css/plugins/summernote/font/summernote.eot'),
+            ),
+            'font_20' => array(
+                array('@PAdminBundle/Resources/public/css/plugins/summernote/font/summernote.ttf'),
+                array(),
+                array('output' => 'Resources/public/css/plugins/summernote/font/summernote.ttf'),
+            ),
+            'font_21' => array(
+                array('@PAdminBundle/Resources/public/css/plugins/summernote/font/summernote.woff'),
+                array(),
+                array('output' => 'Resources/public/css/plugins/summernote/font/summernote.woff'),
+            ),
         );
     }
 

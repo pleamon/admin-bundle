@@ -84,5 +84,50 @@ class NotificationCategory
     {
         return $this->name;
     }
-}
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $notifications;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->notifications = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add notification
+     *
+     * @param \P\AdminBundle\Entity\Notification $notification
+     *
+     * @return NotificationCategory
+     */
+    public function addNotification(\P\AdminBundle\Entity\Notification $notification)
+    {
+        $this->notifications[] = $notification;
+
+        return $this;
+    }
+
+    /**
+     * Remove notification
+     *
+     * @param \P\AdminBundle\Entity\Notification $notification
+     */
+    public function removeNotification(\P\AdminBundle\Entity\Notification $notification)
+    {
+        $this->notifications->removeElement($notification);
+    }
+
+    /**
+     * Get notifications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+}

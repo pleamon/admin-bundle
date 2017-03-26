@@ -1,0 +1,44 @@
+adminmenu:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:AdminMenu:index", page: 1}
+    requirements:
+        page: \d*
+
+adminmenu_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:AdminMenu:show" }
+    options:
+        default: adminmenu
+
+adminmenu_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:AdminMenu:new" }
+    options:
+        default: adminmenu
+
+adminmenu_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:AdminMenu:create" }
+    methods:  POST
+    options:
+        default: adminmenu
+
+adminmenu_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:AdminMenu:edit" }
+    options:
+        default: adminmenu
+
+adminmenu_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:AdminMenu:update" }
+    methods:  [POST, PUT]
+    options:
+        default: adminmenu
+
+adminmenu_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:AdminMenu:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: adminmenu

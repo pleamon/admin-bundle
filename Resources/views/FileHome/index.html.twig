@@ -37,9 +37,9 @@
         <div class="row">
             <div class="col-lg-12">
                 {% for file in files %}
-                    <div class="file-box">
+                <div class="file-box">
                     <div class="file">
-                        <a target="_blank" href="{{ path("p_file_download", {category: file.category.name, filename: file.filename }) }}">
+                        <a target="_blank" href="{{ path("file_download", {category: file.category.name, filename: file.filename }) }}">
                             <span class="corner"></span>
 
                             {% if file.suffix in ['jpg'] %}
@@ -74,9 +74,7 @@
                             </div>
                         </a>
                     </div>
-
                 </div>
-
                 {% endfor %}
             </div>
         </div>
@@ -93,8 +91,6 @@
                     <small></small>
                 </div>
                 <div class="modal-body">
-                    {{ form_row(form.category) }}
-                    {{ form_row(form.tags) }}
                     {{ form_row(form.file) }}
                 </div>
                 <div class="modal-footer">

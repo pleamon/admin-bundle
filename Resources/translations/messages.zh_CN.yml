@@ -1,5 +1,6 @@
 actions: 操作
 new: 新建
+continue new: 继续创建
 create: 创建
 edit: 编辑
 update: 更新
@@ -8,3 +9,10 @@ show: 查看
 list: 列表
 query: 查询
 back to list: 返回列表
+role setting: 权限配置
+menu config: 菜单配置
+user config: 用户配置
+group config: 用户组配置
+role config: 权限配置
+admin config: 后台配置
+Admin Config: 后台配置

@@ -1,0 +1,14 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h1 style="font-weight: bold;"><i class="fa fa-cogs fa-spin"></i>  {{ 'Admin Config'|trans }}</h1>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <a href="{{ path("p_admin_config") }}" class="btn btn-primary"><i class="fa fa-sitemap"></i> {{ 'admin config'|trans({}, 'messages') }}</a>
+            <a href="{{ path("adminmenu") }}" class="btn btn-primary"><i class="fa fa-sitemap"></i> {{ 'menu config'|trans({}, 'messages') }}</a>
+            <a href="{{ path("user") }}" class="btn btn-primary"><i class="fa fa-user"></i> {{ 'user config'|trans({}, 'messages') }}</a>
+            <a href="{{ path("group") }}" class="btn btn-primary"><i class="fa fa-users"></i> {{ 'group config'|trans({}, 'messages') }}</a>
+            <a href="{{ path("role") }}" class="btn btn-primary"><i class="fa fa-user-md"></i> {{ 'role config'|trans({}, 'messages') }}</a>
+        </div>
+    </div>
+</div>

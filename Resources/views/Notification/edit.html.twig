@@ -26,6 +26,16 @@
         {{ form_widget(edit_form.status) }}
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-8">
+        {{ form_label(edit_form.title) }}
+        {{ form_widget(edit_form.title) }}
+    </div>
+    <div class="col-sm-4">
+        {{ form_label(edit_form.icon) }}
+        {{ form_widget(edit_form.icon) }}
+    </div>
+</div>
 {{ form_end(edit_form) }}
 
     {{ form(delete_form, {attr: {style:"display: inline-block;", "class": "delete-action"}}) }}

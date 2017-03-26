@@ -1,0 +1,44 @@
+icon:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:Icon:index", page: 1}
+    requirements:
+        page: \d*
+
+icon_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:Icon:show" }
+    options:
+        default: icon
+
+icon_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:Icon:new" }
+    options:
+        default: icon
+
+icon_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:Icon:create" }
+    methods:  POST
+    options:
+        default: icon
+
+icon_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:Icon:edit" }
+    options:
+        default: icon
+
+icon_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:Icon:update" }
+    methods:  [POST, PUT]
+    options:
+        default: icon
+
+icon_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:Icon:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: icon

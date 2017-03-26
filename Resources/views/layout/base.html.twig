@@ -11,6 +11,8 @@
     '@PAdminBundle/Resources/public/font-awesome/css/font-awesome.min.css'
     '@PAdminBundle/Resources/public/css/plugins/select2/select2.min.css'
     '@PAdminBundle/Resources/public/css/plugins/sweetalert/sweetalert.css'
+    '@PAdminBundle/Resources/public/css/plugins/summernote/summernote.css'
+    '@PAdminBundle/Resources/public/css/plugins/summernote/summernote-bs3.css'
     '@PAdminBundle/Resources/public/css/animate.css'
     '@PAdminBundle/Resources/public/css/style.css'
     '@PAdminBundle/Resources/public/css/common.css'
@@ -114,6 +116,14 @@
         </div>
         {% endblock %}
     </div>
+    {% for i in 1..padmin.getParameter("p.admin.modal").count %}
+    <div class="modal inmodal in" id="modal{{ i }}" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated fadeIn">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 
 <!-- Mainly scripts -->
@@ -125,6 +135,7 @@
     '@PAdminBundle/Resources/public/js/plugins/pace/pace.min.js'
     '@PAdminBundle/Resources/public/js/plugins/select2/select2.full.min.js'
     '@PAdminBundle/Resources/public/js/plugins/sweetalert/sweetalert.min.js'
+    '@PAdminBundle/Resources/public/js/plugins/summernote/summernote.min.js'
     '@PAdminBundle/Resources/public/js/padmin.js'
     %}
     <script type="text/javascript" src="{{ asset(asset_url) }}"></script>

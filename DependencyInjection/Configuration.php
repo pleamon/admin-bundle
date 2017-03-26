@@ -46,6 +46,12 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('route')->defaultValue('')->end()
                     ->end()
                 ->end()
+                ->arrayNode('modal')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('count')->defaultValue(2)->end()
+                    ->end()
+                ->end()
                 ->scalarNode('paginator_template')
                     ->validate()
                         ->ifTrue(function($v) {return $v == null;})
@@ -53,6 +59,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                     ->defaultValue('PAdminBundle:layout:paginator.html.twig')
                 ->end()
+                /*
                 ->arrayNode('menus')
                     ->useAttributeAsKey('id')
                     ->prototype('array')
@@ -81,6 +88,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                 */
             ->end()
             ;
 

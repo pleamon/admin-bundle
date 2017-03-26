@@ -25,7 +25,7 @@ class FileController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $qb = $em->getRepository('PAdminBundle:File')->createQueryBuilder('file');
+        $qb = $em->getRepository('PAdminBundle:File')->createQueryBuilder('file')->orderBy('file.createdAt', 'desc');
 
         $count = $em->getRepository('PAdminBundle:File')->createQueryBuilder('file')
             ->select('COUNT(file.id)')
@@ -36,6 +36,7 @@ class FileController extends Controller
         $file = new File();
 
         $form = $this->createFormBuilder($file)
+            ->add('filename')
             ->add('submit', SubmitType::class, array('label' => 'query', 'attr' => array('class' => 'btn btn-primary')))
             ->setAction($this->generateUrl('file'))
             ->setMethod('POST')
@@ -45,6 +46,11 @@ class FileController extends Controller
 
         $form->handleRequest($request);
         if($form->isSubmitted()) {
+            if($file->getFilename()) {
+                $qb->andWhere('file.filename LIKE :filename')
+                    ->setParameter('filename', '%' . $file->getFilename() . '%')
+                    ;
+            }
         }
 
         list($entities, $pagination) = $this->get('p.paginator')->query($qb, $page, null, $count);
@@ -61,7 +67,7 @@ class FileController extends Controller
      * Creates a new File entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $callback = null)
     {
         $entity = new File();
         $form = $this->createCreateForm($entity);
@@ -72,6 +78,9 @@ class FileController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            if($callback) {
+                return $this->redirect($this->generateUrl($callback));
+            }
             return $this->redirect($this->generateUrl('file_show', array('id' => $entity->getId())));
         }
 
@@ -91,6 +100,7 @@ class FileController extends Controller
     private function createCreateForm(File $entity)
     {
         $form = $this->createForm(FileType::class, $entity, array(
+            'container' => $this->container,
             'action' => $this->generateUrl('file_create'),
             'method' => 'POST',
         ));
@@ -171,6 +181,7 @@ class FileController extends Controller
     private function createEditForm(File $entity)
     {
         $form = $this->createForm(FileType::class, $entity, array(
+            'container' => $this->container,
             'action' => $this->generateUrl('file_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -198,6 +209,7 @@ class FileController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $em->persist($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('file_edit', array('id' => $id)));
@@ -248,5 +260,20 @@ class FileController extends Controller
             ->add('submit', SubmitType::class, array('label' => 'delete', 'translation_domain' => 'messages', 'attr' => array('class' => 'btn btn-danger delete-action')))
             ->getForm()
         ;
+    }
+
+    public function modalAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('PAdminBundle:File')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find File entity.');
+        }
+
+        return $this->render('PAdminBundle:File:modal.html.twig', array(
+            'entity'      => $entity,
+        ));
     }
 }

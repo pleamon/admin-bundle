@@ -28,6 +28,11 @@ class File
     /**
      * @var string
      */
+    private $mimeType;
+
+    /**
+     * @var string
+     */
     private $md5;
 
     /**
@@ -103,6 +108,16 @@ class File
         return $this->suffix;
     }
 
+    public function getMimeType()
+    {
+        return $this->mimeType;
+    }
+
+    public function setMimeType($mimeType)
+    {
+        $this->mimeType = $mimeType;
+    }
+
     /**
      * Set md5
      *
@@ -147,6 +162,16 @@ class File
     public function getSize()
     {
         return $this->size;
+    }
+
+    public function getPrettySize()
+    {
+        $k = 1024;
+        $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+        $i = floor(log($this->size) / log($k));
+        $rs = round($this->size / pow($k, $i), 2) . ' ' . $sizes[$i];
+        return $rs;
     }
 
     /**
@@ -207,9 +232,24 @@ class File
         return $this->filename;
     }
 
-    public function __construct()
+    public function __construct(UploadedFile $file = null, $category = null, $tags = null)
     {
         $this->createdAt = new \DateTime();
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+
+        if($file) {
+            $this->file = $file;
+        }
+
+        if($category) {
+            $this->category = $category;
+        } else {
+            $this->category = new FileCategory('default', 'default', 'default');
+        }
+
+        if($tags) {
+            $this->tags = $tags;
+        }
     }
 
     public function getAbsolute()
@@ -243,13 +283,20 @@ class File
         $this->md5 = md5($path);
         $this->size = $file->getSize();
         $this->suffix = substr(strrchr($this->filename, '.'), 1);
+        $this->mimeType = $file->getMimeType();
         $file->move($dir, $this->getRealFilename());
         $this->file = null;
     }
 
-    public function setFile(UploadedFile $file)
+    public function setFile($file)
     {
-        $this->file = $file;
+        if($file instanceof UploadedFile) {
+            $this->file = $file;
+        } else if($file instanceof File) {
+            $this->file = $file->getFile();
+            $this->category = $file->getCategory();
+            $this->tags = $file->getTags();
+        }
         return $this;
     }
 

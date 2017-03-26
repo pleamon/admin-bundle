@@ -1,0 +1,53 @@
+{% extends 'PAdminBundle:layout:modal.html.twig' %}
+{% trans_default_domain 'PAdminBundle' %}
+
+{% block modal_icon %}
+<i class="fa fa-file modal-icon"></i>
+{% endblock %}
+
+{% block modal_title %}
+{{ entity.filename }}
+{% endblock %}
+
+{% block modal_content %}
+<div class="form">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>{{ 'file.id'|trans }}</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'file.filename'|trans }}</th>
+                <td>{{ entity.filename }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'file.suffix'|trans }}</th>
+                <td>{{ entity.suffix }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'file.mimetype'|trans }}</th>
+                <td>{{ entity.mimeType }}</td>
+            </tr>
+
+            <tr>
+                <th>{{ 'file.md5'|trans }}</th>
+                <td>{{ entity.md5 }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'file.size'|trans }}</th>
+                <td>{{ entity.prettySize }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'file.createdAt'|trans }}</th>
+                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block modal_footer %}
+    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+{% endblock %}

@@ -42,3 +42,9 @@ notification_delete:
     methods:  [POST, DELETE]
     options:
         default: notification
+
+notification_timeline:
+    path:     /timeline
+    defaults: { _controller: "PAdminBundle:Notification:timeline"}
+    options:
+        default: notification

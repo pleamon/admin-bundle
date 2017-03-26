@@ -16,9 +16,12 @@ P\AdminBundle\Entity\FileCategory:
         name:
             type: string
             length: 50
+
         keyName:
             type: string
             length: 20
+            unique: true
+
         dir:
             type: string
             length: 255

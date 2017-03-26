@@ -39,20 +39,19 @@
                             {{ entity.title }}
                         </h1>
                     </div>
-                        {{ entity.content|raw }}
-                        <hr />
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h5>Tags:</h5>
-                                {% for tag in entity.tags %}
-                                <button class="btn btn-primary btn-xs" type="button">{{ tag.name }}</button>
-                                {% endfor %}
-                            </div>
-                            <div class="col-md-6">
-                                <div class="small text-right">
-                                    <h5>Stats:</h5>
-                                    <i class="fa fa-eye"> </i> {{ entity.readCount}} views
-                                </div>
+                    {{ entity.content|raw }}
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            {% for tag in entity.tags %}
+                            <button class="btn btn-primary btn-xs" type="button">{{ tag.name }}</button>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <i class="fa fa-eye"> </i> {{ entity.readCount}} views
                             </div>
                         </div>
                     </div>

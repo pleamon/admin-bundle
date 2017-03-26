@@ -7,6 +7,12 @@ P\AdminBundle\Entity\NotificationCategory:
             generator:
                 strategy: AUTO
 
+    oneToMany:
+        notifications:
+            targetEntity: Notification
+            mappedBy: category
+            orderBy:
+                createdAt: desc
 
     fields:
         nkey:

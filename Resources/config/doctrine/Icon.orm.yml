@@ -1,0 +1,15 @@
+P\AdminBundle\Entity\Icon:
+    type: entity
+    table: icon
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: string
+            length: 255
+        name:
+            type: string
+            length: 255

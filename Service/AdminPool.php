@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class AdminPool
 {
     private $container;
+
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
@@ -22,19 +23,9 @@ class AdminPool
         return $this->container;
     }
 
-    public function getMenus()
-    {
-        return $this->container->getParameter('p_admin.menus');
-    }
-
     public function getTitle()
     {
         return $this->container->getParameter('p_admin_title');
-    }
-
-    public function getRoute($route)
-    {
-        return $this->container->get('router')->getRouteCollection()->get($route);
     }
 
     public function getParameter($name)
@@ -42,4 +33,15 @@ class AdminPool
         return $this->container->getParameter($name);
     }
 
+    public function getMenuParents()
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $result = $em->getRepository('PAdminBundle:AdminMenu')->createQueryBuilder('am')
+            ->where('am.parent IS NULL')
+            ->orderBy('am.sort', 'desc')
+            ->getQuery()
+            ->getResult()
+            ;
+        return $result;
+    }
 }

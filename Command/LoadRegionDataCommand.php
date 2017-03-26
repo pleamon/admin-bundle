@@ -28,7 +28,7 @@ class LoadRegionDataCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('p:region:load')
+            ->setName('p:load:region')
             ->setDescription('加载地理位置数据')
             ;
     }

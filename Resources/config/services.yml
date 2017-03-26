@@ -1,11 +1,13 @@
 parameters:
+    p.admin.config.class: P\AdminBundle\Service\AdminConfig
     p.admin.admin_pool.class: P\AdminBundle\Service\AdminPool
     p.admin.listener.filter_route_role.class: P\AdminBundle\Listener\FilterRouteRoleListener
 
     p.notification.levels: ['info', 'debug', 'warning', 'error', 'fatal']
     p.notification.status: ['隐藏', '正常']
 
-    p.twig.array_extensions.class: P\AdminBundle\Extension\ArrayExtension
+    p.twig.array_extension.class: P\AdminBundle\TwigExtension\ArrayExtension
+    p.twig.markdown_extension.class: P\AdminBundle\TwigExtension\MarkdownParsedownExtension
 
     p.file_types:
         image: ['jpg', 'png', 'gif']
@@ -15,6 +17,11 @@ parameters:
     p.article.status: ['隐藏', '显示']
 
 services:
+    p.admin.config:
+        class: "%p.admin.config.class%"
+        arguments:
+            - "@service_container"
+
     p.admin.pool:
         class: "%p.admin.admin_pool.class%"
         arguments:
@@ -24,6 +31,9 @@ services:
         class: "%p.admin.listener.filter_route_role.class%"
         arguments:
             - '@service_container'
+            - '@doctrine.orm.default_entity_manager'
+            - '@security.authorization_checker'
+            - '@request_stack'
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
@@ -51,15 +61,10 @@ services:
         arguments: ["@doctrine.orm.default_entity_manager"]
 
     p.twig.array_extension:
-        class: %p.twig.array_extensions.class%
+        class: %p.twig.array_extension.class%
         tags:
             - { name: twig.extension }
 
-    p.file.category:
-        class: P\FileBundle\Service\FileCategory
-        arguments:
-            - '@service_container'
-            - '@doctrine.orm.default_entity_manager'
     p.curl:
         class: P\AdminBundle\Service\Curl
 
@@ -67,8 +72,13 @@ services:
         class: P\AdminBundle\Service\MarkdownParsedown
 
     p.markdown_extension:
-        class: P\AdminBundle\Service\MarkdownParsedownExtension
+        class: "%p.twig.markdown_extension.class%"
         tags:
             - { name: twig.extension }
+        arguments:
+            - "@service_container"
+
+    p.icon:
+        class: P\AdminBundle\Service\Icon
         arguments:
             - "@service_container"

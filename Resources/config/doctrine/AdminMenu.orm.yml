@@ -1,0 +1,56 @@
+P\AdminBundle\Entity\AdminMenu:
+    type: entity
+    table: admin_menu
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    manyToMany:
+        roles:
+            targetEntity: P\UserBundle\Entity\Role
+            joinTable:
+                name: admin_menu_role
+                joinColumns:
+                    group_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    role_id:
+                        referencedColumnName: id
+    manyToOne:
+        parent:
+            targetEntity: AdminMenu
+            inversedBy: items
+            joinColumn:
+                name: parent_id
+                referencedColumnName: id
+        icon:
+            targetEntity: Icon
+            joinColumn:
+                name: icon_id
+                referencedColumnName: id
+
+    oneToMany:
+        items:
+            targetEntity: AdminMenu
+            mappedBy: parent
+
+    fields:
+        name:
+            type: string
+            length: 255
+        text:
+            type: string
+            length: 255
+        label:
+            type: string
+            length: 255
+            nullable: true
+        route:
+            type: string
+            length: 255
+            nullable: true
+        sort:
+            type: integer
+            nullable: true

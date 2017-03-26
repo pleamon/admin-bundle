@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use P\AdminBundle\Form\Type\RichTextType;
+use P\AdminBundle\Form\Type\IconType;
 
 class NotificationType extends AbstractType
 {
@@ -19,6 +20,7 @@ class NotificationType extends AbstractType
     {
         $container = $options['container'];
         $builder
+            ->add('icon', IconType::class, array('label' => 'notification.icon'))
             ->add('category', null, array('label' => 'notification.category'))
             ->add('level', ChoiceType::class, array('label' => 'notification.level', 'choices' => array_flip($container->getParameter('p.notification.levels'))))
             ->add('title', null, array('label' => 'notification.title'))

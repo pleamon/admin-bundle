@@ -1,0 +1,79 @@
+{% block p_multiple_upload_file_row %}
+    {% spaceless %}
+    {% set uniqid = random() %}
+        <style>
+        .filelist .checkbox {
+            display: none;
+        }
+        </style>
+        <div class="row fileupload" id="row_id_{{ uniqid }}">
+            <div class="col-sm-6" style="overflow: scroll; max-height: 240px;">
+                <h4>文件列表</h4>
+                <ul class="list-group filelist">
+                    {% for index, file in data.files %}
+                    <li class="list-group-item">
+                        {{ form_widget(form.file_id[index]) }}
+                        <a href="javascript:;" class="badge cancel-upload-file">
+                            <i class="fa fa-times"></i>
+                        </a>
+                        <span class="badge badge-danger"></span>
+                        <i class="fa fa-file"></i>
+                        {{ file.filename }}
+                        <code>{{ file.size }}</code>
+                        <code>{{ file.mimeType }}</code>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">批量上传文件</h3>
+                <div role="form">
+                    <div class="form-group">
+                        <label>{{ form_label(form.category) }}</label>
+                        {{ form_widget(form.category) }}
+                    </div>
+                    <div class="form-group">
+                        <label>{{ form_label(form.tags) }}</label>
+                        {{ form_widget(form.tags) }}
+                    </div>
+                    <label>选择文件</label>
+                    <a href="javascript:;" class="btn btn-block btn-info file-show-btn">选择文件
+                        <input class="form-control hidden upload-multiple-file-btn" type="file" name="{{ name }}[]" value="" multiple>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr />
+    {% endspaceless %}
+    <script>
+    $(function() {
+        var form_id = "{{ parent.vars.id }}";
+        $("form[name=" + form_id + "]").attr("enctype", 'multipart/form-data');
+
+        var row_id = "row_id_{{ uniqid }}";
+        var row = $("#" + row_id);
+
+        var file_drop = row[0];
+        file_drop.addEventListener(
+            'dragover',
+            function handleDragOver(evt) {
+                evt.stopPropagation()
+                evt.preventDefault()
+                evt.dataTransfer.dropEffect = 'copy'
+            },
+            false
+        )
+        file_drop.addEventListener(
+            'drop',
+            function(evt) {
+                evt.stopPropagation()
+                evt.preventDefault()
+                var files = evt.dataTransfer.files  // FileList object.
+                row.find(".upload-multiple-file-btn").prop('files', files);
+                var file = files[0]                 // File     object.
+            },
+            false
+        )
+    }());
+    </script>
+    {% endblock %}
+

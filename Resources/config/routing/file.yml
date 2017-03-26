@@ -17,9 +17,11 @@ file_new:
         default: file
 
 file_create:
-    path:     /create
-    defaults: { _controller: "PAdminBundle:File:create" }
+    path:     /create/{callback}
+    defaults: { _controller: "PAdminBundle:File:create", callback: null }
     methods:  POST
+    requirements:
+        callback: \w+
     options:
         default: file
 
@@ -50,5 +52,9 @@ file_download:
 file_preview:
     path:     /preview/{category}/{filename}
     defaults: { _controller: PAdminBundle:FilePreview:index }
+
+file_modal:
+    path:     /{id}/modal
+    defaults: { _controller: "PAdminBundle:File:modal" }
 
 

@@ -25,6 +25,16 @@
         {{ form_widget(form.status) }}
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-8">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+    </div>
+    <div class="col-sm-4">
+        {{ form_label(form.icon) }}
+        {{ form_widget(form.icon) }}
+    </div>
+</div>
 {{ form_end(form) }}
 
 {% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'PAdminBundle:layout:ibox.html.twig' %}
+{% trans_default_domain 'PAdminBundle' %}
+
+
+{% block ibox_title -%} {{ 'edit'|trans({}, 'messages') }}{% endblock %}
+
+{% block ibox_tools -%}
+    <a class="btn btn-outline btn-info" href="{{ path("adminmenu") }}">{{ 'back to list'|trans({}, 'messages') }}</a>
+{% endblock %}
+
+
+{% block ibox_content -%}
+    <table class="table">
+        <tbody>
+            <tr>
+
+                <th>{{ 'adminmenu.id'|trans }}</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'adminmenu.name'|trans }}</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'adminmenu.text'|trans }}</th>
+                <td>{{ entity.text }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'adminmenu.label'|trans }}</th>
+                <td>{{ entity.label }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'adminmenu.route'|trans }}</th>
+                <td>{{ entity.route }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a class="btn btn-primary" href="{{ path('adminmenu_new') }}"> {{ 'continue new'|trans({}, 'messages') }} </a>
+        <a class="btn btn-primary" href="{{ path('adminmenu_edit', { 'id': entity.id }) }}"> {{ 'edit'|trans({}, 'messages') }} </a>
+{{ form(delete_form, {attr: {style:"display: inline-block;", "class": "delete-action"}}) }}
+
+{% endblock %}
+

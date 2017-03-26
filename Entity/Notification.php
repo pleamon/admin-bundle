@@ -205,5 +205,33 @@ class Notification
     {
         return $this->category;
     }
-}
+    /**
+     * @var \P\AdminBundle\Entity\Icon
+     */
+    private $icon;
 
+
+    /**
+     * Set icon
+     *
+     * @param \P\AdminBundle\Entity\Icon $icon
+     *
+     * @return Notification
+     */
+    public function setIcon(\P\AdminBundle\Entity\Icon $icon = null)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return \P\AdminBundle\Entity\Icon
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+}

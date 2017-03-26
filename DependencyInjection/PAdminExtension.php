@@ -22,9 +22,10 @@ class PAdminExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('p.admin.menus', $config['menus']);
+        //$container->setParameter('p.admin.menus', $config['menus']);
         $container->setParameter('p.admin.title', $config['title']);
         $container->setParameter('p.admin.search', $config['search']);
+        $container->setParameter('p.admin.modal', $config['modal']);
         $container->setParameter('p.admin.base_template', isset($config['base_template'])?$config['base_template']:'');
         $container->setParameter('p.paginator.template', $config['paginator_template']);
 
@@ -45,7 +46,8 @@ class PAdminExtension extends Extension
         $themes = $container->getParameter('twig.form.resources');
         $themes = array_merge($themes, array(
             'PAdminBundle:Form:image_field.html.twig',
-            'PAdminBundle:Form:upload_image_field.html.twig',
+            'PAdminBundle:Form:upload_file_field.html.twig',
+            'PAdminBundle:Form:upload_multiple_file_field.html.twig',
             'PAdminBundle:Form:label_field.html.twig',
             'PAdminBundle:Form:custom_field.html.twig',
             'PAdminBundle:Form:region_field.html.twig',
@@ -54,6 +56,7 @@ class PAdminExtension extends Extension
             'PAdminBundle:Form:editor_field.html.twig',
             'PAdminBundle:Form:rich_text_field.html.twig',
             'PAdminBundle:Form:recaptcha_field.html.twig',
+            'PAdminBundle:Form:icon_field.html.twig',
         ));
         $container->setParameter('twig.form.resources', $themes);
     }

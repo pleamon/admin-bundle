@@ -278,4 +278,3 @@ class Article
         return $this->tags;
     }
 }
-

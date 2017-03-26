@@ -1,0 +1,15 @@
+P\AdminBundle\Entity\AdminConfig:
+    type: entity
+    table: admin_config
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        key:
+            type: string
+            length: 255
+        value:
+            type: string
+            length: 255
