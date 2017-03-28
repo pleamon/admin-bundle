@@ -1,0 +1,33 @@
+P\AdminBundle\Entity\ArticleComment:
+    type: entity
+    table: article_comment
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToOne:
+        article:
+            targetEntity: Article
+            joinColumn:
+                name: article_id
+                referencedColumnName: id
+        user:
+            targetEntity: P\UserBundle\Entity\User
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+
+    fields:
+        title:
+            type: string
+            length: 255
+
+        content:
+            type: text
+
+        status:
+            type: integer
+
+        createdAt:
+            type: datetime

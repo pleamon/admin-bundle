@@ -32,6 +32,7 @@ class Curl
     {
         $this->init();
         $this->setOpts($options);
+        $this->setOpt(CURLOPT_RETURNTRANSFER, 1);
         $this->setOpt(CURLOPT_URL, $url);
 
         return $this->exec();
@@ -45,7 +46,7 @@ class Curl
             CURLOPT_POST => 1,
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POSTFIELDS => $data,
-        ), $options);
+        ), $options));
 
         return $this->exec();
     }

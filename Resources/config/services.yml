@@ -82,3 +82,20 @@ services:
         class: P\AdminBundle\Service\Icon
         arguments:
             - "@service_container"
+    p.amqp:
+        class: P\AdminBundle\Service\Amqp
+        arguments:
+            - "@service_container"
+            - '@p.curl'
+            - "@event_dispatcher"
+
+    p.amqp.subscriber:
+        class: P\AdminBundle\Listener\AMQPSubscriber
+        tags:
+            - {name: kernel.event_subscriber}
+        arguments:
+            - "@service_container"
+
+    p.baidu.geocoder:
+        class: P\AdminBundle\Service\BaiduGeocoder
+        arguments: ["@p.curl", "%p.baidu%"]

@@ -1,0 +1,44 @@
+articlecomment:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:ArticleComment:index", page: 1}
+    requirements:
+        page: \d*
+
+articlecomment_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:ArticleComment:show" }
+    options:
+        default: articlecomment
+
+articlecomment_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:ArticleComment:new" }
+    options:
+        default: articlecomment
+
+articlecomment_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:ArticleComment:create" }
+    methods:  POST
+    options:
+        default: articlecomment
+
+articlecomment_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:ArticleComment:edit" }
+    options:
+        default: articlecomment
+
+articlecomment_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:ArticleComment:update" }
+    methods:  [POST, PUT]
+    options:
+        default: articlecomment
+
+articlecomment_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:ArticleComment:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: articlecomment

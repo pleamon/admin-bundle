@@ -7,6 +7,10 @@ P\AdminBundle\Entity\ArticleCategory:
             generator:
                 strategy: AUTO
 
+    oneToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: category
     fields:
         name:
             type: string

@@ -1,0 +1,13 @@
+p_amqp:
+    path:    /
+    defaults: { _controller: PAdminBundle:AMQP:index }
+
+p_amqp_queue_delete:
+    path:    /queue/{name}/delete
+    defaults: { _controller: PAdminBundle:AMQP:queueDelete }
+    methods: [delete, post]
+
+p_amqp_exchange_delete:
+    path:    /exchange/{name}/delete
+    defaults: { _controller: PAdminBundle:AMQP:exchangeDelete }
+    methods: [delete, post]

@@ -10,6 +10,10 @@ p_admin_config:
     path:    /config
     defaults: { _controller: PAdminBundle:AdminConfig:index }
 
+p_admin_amqp:
+    resource: "@PAdminBundle/Resources/config/routing/amqp.yml"
+    prefix:   /amqp
+
 p_notification_notification_category:
     resource: "@PAdminBundle/Resources/config/routing/notificationcategory.yml"
     prefix:   /notification_category
@@ -29,6 +33,7 @@ p_file_filetag:
 p_file_filecategory:
     resource: "@PAdminBundle/Resources/config/routing/filecategory.yml"
     prefix:   /filecategory
+
 p_file_home:
     path:     /home
     defaults: { _controller: PAdminBundle:FileHome:index }
@@ -44,6 +49,10 @@ p_article_articletag:
 p_article_article:
     resource: "@PAdminBundle/Resources/config/routing/article.yml"
     prefix:   /article
+
+p_admin_articlecomment:
+    resource: "@PAdminBundle/Resources/config/routing/articlecomment.yml"
+    prefix:   /articlecomment
 
 p_admin_icon:
     resource: "@PAdminBundle/Resources/config/routing/icon.yml"

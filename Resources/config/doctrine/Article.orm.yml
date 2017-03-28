@@ -30,6 +30,10 @@ P\AdminBundle\Entity\Article:
                 inverseJoinColumns:
                     tag_id:
                         referencedColumnName: id
+    oneToMany:
+        comments:
+            targetEntity: ArticleComment
+            mappedBy: article
 
     fields:
         title:
@@ -48,4 +52,3 @@ P\AdminBundle\Entity\Article:
 
         createdAt:
             type: datetime
-

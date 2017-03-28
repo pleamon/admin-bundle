@@ -1,0 +1,134 @@
+{% extends admin_base_template %}
+
+{% form_theme exchangeForm 'bootstrap_3_layout.html.twig' %}
+{% form_theme queueForm 'bootstrap_3_layout.html.twig' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>exchanges</h5>
+                <div class="ibox-tools">
+                    <a class="btn btn-outline btn-info" data-toggle="modal" data-target="#modal-exchange-new">new exchange</a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-hover no-margins">
+                    <thead>
+                        <tr>
+                            <th>vhost</th>
+                            <th>name</th>
+                            <th>type</th>
+                            <th>durable</th>
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for exchange in exchanges %}
+                        <tr>
+                            <td>{{ exchange.vhost }}</td>
+                            <td>{{ exchange.name }}</td>
+                            <td>{{ exchange.type }}</td>
+                            <td>{{ exchange.durable }}</td>
+                            <td>
+                                {% if exchange.name %}
+                                <form class="delete-action" action="{{ path("p_amqp_exchange_delete", {name: exchange.name}) }}" method="post">
+                                    <button type="submit" class="btn btn-danger btn-xs"> delete </button>
+                                </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>queues</h5>
+                <div class="ibox-tools">
+                    <a class="btn btn-outline btn-info" data-toggle="modal" data-target="#modal-queue-new">new queue</a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-hover no-margins">
+                    <thead>
+                        <tr>
+                            <th>vhost</th>
+                            <th>name</th>
+                            <th>durable</th>
+                            <th>ready</th>
+                            <th>total</th>
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for queue in queues %}
+                        <tr>
+                            <td>{{ queue.vhost }}</td>
+                            <td>{{ queue.name }}</td>
+                            <td>{{ queue.durable }}</td>
+                            <td>{{ queue.messages_ready_ram }}</td>
+                            <td>{{ queue.messages_ram }}</td>
+                            <td>
+                                <form class="delete-action" action="{{ path("p_amqp_queue_delete", {name: queue.name}) }}" method="post">
+                                    <button type="submit" class="btn btn-danger btn-xs"> delete </button>
+                                </form>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal in" id="modal-exchange-new" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            {{ form_start(exchangeForm) }}
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-cloud-upload modal-icon"></i>
+                <h4 class="modal-title">new exchange</h4>
+                <small></small>
+            </div>
+            <div class="modal-body">
+                {{ form_row(exchangeForm.exchange) }}
+                {{ form_row(exchangeForm.type) }}
+                {{ form_row(exchangeForm.flags) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                {{ form_widget(exchangeForm.submit) }}
+            </div>
+            {{ form_end(exchangeForm) }}
+        </div>
+    </div>
+</div>
+
+<div class="modal inmodal in" id="modal-queue-new" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            {{ form_start(queueForm) }}
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-cloud-upload modal-icon"></i>
+                <h4 class="modal-title">new queue</h4>
+                <small></small>
+            </div>
+            <div class="modal-body">
+                {{ form_row(queueForm.queue) }}
+                {{ form_row(queueForm.flags) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                {{ form_widget(queueForm.submit) }}
+            </div>
+            {{ form_end(queueForm) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

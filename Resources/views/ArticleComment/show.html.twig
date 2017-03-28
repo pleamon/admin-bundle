@@ -1,0 +1,47 @@
+{% extends 'PAdminBundle:layout:ibox.html.twig' %}
+{% trans_default_domain 'PAdminBundle' %}
+
+
+{% block ibox_title -%} {{ 'edit'|trans({}, 'messages') }}{% endblock %}
+
+{% block ibox_tools -%}
+    <a class="btn btn-outline btn-info" href="{{ path("articlecomment") }}">{{ 'back to list'|trans({}, 'messages') }}</a>
+{% endblock %}
+
+
+{% block ibox_content -%}
+    <table class="table">
+        <tbody>
+            <tr>
+
+                <th>{{ 'articlecomment.id'|trans }}</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'articlecomment.title'|trans }}</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'articlecomment.content'|trans }}</th>
+                <td>{{ entity.content }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'articlecomment.status'|trans }}</th>
+                <td>{{ entity.status }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'articlecomment.createdAt'|trans }}</th>
+                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a class="btn btn-primary" href="{{ path('articlecomment_edit', { 'id': entity.id }) }}"> {{ 'edit'|trans({}, 'messages') }} </a>
+{{ form(delete_form, {attr: {style:"display: inline-block;", "class": "delete-action"}}) }}
+
+{% endblock %}
+

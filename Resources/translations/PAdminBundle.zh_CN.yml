@@ -69,6 +69,14 @@ articletag:
     id: id
     name: 标签
 
+articlecomment:
+    id: id
+    article: 文章
+    title: 标题
+    content: 评论内容
+    status: 状态
+    createdAt: 评论时间
+
 icon:
     id: id
     show: 展示

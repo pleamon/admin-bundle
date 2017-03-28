@@ -277,4 +277,43 @@ class Article
     {
         return $this->tags;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $comments;
+
+
+    /**
+     * Add comment
+     *
+     * @param \P\AdminBundle\Entity\ArticleComment $comment
+     *
+     * @return Article
+     */
+    public function addComment(\P\AdminBundle\Entity\ArticleComment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \P\AdminBundle\Entity\ArticleComment $comment
+     */
+    public function removeComment(\P\AdminBundle\Entity\ArticleComment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
 }

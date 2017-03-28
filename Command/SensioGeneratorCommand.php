@@ -15,8 +15,9 @@ class SensioGeneratorCommand extends GenerateDoctrineCrudCommand
     {
         parent::configure();
 
-        $this->setName('p:generate:crud');
-        $this->setDescription('Our admin generator rocks!');
+        $this->setName('p:generate:crud')
+            ->setDescription('generate crud')
+            ;
     }
 
     protected function getSkeletonDirs(BundleInterface $bundle = null)
