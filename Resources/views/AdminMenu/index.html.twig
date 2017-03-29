@@ -1,6 +1,5 @@
 {% extends admin_base_template %}
 {% trans_default_domain 'PAdminBundle' %}
-{% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block page_heading %}
 {% include 'PAdminBundle:AdminConfig:header.html.twig' %}
@@ -13,77 +12,134 @@
 %}
 <link rel="stylesheet" type="text/css" href="{{ asset(asset_url) }}" />
 {% endstylesheets %}
-
-{% if form.children|length > 2 %}
+<style>
+#dd-empty {
+  border: 1px dashed #bbb;
+  min-height: 100px;
+  background-color: #e5e5e5;
+  background-image: -webkit-linear-gradient(45deg, #ffffff 25%, transparent 25%, transparent 75%, #ffffff 75%, #ffffff), -webkit-linear-gradient(45deg, #ffffff 25%, transparent 25%, transparent 75%, #ffffff 75%, #ffffff);
+  background-image: -moz-linear-gradient(45deg, #ffffff 25%, transparent 25%, transparent 75%, #ffffff 75%, #ffffff), -moz-linear-gradient(45deg, #ffffff 25%, transparent 25%, transparent 75%, #ffffff 75%, #ffffff);
+  background-image: linear-gradient(45deg, #ffffff 25%, transparent 25%, transparent 75%, #ffffff 75%, #ffffff), linear-gradient(45deg, #ffffff 25%, transparent 25%, transparent 75%, #ffffff 75%, #ffffff);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+}
+</style>
 <div class="row">
-    <div class="col-lg-12">
-        <div class="ibox collapsed">
-            <div class="ibox-title collapse-link">
-                <h5>{{ 'query'|trans({}, 'messages') }}</h5>
-                <div class="ibox-tools">
-                    <i class="fa fa-chevron-up"></i>
-                </div>
-            </div>
-            <div class="ibox-content">
-                {{ form(form) }}
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
-
-
-<div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <div class="ibox">
             <div class="ibox-title">
-                <h5>{{ 'list'|trans({}, 'messages') }}</h5>
+                <h5>{{ 'enabled list'|trans({}, 'messages') }}</h5>
                 <div class="ibox-tools">
-                    <a class="btn btn-outline btn-info" href="{{ path("adminmenu_new") }}">{{ 'new'|trans({}, 'messages') }}</a>
+                    <span id="nestable-menu">
+                        <a type="button" href="{{ path("adminmenu_list") }}" class="btn btn-outline btn-info">列表</a>
+                        <button type="button" data-action="expand-all" class="btn btn-outline btn-success">展开</button>
+                        <button type="button" data-action="collapse-all" class="btn btn-outline btn-warning">收起</button>
+                    </span>
+                    <button type="button" class="btn btn-outline btn-info" id="sort-save" href="">
+                        <div class="sk-spinner sk-spinner-circle hide" id="save-loading">
+                            <div class="sk-circle1 sk-circle"></div>
+                            <div class="sk-circle2 sk-circle"></div>
+                            <div class="sk-circle3 sk-circle"></div>
+                            <div class="sk-circle4 sk-circle"></div>
+                            <div class="sk-circle5 sk-circle"></div>
+                            <div class="sk-circle6 sk-circle"></div>
+                            <div class="sk-circle7 sk-circle"></div>
+                            <div class="sk-circle8 sk-circle"></div>
+                            <div class="sk-circle9 sk-circle"></div>
+                            <div class="sk-circle10 sk-circle"></div>
+                            <div class="sk-circle11 sk-circle"></div>
+                            <div class="sk-circle12 sk-circle"></div>
+                        </div>
+                        <span id="save-text">{{ 'update'|trans({}, 'messages') }}</span>
+                    </button>
                 </div>
             </div>
             <div class="ibox-content p-md">
-                <div class="dataTables_wrapper form-inline dt-bootstrap">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{{ 'adminmenu.id'|trans }}</th>
-                                    <th>{{ 'adminmenu.parent'|trans }}</th>
-                                    <th>{{ 'adminmenu.name'|trans }}</th>
-                                    <th>{{ 'adminmenu.text'|trans }}</th>
-                                    <th>{{ 'adminmenu.route'|trans }}</th>
-                                    <th>{{ 'adminmenu.sort'|trans }}</th>
-                                    <th>{{ 'actions'|trans({}, 'messages') }}</th>
+                <div class="dd" id="nestable">
+                    <ol class="dd-list">
+                        {% for first in entities %}
+                        <li class="dd-item" data-id="{{ first.id }}">
+                            <div class="dd-handle">
+                                {% if first.icon %}
+                                <span class="label label-info"><i class="{{ first.icon.name }}"></i></span>
+                                {% endif %}
+                                {{ first.text }} [ {{ first.route ?? '-' }} ]
+                            </div>
+                            {% if first.items|length > 0 %}
+                            <ol class="dd-list">
+                                {% for secondary in first.items %}
+                                <li class="dd-item" data-id="{{ secondary.id}}">
+                                    <div class="dd-handle">
+                                        {% if secondary.icon %}
+                                        <span class="label label-info"><i class="{{ secondary.icon.name }}"></i></span>
+                                        {% endif %}
+                                        {{ secondary.text}} [ {{ secondary.route ?? '-' }} ]
+                                    </div>
+                                    {% if secondary.items|length > 0 %}
+                                    <ol class="dd-list">
+                                        {% for third in secondary.items %}
+                                        <li class="dd-item" data-id="{{ third.id}}">
+                                            <div class="dd-handle">
+                                                {% if third.icon %}
+                                                <span class="label label-info"><i class="{{ third.icon.name }}"></i></span>
+                                                {% endif %}
+                                                {{ third.text}} [ {{ third.route ?? '-' }} ]
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    </ol>
+                            {% endif %}
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% for entity in entities %}
-                                <tr>
-                                    <td><a href="{{ path('adminmenu_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                                    <td>{{ entity.parent }}</td>
-                                    <td>{{ entity.name }}</td>
-                                    <td>{% if entity.icon %}<i class="{{ entity.icon.name }}"></i>{% endif %} {{ entity.text }}</td>
-                                    <td>{{ entity.route }}</td>
-                                    <td>{{ entity.sort }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                        <a class="btn btn-primary btn-xs" href="{{ path('adminmenu_show', { 'id': entity.id }) }}">
-                                            {{ 'show'|trans({}, 'messages') }}
-                                        </a>
-                                        <a class="btn btn-primary btn-xs" href="{{ path('adminmenu_edit', { 'id': entity.id }) }}">
-                                            {{ 'edit'|trans({}, 'messages') }}
-                                        </a>
-                                        </div>
-
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    {{ tools|raw }}
+                                </li>
+                                {% endfor %}
+                            </ol>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>{{ 'unabled list'|trans({}, 'messages') }}</h5>
+                <div class="ibox-tools">
+                    <a class="btn btn-outline btn-info" href="{{ path("adminmenu_new") }}">{{ 'new'|trans({}, 'messages') }}</a>
+                    <button id="scan-btn" type="button" class="btn btn-outline btn-info" >
+                        <div class="sk-spinner sk-spinner-circle hide" id="scan-loading">
+                            <div class="sk-circle1 sk-circle"></div>
+                            <div class="sk-circle2 sk-circle"></div>
+                            <div class="sk-circle3 sk-circle"></div>
+                            <div class="sk-circle4 sk-circle"></div>
+                            <div class="sk-circle5 sk-circle"></div>
+                            <div class="sk-circle6 sk-circle"></div>
+                            <div class="sk-circle7 sk-circle"></div>
+                            <div class="sk-circle8 sk-circle"></div>
+                            <div class="sk-circle9 sk-circle"></div>
+                            <div class="sk-circle10 sk-circle"></div>
+                            <div class="sk-circle11 sk-circle"></div>
+                            <div class="sk-circle12 sk-circle"></div>
+                        </div>
+                        <span id="scan-text">{{ 'scan'|trans({}, 'messages') }}</span>
+                    </button>
+                </div>
+            </div>
+            <div class="ibox-content p-md">
+                <div class="dd" id="unableds">
+                    <ol class="dd-list">
+                        {% for unabledMenu in unabledMenus %}
+                        <li class="dd-item" data-id="{{ unabledMenu.id }}">
+                            <div class="dd-handle">
+                                {% if unabledMenu.icon %}
+                                <span class="label label-warning"><i class="{{ unabledMenu.icon.name }}"></i></span>
+                                {% endif %}
+                                {{ unabledMenu.text }} [ {{ unabledMenu.route }} ]
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ol>
                 </div>
             </div>
         </div>
@@ -92,4 +148,91 @@
 {% endblock %}
 
 {% block javascripts %}
+
+{% javascripts
+'@PAdminBundle/Resources/public/js/plugins/nestable/jquery.nestable.js'
+%}
+<script type="text/javascript" src="{{ asset(asset_url) }}"></script>
+{% endjavascripts %}
+
+    <script>
+$(document).ready(function(){
+
+    var nestableData = {{ sorts }};
+
+    // activate Nestable for list 1
+    $('#nestable').nestable({
+        maxDepth: 3,
+        group: 1
+    })
+
+    // activate Nestable for list 2
+    $('#unableds').nestable({
+        maxDepth: 1,
+        group: 1
+    });
+
+    $('#nestable-menu').on('click', function (e) {
+        var target = $(e.target),
+        action = target.data('action');
+        if (action === 'expand-all') {
+            $('.dd').nestable('expandAll');
+        }
+        if (action === 'collapse-all') {
+            $('.dd').nestable('collapseAll');
+        }
+    });
+    $("#sort-save").on("click", function(e) {
+        var postUrl = "{{ path("adminmenu_sort_save") }}";
+        nestableData = window.JSON.stringify($('#nestable').nestable('serialize'));
+        $("#save-loading, #save-text").toggleClass("hide");
+        if(nestableData.length > 0) {
+            $.ajax({
+                url: postUrl,
+                data: nestableData,
+                method: 'post',
+                success: function(json) {
+                    swal('更新成功', '', 'success');
+                    $("#save-loading, #save-text").toggleClass("hide");
+                },
+                error: function(error) {
+                    swal(error.statusText, '', 'error');
+                    $("#save-loading, #save-text").toggleClass("hide");
+                }
+            })
+        } else {
+            swal('没有变动', '', 'warning');
+        }
+    });
+
+    $("#scan-btn").on("click", function(e) {
+        var scanUrl = "{{ path("adminmenu_scan") }}";
+        $("#scan-loading, #scan-text").toggleClass("hide");
+        $.ajax({
+            url: scanUrl,
+            dataType: 'json',
+            success: function(json) {
+                $("#scan-loading, #scan-text").toggleClass("hide");
+                $("#unableds").html("");
+                console.log(json);
+                $(json).each(function(k, v) {
+                    var dditem = '<li class="dd-item" data-id="' + v.id + '">' +
+                                    '<div class="dd-handle">' +
+                                        (v.icon ? '<span class="label label-warning"><i class="' + v.icon.name + '"></i></span>' : '') +
+                                        v.text + '[ ' + v.route + ' ]' +
+                                    '</div>' +
+                                 '</li>';
+                    $(dditem).appendTo($("#unableds"));
+                });
+                $("scan-loading").hide();
+            },
+            error: function(error) {
+                swal(error.statusText, '', 'error');
+                $("#scan-loading, #scan-text").toggleClass("hide");
+            }
+        })
+    })
+});
+
+    </script>
 {% endblock %}

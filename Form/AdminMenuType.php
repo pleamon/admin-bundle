@@ -47,6 +47,7 @@ class AdminMenuType extends AbstractType
             ->add('icon', IconType::class, array('label' => 'adminmenu.icon', 'required' => false))
             ->add('roles', null, array('label' => 'adminmenu.roles'))
             ->add('sort', null, array('label' => 'adminmenu.sort'))
+            ->add('enabled', null, array('label' => 'adminmenu.enabled'))
             ;
     }
     

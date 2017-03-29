@@ -1,6 +1,10 @@
 adminmenu:
-    path:     /{page}
-    defaults: { _controller: "PAdminBundle:AdminMenu:index", page: 1}
+    path:     /
+    defaults: { _controller: "PAdminBundle:AdminMenu:index"}
+
+adminmenu_list:
+    path:     /list/{page}
+    defaults: { _controller: "PAdminBundle:AdminMenu:list", page: 1}
     requirements:
         page: \d*
 
@@ -42,3 +46,11 @@ adminmenu_delete:
     methods:  [POST, DELETE]
     options:
         default: adminmenu
+
+adminmenu_sort_save:
+    path:     /sort/save
+    defaults: { _controller: "PAdminBundle:AdminMenu:sortSave"}
+ 
+adminmenu_scan:
+    path:     /scan
+    defaults: { _controller: "PAdminBundle:AdminMenu:scan"}

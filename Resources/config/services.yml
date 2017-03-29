@@ -1,5 +1,6 @@
 parameters:
     p.admin.config.class: P\AdminBundle\Service\AdminConfig
+    p.admin.menu.class: P\AdminBundle\Service\AdminMenu
     p.admin.admin_pool.class: P\AdminBundle\Service\AdminPool
     p.admin.listener.filter_route_role.class: P\AdminBundle\Listener\FilterRouteRoleListener
 
@@ -21,6 +22,12 @@ services:
         class: "%p.admin.config.class%"
         arguments:
             - "@service_container"
+
+    p.admin.menu:
+        class: "%p.admin.menu.class%"
+        arguments:
+            - "@service_container"
+            - '@doctrine.orm.default_entity_manager'
 
     p.admin.pool:
         class: "%p.admin.admin_pool.class%"

@@ -35,6 +35,7 @@ P\AdminBundle\Entity\AdminMenu:
         items:
             targetEntity: AdminMenu
             mappedBy: parent
+            order: sort
 
     fields:
         name:
@@ -43,6 +44,7 @@ P\AdminBundle\Entity\AdminMenu:
         text:
             type: string
             length: 255
+            nullable: true
         label:
             type: string
             length: 255
@@ -51,6 +53,10 @@ P\AdminBundle\Entity\AdminMenu:
             type: string
             length: 255
             nullable: true
+        enabled:
+            type: boolean
+            options:
+                default: true
         sort:
             type: integer
             nullable: true

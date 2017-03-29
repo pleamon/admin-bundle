@@ -316,4 +316,130 @@ class AdminMenu
     {
         return $this->sort;
     }
+    /**
+     * @var \P\AdminBundle\Entity\AdminMenu
+     */
+    private $mount;
+
+
+    /**
+     * Set mount
+     *
+     * @param \P\AdminBundle\Entity\AdminMenu $mount
+     *
+     * @return AdminMenu
+     */
+    public function setMount(\P\AdminBundle\Entity\AdminMenu $mount = null)
+    {
+        $this->mount = $mount;
+
+        return $this;
+    }
+
+    /**
+     * Get mount
+     *
+     * @return \P\AdminBundle\Entity\AdminMenu
+     */
+    public function getMount()
+    {
+        return $this->mount;
+    }
+    /**
+     * @var boolean
+     */
+    private $show = true;
+
+
+    /**
+     * Set show
+     *
+     * @param boolean $show
+     *
+     * @return AdminMenu
+     */
+    public function setShow($show)
+    {
+        $this->show = $show;
+
+        return $this;
+    }
+
+    /**
+     * Get show
+     *
+     * @return boolean
+     */
+    public function getShow()
+    {
+        return $this->show;
+    }
+    /**
+     * @var boolean
+     */
+    private $enabled = true;
+
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     *
+     * @return AdminMenu
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $mounts;
+
+
+    /**
+     * Add mount
+     *
+     * @param \P\AdminBundle\Entity\AdminMenu $mount
+     *
+     * @return AdminMenu
+     */
+    public function addMount(\P\AdminBundle\Entity\AdminMenu $mount)
+    {
+        $this->mounts[] = $mount;
+
+        return $this;
+    }
+
+    /**
+     * Remove mount
+     *
+     * @param \P\AdminBundle\Entity\AdminMenu $mount
+     */
+    public function removeMount(\P\AdminBundle\Entity\AdminMenu $mount)
+    {
+        $this->mounts->removeElement($mount);
+    }
+
+    /**
+     * Get mounts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMounts()
+    {
+        return $this->mounts;
+    }
 }

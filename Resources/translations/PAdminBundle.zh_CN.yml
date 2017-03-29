@@ -1,14 +1,16 @@
 adminmenu:
     id: id
-    name: name
-    text: text
+    name: 名称
+    text: 菜单文字
     label: label
-    route: route
-    parent: parent
+    route: 路由
+    parent: 上级菜单
+    mount: 挂载菜单
     items: items
-    roles: roles
+    roles: 权限
     icon: icon
-    sort: sort
+    sort: 排序
+    enabled: 显示
 
 notification:
     id: id

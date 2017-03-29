@@ -9,6 +9,7 @@ P\AdminBundle\Entity\ArticleComment:
     manyToOne:
         article:
             targetEntity: Article
+            inversedBy: comments
             joinColumn:
                 name: article_id
                 referencedColumnName: id

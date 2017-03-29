@@ -10,6 +10,7 @@ P\AdminBundle\Entity\Article:
     manyToOne:
         category:
             targetEntity: ArticleCategory
+            inversedBy: articles
             joinColumn:
                 name: category_id
                 referencedColumnName: id
