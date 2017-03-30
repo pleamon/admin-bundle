@@ -1,0 +1,49 @@
+{% extends 'PAdminBundle:layout:ibox.html.twig' %}
+{% trans_default_domain 'PUserBundle' %}
+
+
+{% block ibox_title -%} {{ 'edit'|trans({}, 'messages') }}{% endblock %}
+
+{% block ibox_tools -%}
+    <a class="btn btn-outline btn-info" href="{{ path("user") }}">{{ 'back to list'|trans({}, 'messages') }}</a>
+{% endblock %}
+
+
+{% block ibox_content -%}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>{{ 'user.id'|trans }}</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'user.username'|trans }}</th>
+                <td>{{ entity.username }}</td>
+            </tr>
+
+            <tr>
+                <th>{{ 'user.email'|trans }}</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+
+            <tr>
+                <th>{{ 'user.group'|trans }}</th>
+                <td>
+                    {% for group in entity.groups %}
+                    <span class="label label-primary">{{ group.name }}</span>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>{{ 'user.createdAt'|trans }}</th>
+                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a class="btn btn-primary" href="{{ path('user_edit', { 'id': entity.id }) }}"> {{ 'edit'|trans({}, 'messages') }} </a>
+{{ form(delete_form, {attr: {style:"display: inline-block;", class: "delete-action"}}) }}
+
+
+{% endblock %}
+

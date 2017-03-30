@@ -1,0 +1,51 @@
+{% extends 'PAdminBundle:layout:modal.html.twig' %}
+{% trans_default_domain 'PUserBundle' %}
+
+{% block modal_title %} role {% endblock %}
+{% block modal_icon %} <i class="fa fa-child modal-icon"></i> {% endblock %}
+
+{% block modal_content %}
+<table class="table">
+    <tbody>
+        <tr>
+
+            <th>{{ 'role.id'|trans }}</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'role.parent'|trans }}</td>
+            <td>{{ entity.parent }}</td>
+        </tr>
+        <tr>
+
+            <th>{{ 'role.name'|trans }}</th>
+            <td>{{ entity.name }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'role.childrens'|trans }}</td>
+            <td>
+                <table class="table table-stripped small m-t-md">
+                    <tbody>
+                    {% for children in entity.childrens %}
+                        <tr>
+                            <td>
+                                <i class="fa fa-circle text-navy"></i>
+                                {{ children.name }}
+                            </td>
+                        </tr>
+                    {% for grandson in children.allChildrens %}
+                        <tr>
+                            <td>
+                                <i class="fa fa-circle text-danger"></i>
+                                {{ grandson }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

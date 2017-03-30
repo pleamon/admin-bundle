@@ -10,6 +10,18 @@ p_admin_config:
     path:    /config
     defaults: { _controller: PAdminBundle:AdminConfig:index }
 
+p_admin_user:
+    resource: "@PAdminBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+p_admin_role:
+    resource: "@PAdminBundle/Resources/config/routing/role.yml"
+    prefix:   /role
+
+p_admin_group:
+    resource: "@PAdminBundle/Resources/config/routing/group.yml"
+    prefix:   /group
+
 p_admin_amqp:
     resource: "@PAdminBundle/Resources/config/routing/amqp.yml"
     prefix:   /amqp

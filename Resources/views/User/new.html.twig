@@ -1,0 +1,18 @@
+{% extends 'PAdminBundle:layout:ibox.html.twig' %}
+
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block ibox_title -%}{{ 'new'|trans({}, 'messages') }}{% endblock %}
+{% block ibox_tools -%}
+    <a class="btn btn-outline btn-info" href="{{ path("user") }}">{{ 'back to list'|trans({}, 'messages') }}</a>
+{% endblock %}
+
+{% block ibox_content -%}
+
+    {{ form(form) }}
+
+    
+
+{% endblock %}
+

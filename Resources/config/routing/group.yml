@@ -1,0 +1,44 @@
+group:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:Group:index", page: 1}
+    requirements:
+        page: \d*
+
+group_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:Group:show" }
+    options:
+        default: group
+
+group_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:Group:new" }
+    options:
+        default: group
+
+group_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:Group:create" }
+    methods:  POST
+    options:
+        default: group
+
+group_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:Group:edit" }
+    options:
+        default: group
+
+group_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:Group:update" }
+    methods:  [POST, PUT]
+    options:
+        default: group
+
+group_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:Group:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: group

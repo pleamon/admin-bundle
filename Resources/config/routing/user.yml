@@ -1,0 +1,44 @@
+user:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:User:index", page: 1}
+    requirements:
+        page: \d*
+
+user_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:User:show" }
+    options:
+        default: user
+
+user_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:User:new" }
+    options:
+        default: user
+
+user_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:User:create" }
+    methods:  POST
+    options:
+        default: user
+
+user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:User:edit" }
+    options:
+        default: user
+
+user_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:User:update" }
+    methods:  [POST, PUT]
+    options:
+        default: user
+
+user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:User:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: user

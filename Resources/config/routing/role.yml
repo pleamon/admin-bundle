@@ -1,0 +1,50 @@
+role:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:Role:index", page: 1}
+    requirements:
+        page: \d*
+
+role_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:Role:show" }
+    options:
+        default: role
+
+role_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:Role:new" }
+    options:
+        default: role
+
+role_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:Role:create" }
+    methods:  POST
+    options:
+        default: role
+
+role_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:Role:edit" }
+    options:
+        default: role
+
+role_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:Role:update" }
+    methods:  [POST, PUT]
+    options:
+        default: role
+
+role_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:Role:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: role
+
+role_modal:
+    path:     /{id}/modal
+    defaults: { _controller: "PAdminBundle:Role:modal" }
+    options:
+        default: role

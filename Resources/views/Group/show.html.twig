@@ -1,0 +1,43 @@
+{% extends 'PAdminBundle:layout:ibox.html.twig' %}
+{% trans_default_domain 'PUserBundle' %}
+
+
+{% block ibox_title -%} {{ 'edit'|trans({}, 'messages') }}{% endblock %}
+
+{% block ibox_tools -%}
+    <a class="btn btn-outline btn-info" href="{{ path("group") }}">{{ 'back to list'|trans({}, 'messages') }}</a>
+{% endblock %}
+
+
+{% block ibox_content -%}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>{{ 'group.id'|trans }}</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'group.name'|trans }}</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+
+            <tr>
+                <th>{{ 'group.roles'|trans }}</th>
+                <td>
+                    {% for role in entity.roles %}
+                        <span class="label label-primary">{{ role.name }}</span>
+                        {% for children in role.allChildrens %}
+                        <span class="label label-primary">{{ children }}</span>
+                        {% endfor %}
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a class="btn btn-primary" href="{{ path('group_edit', { 'id': entity.id }) }}"> {{ 'edit'|trans({}, 'messages') }} </a>
+{{ form(delete_form, {attr: {style:"display: inline-block;", class: "delete-action"}}) }}
+
+
+{% endblock %}
+
