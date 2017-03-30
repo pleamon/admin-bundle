@@ -1,0 +1,6 @@
+P\AdminBundle\Entity\TaskRunner:
+    type: entity
+    table: task_runner
+    id:
+        id:
+            type: integer

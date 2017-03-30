@@ -156,7 +156,7 @@ fos_oauth_server_authorize:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
 ```
 
-## Security
+## Firewall
 
 ```
 # app/config/security.yml

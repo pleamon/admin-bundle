@@ -1,0 +1,6 @@
+P\AdminBundle\Entity\TaskPlan:
+    type: entity
+    table: task_plan
+    id:
+        id:
+            type: integer

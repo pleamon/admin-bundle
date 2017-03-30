@@ -1,0 +1,7 @@
+P\AdminBundle\Entity\TaskGroup:
+    type: entity
+    table: task_group
+    id:
+        id:
+            type: integer
+

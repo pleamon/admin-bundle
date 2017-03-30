@@ -1,0 +1,6 @@
+P\AdminBundle\Entity\Task:
+    type: entity
+    table: task
+    id:
+        id:
+            type: integer
