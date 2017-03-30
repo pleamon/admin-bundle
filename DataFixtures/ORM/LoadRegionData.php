@@ -41,7 +41,7 @@ class LoadRegionData implements FixtureInterface, ContainerAwareInterface
 
     public function getOrder()
     {
-        return 1;
+        return 10;
     }
 
     public function getData()

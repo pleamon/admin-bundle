@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the FOSUserBundle package.
+ * This file is part of the PAdminBundle package.
  *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
+ * (c) P Admin <http://padmin.pleamon.com/>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,12 +16,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use P\AdminBundle\DataFixtures\ORM\LoadIconData;
-use Symfony\Component\Filesystem\Filesystem;
+use P\AdminBundle\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Console\Helper\Table;
 
 /**
- * @author Antoine Hérault <antoine.herault@gmail.com>
+ * @author Antoine Pleamon <pleamon.li@gmail.com>
  */
 class AmqpSubscribeListCommand extends ContainerAwareCommand
 {
@@ -50,7 +50,7 @@ class AmqpSubscribeListCommand extends ContainerAwareCommand
             echo "An error occured while creating your directory";
         }
 
-        $files = scandir($cacheDir);
+        $files = $fs->scandir($cacheDir);
 
         if(count($files) == 0) {
             $output->write("<info>没有正在运行的程序.</info>");
@@ -60,10 +60,6 @@ class AmqpSubscribeListCommand extends ContainerAwareCommand
         $table = new Table($output);
         $table->setHeaders(array('pid', 'exchange', 'queue', 'routing', 'status'));
         foreach($files as $file) {
-            if(in_array($file, array('.', '..'))) {
-                echo $file;
-                continue;
-            }
             $pid = file_get_contents($cacheDir . '/' . $file);
             if($pid && !posix_getpgid($pid)) {
                 $fs->remove($cacheDir . '/' . $file);

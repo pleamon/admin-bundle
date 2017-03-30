@@ -1,6 +1,7 @@
 P\AdminBundle\Entity\Notification:
     type: entity
     table: notification
+    repository: P\AdminBundle\Repository\AdminMenuRepository
     id:
         id:
             type: integer

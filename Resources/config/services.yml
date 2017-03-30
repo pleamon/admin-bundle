@@ -1,14 +1,19 @@
-parameters:
-    p.admin.config.class: P\AdminBundle\Service\AdminConfig
-    p.admin.menu.class: P\AdminBundle\Service\AdminMenu
-    p.admin.admin_pool.class: P\AdminBundle\Service\AdminPool
-    p.admin.listener.filter_route_role.class: P\AdminBundle\Listener\FilterRouteRoleListener
+imports:
+    - { resource: services/amqp.yml }
+    - { resource: services/assetic.yml }
+    - { resource: services/baidu.yml }
+    - { resource: services/config.yml }
+    - { resource: services/core.yml }
+    - { resource: services/curl.yml }
+    - { resource: services/markdown.yml }
+    - { resource: services/menu.yml }
+    - { resource: services/notification.yml }
+    - { resource: services/paginator.yml }
+    - { resource: services/twig.yml }
 
+parameters:
     p.notification.levels: ['info', 'debug', 'warning', 'error', 'fatal']
     p.notification.status: ['隐藏', '正常']
-
-    p.twig.array_extension.class: P\AdminBundle\TwigExtension\ArrayExtension
-    p.twig.markdown_extension.class: P\AdminBundle\TwigExtension\MarkdownParsedownExtension
 
     p.file_types:
         image: ['jpg', 'png', 'gif']
@@ -16,93 +21,3 @@ parameters:
         audio: ['mp4', 'mp3']
 
     p.article.status: ['隐藏', '显示']
-
-services:
-    p.admin.config:
-        class: "%p.admin.config.class%"
-        arguments:
-            - "@service_container"
-
-    p.admin.menu:
-        class: "%p.admin.menu.class%"
-        arguments:
-            - "@service_container"
-            - '@doctrine.orm.default_entity_manager'
-
-    p.admin.pool:
-        class: "%p.admin.admin_pool.class%"
-        arguments:
-            - '@service_container'
-
-    p.admin.listener.filter_route_role:
-        class: "%p.admin.listener.filter_route_role.class%"
-        arguments:
-            - '@service_container'
-            - '@doctrine.orm.default_entity_manager'
-            - '@security.authorization_checker'
-            - '@request_stack'
-        tags:
-            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
-
-    p.admin.assetic.config_loader:
-        class: "%assetic.config_loader.class%"
-        tags:
-            - { name: assetic.formula_loader, alias: config}
-
-    p.admin.assetic.config_resource:
-        class: "%assetic.config_resource.class%"
-        tags:
-            - { name: assetic.formula_resource, loader: config}
-        arguments:
-            - { type: collection }
-
-    p.paginator:
-        class: P\AdminBundle\Service\Paginator
-        arguments: 
-            - "@service_container"
-            - "@templating"
-            - "@request_stack"
-
-    p.notification:
-        class: P\AdminBundle\Service\Notification
-        arguments: ["@doctrine.orm.default_entity_manager"]
-
-    p.twig.array_extension:
-        class: %p.twig.array_extension.class%
-        tags:
-            - { name: twig.extension }
-
-    p.curl:
-        class: P\AdminBundle\Service\Curl
-
-    p.markdown:
-        class: P\AdminBundle\Service\MarkdownParsedown
-
-    p.markdown_extension:
-        class: "%p.twig.markdown_extension.class%"
-        tags:
-            - { name: twig.extension }
-        arguments:
-            - "@service_container"
-
-    p.icon:
-        class: P\AdminBundle\Service\Icon
-        arguments:
-            - "@service_container"
-    p.amqp:
-        class: P\AdminBundle\Service\Amqp
-        arguments:
-            - "@service_container"
-            - '@p.curl'
-            - "@event_dispatcher"
-
-    p.amqp.subscriber:
-        class: P\AdminBundle\Listener\AMQPSubscriber
-        tags:
-            - {name: kernel.event_subscriber}
-        arguments:
-            - "@service_container"
-
-    p.baidu.geocoder:
-        class: P\AdminBundle\Service\BaiduGeocoder
-        arguments: ["@p.curl", "%p.baidu%"]

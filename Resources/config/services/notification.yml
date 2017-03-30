@@ -1,0 +1,4 @@
+services:
+    p.admin.notification:
+        class: P\AdminBundle\Service\Notification
+        arguments: ["@doctrine.orm.default_entity_manager"]

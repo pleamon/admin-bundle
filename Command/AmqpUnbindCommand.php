@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the FOSUserBundle package.
+ * This file is part of the PAdminBundle package.
  *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
+ * (c) P Admin <http://padmin.pleamon.com/>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use P\AdminBundle\DataFixtures\ORM\LoadIconData;
 
 /**
- * @author Antoine Hérault <antoine.herault@gmail.com>
+ * @author Antoine Pleamon <pleamon.li@gmail.com>
  */
 class AmqpUnbindCommand extends ContainerAwareCommand
 {

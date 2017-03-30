@@ -1,0 +1,8 @@
+services:
+    p.paginator:
+        class: P\AdminBundle\Service\Paginator
+        arguments:
+            - "@service_container"
+            - "@templating"
+            - "@request_stack"
+

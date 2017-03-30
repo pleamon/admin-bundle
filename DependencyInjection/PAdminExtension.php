@@ -7,6 +7,8 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
+use P\AdminBundle\Component\Filesystem\Filesystem;
+
 /**
  * This is the class that loads and manages your bundle configuration
  *
@@ -22,11 +24,14 @@ class PAdminExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        //$container->setParameter('p.admin.menus', $config['menus']);
+        $container->setParameter('p.admin.favicon', $config['favicon']);
         $container->setParameter('p.admin.title', $config['title']);
+        $container->setParameter('p.admin.description', $config['description']);
+        $container->setParameter('p.admin.copyright', $config['copyright']);
         $container->setParameter('p.admin.search', $config['search']);
         $container->setParameter('p.admin.modal', $config['modal']);
-        $container->setParameter('p.admin.base_template', isset($config['base_template'])?$config['base_template']:'');
+        $container->setParameter('p.admin.base_template', $config['base_template']);
+        $container->setParameter('p.admin.route', $config['route']);
         $container->setParameter('p.paginator.template', $config['paginator_template']);
         $container->setParameter('p.amqp.credentials', $config['amqp']);
         $container->setParameter('p.baidu', $config['baidu']);
@@ -35,7 +40,6 @@ class PAdminExtension extends Extension
         $loader->load('services.yml');
         $this->addAssetsBundle($container);
         $this->addFormThemes($container);
-        $this->setParameterToTwig($container, $config);
     }
 
     public function setMenuTemplate($container)
@@ -46,20 +50,14 @@ class PAdminExtension extends Extension
     public function addFormThemes($container)
     {
         $themes = $container->getParameter('twig.form.resources');
-        $themes = array_merge($themes, array(
-            'PAdminBundle:Form:image_field.html.twig',
-            'PAdminBundle:Form:upload_file_field.html.twig',
-            'PAdminBundle:Form:upload_multiple_file_field.html.twig',
-            'PAdminBundle:Form:label_field.html.twig',
-            'PAdminBundle:Form:custom_field.html.twig',
-            'PAdminBundle:Form:region_field.html.twig',
-            'PAdminBundle:Form:datepicker_field.html.twig',
-            'PAdminBundle:Form:datetimepicker_field.html.twig',
-            'PAdminBundle:Form:editor_field.html.twig',
-            'PAdminBundle:Form:rich_text_field.html.twig',
-            'PAdminBundle:Form:recaptcha_field.html.twig',
-            'PAdminBundle:Form:icon_field.html.twig',
-        ));
+        $dir = __DIR__ . '/../Resources/views/Form';
+
+        $fs = new Filesystem();
+
+        $files = array_map(function($file) {
+            return sprintf('PAdminBundle:Form:%s', $file);
+        }, $fs->scandir($dir));
+        $themes = array_merge($themes, $files);
         $container->setParameter('twig.form.resources', $themes);
     }
 
@@ -70,33 +68,5 @@ class PAdminExtension extends Extension
             'PAdminBundle',
         ));
         $container->setParameter('assetic.bundles', $asseticBundles);
-    }
-
-    public function addAssetsInputs($container)
-    {
-        $formulae = array(
-            'font_css' => array(
-                array('@PAdminBundle/Resources/public/googlefonts/fonts.css'),
-                array(),
-                array('googlefonts/fonts.css')
-            ),
-            'font1' => array (
-                array('@PAdminBundle/Resources/public/googlefonts/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf'),
-                array (),
-                array (
-                    //'output' => 'googlefonts/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf'
-                    'output' => 'test'
-                )
-            )
-        );
-
-        //$container->getDefinition('assetic.config_resource')->replaceArgument(0, $formulae);
-    }
-
-    public function setParameterToTwig($container, $config)
-    {
-        //$def = $container->getDefinition('twig');
-        //$def->addMethodCall('addGlobal', array($key, new Reference($global['id'])));
-        //$def->addMethodCall('addGlobal', array('admin_config', $config));
     }
 }

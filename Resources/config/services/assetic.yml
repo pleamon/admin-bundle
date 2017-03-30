@@ -1,0 +1,13 @@
+services:
+    p.admin.assetic.config_loader:
+        class: "%assetic.config_loader.class%"
+        tags:
+            - { name: assetic.formula_loader, alias: config}
+
+    p.admin.assetic.config_resource:
+        class: "%assetic.config_resource.class%"
+        tags:
+            - { name: assetic.formula_resource, loader: config}
+        arguments:
+            - { type: collection }
+

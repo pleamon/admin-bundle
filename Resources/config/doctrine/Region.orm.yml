@@ -1,6 +1,9 @@
 P\AdminBundle\Entity\Region:
     type: entity
     table: region
+    cache:
+        usage : READ_ONLY
+        region : padmin_region_region
     id:
         id:
             type: integer

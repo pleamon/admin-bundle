@@ -1,3 +1,5 @@
+new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+
 new FOS\UserBundle\FOSUserBundle(),
 new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
 

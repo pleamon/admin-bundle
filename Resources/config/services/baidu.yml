@@ -1,0 +1,4 @@
+services:
+    p.baidu.geocoder:
+        class: P\AdminBundle\Service\BaiduGeocoder
+        arguments: ["@p.curl", "%p.baidu%"]

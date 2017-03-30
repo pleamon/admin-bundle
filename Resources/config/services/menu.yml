@@ -1,0 +1,7 @@
+services:
+    p.admin.menu:
+        class: P\AdminBundle\Component\Menu\Menu
+        arguments:
+            - '@router'
+            - '@doctrine.orm.default_entity_manager'
+            - '%p.admin.route%'

@@ -7,8 +7,6 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\CallbackTransformer;
 
 use P\AdminBundle\Entity\Region;
 use P\AdminBundle\Exception\NotFoundRegionException;
@@ -46,7 +44,6 @@ class RegionType extends AbstractType
         if(empty($provinces)) {
             throw new \Exception('region数据未导入，请执行[./app/console p:region:load]');
         }
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

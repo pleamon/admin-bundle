@@ -1,0 +1,11 @@
+{% extends 'PAdminBundle:Security:base.html.twig' %}
+
+{% trans_default_domain 'PUserBundle' %}
+
+{% block form_body %}
+
+<div class="alert alert-success">
+    <a href="#" class="alert-link">{{ user.username }}</a> 恭喜您成功激活了账户
+</div>
+<a href="{{ path("fos_user_security_login") }}" class="btn btn-primary block full-width m-b">{{ 'security.login.submit'|trans }}</a>
+{% endblock %}

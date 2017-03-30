@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}p admin{% endblock %}</title>
+    <title>{% block favicon %}{{ padmin.favicon }}{% endblock %}</title>
 
     {% stylesheets filter="cssrewrite"
     '@PAdminBundle/Resources/public/css/bootstrap.min.css'
@@ -33,6 +33,8 @@
 </head>
 <body>
 
+    {% block body %}
+
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -57,8 +59,8 @@
                         </ul>
                     </div>
                     <div class="logo-element">
-                        {% block admin_title %}
-                        {{ admin_title }}
+                        {% block title %}
+                        {{ padmin.title }}
                         {% endblock %}
                     </div>
                 </li>
@@ -73,17 +75,19 @@
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="post" action="{{ admin_search.route and path(admin_search.route) or '' }}">
+                    {% if padmin.search.route %}
+                    <form role="search" class="navbar-form-custom" method="post" action="{{ padmin.search.route and path(padmin.search.route) or '' }}">
                         <div class="form-group">
-                            <input type="text" placeholder="{{ admin_search.text }}" class="form-control" name="top-search" id="top-search">
+                            <input type="text" placeholder="{{ padmin.search.text }}" class="form-control" name="top-search" id="top-search">
                         </div>
                     </form>
+                    {% endif %}
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     {% block navbar_right %}
                     {% endblock %}
                     {% block navbar_defined %}
-                    <li> <a href="{{ path('fos_user_security_logout') }}"> <i class="fa fa-sign-out"></i> Log out </a> </li>
+                    <li> <a href="{{ path('fos_user_security_logout') }}"> <i class="fa fa-sign-out"></i> {{ 'Log out'|trans }} </a> </li>
                     <li> <a class="right-sidebar-toggle"> <i class="fa fa-tasks"></i> </a> </li>
                     {% endblock %}
                 </ul>
@@ -145,6 +149,7 @@
     {% endjavascripts %}
 
     {% block javascripts %}
+    {% endblock %}
     {% endblock %}
 </body>
 </html>

@@ -1,6 +1,10 @@
 P\AdminBundle\Entity\AdminMenu:
     type: entity
     table: admin_menu
+    repository: P\AdminBundle\Repository\AdminMenuRepository
+    cache:
+        usage : READ_WRITE
+        region : padmin_menu_region
     id:
         id:
             type: integer

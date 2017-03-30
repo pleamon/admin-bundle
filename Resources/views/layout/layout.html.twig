@@ -3,7 +3,7 @@
 {% block menus %}
 {% set route = app.request.get('_route') %}
 {% set active = 0 %}
-{% for parent in padmin.menuParents %}
+{% for parent in padmin.get('p.admin.menu').RootMenus %}
     {% if active == 0 %}
         {% for menu in parent.items %}
             {% if menu.route == route %}

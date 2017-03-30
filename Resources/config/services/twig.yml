@@ -1,0 +1,29 @@
+services:
+    p.admin.twig.icon_extension:
+        class: P\AdminBundle\Component\TwigExtension\IconExtension
+        tags:
+            - { name: twig.extension }
+
+    p.admin.twig.array_extension:
+        class: P\AdminBundle\Component\TwigExtension\ArrayExtension
+        tags:
+            - { name: twig.extension }
+
+    p.admin.twig.markdown_extension:
+        class: P\AdminBundle\Component\TwigExtension\MarkdownParsedownExtension
+        tags:
+            - { name: twig.extension }
+        arguments:
+            - "@p.admin.markdown.parsedown"
+
+    p.admin.twig.variable:
+        class: P\AdminBundle\Component\TwigExtension\PAdminVariable
+        arguments:
+            - "@service_container"
+            - "@doctrine.orm.default_entity_manager"
+            - "%p.admin.favicon%"
+            - "%p.admin.title%"
+            - "%p.admin.description%"
+            - "%p.admin.copyright%"
+            - "%p.admin.search%"
+            - "%p.admin.base_template%"

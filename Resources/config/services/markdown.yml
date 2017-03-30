@@ -1,0 +1,3 @@
+services:
+    p.admin.markdown.parsedown:
+        class: P\AdminBundle\Component\Markdown\Parsedown

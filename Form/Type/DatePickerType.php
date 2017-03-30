@@ -10,6 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\CallbackTransformer;
 
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+
 class DatePickerType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver)
@@ -50,6 +52,6 @@ class DatePickerType extends AbstractType
 
     public function getParent()
     {
-        return 'date';
+        return DateType::class;
     }
 }

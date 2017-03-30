@@ -31,12 +31,13 @@ class LoadAdminMenuData implements FixtureInterface, ContainerAwareInterface
 
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
 
     public function getData()
     {
         return array(
-
+            
+        );
     }
 }

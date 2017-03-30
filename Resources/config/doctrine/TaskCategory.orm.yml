@@ -1,0 +1,14 @@
+P\AdminBundle\Entity\TaskCategory:
+    type: entity
+    table: task_category
+    id:
+        id:
+            type: integer
+    oneToMany:
+        tasks:
+            targetEntity: Task
+            mappedBy: category
+    fields:
+        name:
+            type: string
+            length: 255

@@ -1,0 +1,5 @@
+services:
+    p.admin.config:
+        class: P\AdminBundle\Service\AdminConfig
+        arguments:
+            - "@service_container"

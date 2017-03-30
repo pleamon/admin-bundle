@@ -1,0 +1,15 @@
+P\AdminBundle\Entity\TaskTag:
+    type: entity
+    table: task_tag
+    id:
+        id:
+            type: integer
+    manyToMany:
+        tasks:
+            targetEntity: Task
+            mappedBy: tags
+    fields:
+        name:
+            type: string
+            length: 255
+

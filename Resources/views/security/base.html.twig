@@ -27,6 +27,8 @@
                 <h1 class="logo-name">{% block logo_name %}PAD{% endblock %}</h1>
             </div>
             {% block form_header %}
+            <h2>{{ padmin.title }}</h2>
+            <p>{{ padmin.description }}</p>
             {% endblock %}
 
             <span class="text-danger">
@@ -38,8 +40,12 @@
                 {% block form_body %}
                 {% endblock %}
             </form>
+
+            {% block form_body_links %}
+            {% endblock %}
+
             {% block form_footer %}
-            <p class="m-t"> <small> Inspinia we app framework base on Bootstrap 3 &copy; 2014 </small> </p>
+            <p class="m-t"> <small> {{ padmin.copyright }} </small> </p>
             {% endblock %}
         </div>
     </div>

@@ -1,0 +1,9 @@
+services:
+    p.admin.listener.filter_route_role:
+        class: P\AdminBundle\Component\Core\Listener\FilterRouteRoleListener
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@security.authorization_checker'
+            - '@request_stack'
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

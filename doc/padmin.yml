@@ -1,6 +1,6 @@
 p_admin:
     title: 示例
     search:
-        route: test
+        route: ~
         text: 搜索
     base_template: "PAdminBundle:layout:standard_layout.html.twig"

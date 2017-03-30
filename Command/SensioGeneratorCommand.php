@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the PAdminBundle package.
+ *
+ * (c) P Admin <http://padmin.pleamon.com/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace P\AdminBundle\Command;
 
 use Sensio\Bundle\GeneratorBundle\Command\GenerateDoctrineCrudCommand;
