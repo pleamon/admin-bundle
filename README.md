@@ -71,9 +71,6 @@ doctrine_cache:
 # app/config/p/admin.yml
 
 p_admin:
-    favicon: # type string, default 'p admin'
-    title: # type string default 'p admin'
-    copyright: ~
     search:
         route: search_route # type string default null
         text: 搜索框 # type string default ''
@@ -122,14 +119,9 @@ fos_user:
     group:
         group_class: P\UserBundle\Entity\Group
     registration:
-        form:
-            type: p_user_registration
         confirmation:
             enabled: true
-            from_email:
-                address:    %mailer_user%
-                sender_name: p admin Team
-
+            template: PAdminBundle:Registration:mail.email.twig
     from_email:
         address:    %mailer_user%
         sender_name: p admin Team
@@ -183,7 +175,7 @@ fos_user_registration:
 fos_user_reseting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix: /admin/resetting
-    
+
 fos_oauth_server_token:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
 
