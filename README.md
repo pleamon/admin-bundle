@@ -138,7 +138,7 @@ fos_user:
 # app/config/fos/oauth.yml
 
 fos_oauth_server:
-    db_driver: propel
+    db_driver: orm
     client_class:        P\OAuthBundle\Entity\OAuthClient
     access_token_class:  P\OAuthBundle\Entity\OAuthAccessToken
     refresh_token_class: P\OAuthBundle\Entity\OAuthRefreshToken
