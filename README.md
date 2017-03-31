@@ -129,7 +129,7 @@ fos_user:
         mailer: fos_user.mailer.twig_swift
     resetting:
         email:
-            template: email/password_resetting.email.twig
+            template: PAdminBundle:Resetting:mail.email.twig
 ```
 
 - fos/oauth.yml
