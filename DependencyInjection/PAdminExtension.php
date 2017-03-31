@@ -24,10 +24,6 @@ class PAdminExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('p.admin.favicon', $config['favicon']);
-        $container->setParameter('p.admin.title', $config['title']);
-        $container->setParameter('p.admin.description', $config['description']);
-        $container->setParameter('p.admin.copyright', $config['copyright']);
         $container->setParameter('p.admin.search', $config['search']);
         $container->setParameter('p.admin.modal', $config['modal']);
         $container->setParameter('p.admin.base_template', $config['base_template']);

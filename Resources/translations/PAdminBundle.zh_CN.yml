@@ -1,3 +1,4 @@
+Log out: 登出
 adminmenu:
     id: id
     name: 名称
@@ -84,3 +85,28 @@ icon:
     show: 展示
     type: 类型
     name: 名称
+
+user:
+    id: id
+    username: 用户名
+    password: 密码
+    confirm_password: 确认密码
+    group: 用户组
+    email: 邮箱
+    createdAt: 创建时间
+    lastLogin: 最后登录时间
+    enabled: 状态
+
+group:
+    id: id
+    name: 用户组名
+    users: 用户
+    roles: 权限
+
+role:
+    id: id
+    parent: 上级权限
+    name: 权限名称
+    childrens: 子级权限
+
+

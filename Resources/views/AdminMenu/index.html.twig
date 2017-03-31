@@ -25,13 +25,27 @@
 }
 </style>
 <div class="row">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>{{ 'enabled list'|trans({}, 'messages') }}</h5>
+                <div class="ibox-tools">
+                    <span>
+                        <a type="button" href="{{ path("adminmenu_list") }}" class="btn btn-outline btn-info">列表</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<div class="row">
     <div class="col-lg-6">
         <div class="ibox">
             <div class="ibox-title">
                 <h5>{{ 'enabled list'|trans({}, 'messages') }}</h5>
                 <div class="ibox-tools">
                     <span id="nestable-menu">
-                        <a type="button" href="{{ path("adminmenu_list") }}" class="btn btn-outline btn-info">列表</a>
                         <button type="button" data-action="expand-all" class="btn btn-outline btn-success">展开</button>
                         <button type="button" data-action="collapse-all" class="btn btn-outline btn-warning">收起</button>
                     </span>
@@ -55,7 +69,9 @@
                 </div>
             </div>
             <div class="ibox-content p-md">
+                
                 <div class="dd" id="nestable">
+                    {% if entities|length > 0 %}
                     <ol class="dd-list">
                         {% for first in entities %}
                         <li class="dd-item" data-id="{{ first.id }}">
@@ -88,8 +104,7 @@
                                         </li>
                                         {% endfor %}
                                     </ol>
-                            {% endif %}
-
+                                    {% endif %}
                                 </li>
                                 {% endfor %}
                             </ol>
@@ -97,6 +112,7 @@
                         </li>
                         {% endfor %}
                     </ol>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -122,11 +138,16 @@
                             <div class="sk-circle11 sk-circle"></div>
                             <div class="sk-circle12 sk-circle"></div>
                         </div>
-                        <span id="scan-text">{{ 'scan'|trans({}, 'messages') }}</span>
+                        <span id="scan-text">{{ 'scan routes'|trans({}, 'messages') }}</span>
                     </button>
                 </div>
             </div>
             <div class="ibox-content p-md">
+                <div class="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="unables-filter" placeholder="筛选" />
+                    </div>
+                </div>
                 <div class="dd" id="unableds">
                     <ol class="dd-list">
                         {% for unabledMenu in unabledMenus %}
@@ -164,12 +185,25 @@ $(document).ready(function(){
     $('#nestable').nestable({
         maxDepth: 3,
         group: 1
-    })
+    });
 
     // activate Nestable for list 2
     $('#unableds').nestable({
         maxDepth: 1,
         group: 1
+    });
+
+    $("#unables-filter").on("keyup", function(e) {
+        var text = e.target.value;
+        console.log(text);
+        $("#unableds .dd-item").each(function(k, el) {
+            var item_text = $(el).find(".dd-handle").text()
+            if(item_text.indexOf(text) >= 0) {
+                $(el).show();
+            } else {
+                $(el).hide();
+            }
+        });
     });
 
     $('#nestable-menu').on('click', function (e) {

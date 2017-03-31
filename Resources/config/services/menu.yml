@@ -2,6 +2,17 @@ services:
     p.admin.menu:
         class: P\AdminBundle\Component\Menu\Menu
         arguments:
+            - '@service_container'
             - '@router'
             - '@doctrine.orm.default_entity_manager'
             - '%p.admin.route%'
+            - '@doctrine_cache.providers.metadata_cache_driver'
+            - '@doctrine_cache.providers.query_cache_driver'
+            - '@doctrine_cache.providers.result_cache_driver'
+
+    p.admin.menu.subscriber:
+        class: P\AdminBundle\Component\Menu\EventListener\MenuSubscriber
+        arguments:
+            - '@service_container'
+        tags: 
+            - { name: doctrine.event_subscriber }

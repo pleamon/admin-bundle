@@ -1,0 +1,15 @@
+services:
+    p.admin.simple.type.extension:
+        class: P\AdminBundle\Form\Extension\SimpleTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\TextType }
+
+    p.admin.choice.type.extension:
+        class: P\AdminBundle\Form\Extension\ChoiceTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
+
+    p.admin.text.type.extension:
+        class: P\AdminBundle\Form\Extension\TextTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\TextType }

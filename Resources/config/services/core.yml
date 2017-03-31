@@ -7,3 +7,15 @@ services:
             - '@request_stack'
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    p.admin.core:
+        class: P\AdminBundle\Component\Core\Core
+        arguments:
+            - '@service_container'
+            - '@doctrine.orm.default_entity_manager'
+
+    p.admin.core.config:
+        class: P\AdminBundle\Component\Core\Config
+        arguments:
+            - '@service_container'
+            - '@doctrine.orm.default_entity_manager'

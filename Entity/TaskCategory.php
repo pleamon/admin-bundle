@@ -112,4 +112,3 @@ class TaskCategory
         return $this->tasks;
     }
 }
-

@@ -20,5 +20,6 @@ class TwigCompilerPass implements CompilerPassInterface
         $base_template = $container->getParameter('p.admin.base_template');
         $definition->addMethodCall('addGlobal', array('admin_base_template', $base_template));
         $definition->addMethodCall('addGlobal', array('padmin', new Reference('p.admin.twig.variable')));
+        $definition->addMethodCall('addGlobal', array('pconfig', new Reference('p.admin.core.config')));
     }
 }

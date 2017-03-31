@@ -112,4 +112,3 @@ class TaskTag
         return $this->tasks;
     }
 }
-

@@ -6,10 +6,41 @@ P\AdminBundle\Entity\AdminConfig:
             type: integer
             generator:
                 strategy: AUTO
+    uniqueConstraints:
+        uniq_group_key:
+            columns: [ group_name, key_name ]
     fields:
+        group:
+            type: string
+            length: 255
+            column: group_name
+
         key:
             type: string
             length: 255
+            column: key_name
+
+        name:
+            type: string
+            length: 255
+
+        type:
+            type: string
+            length: 255
+            nullable: true
+
         value:
             type: string
             length: 255
+            nullable: true
+
+        description:
+            type: text
+            nullable: true
+
+        options:
+            type: json_array
+            nullable: true
+
+        sort:
+            type: integer

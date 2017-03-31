@@ -8,12 +8,19 @@ use P\AdminBundle\Entity\AdminMenu as AdminMenuEntity;
 
 class Menu
 {
+    public const CACHE_REGION = 'p.admin.menu';
+
+    private $container;
     private $router;
     private $em;
     private $excludeScanRoutes;
+    private $metadataCacheDriver;
+    private $queryCacheDriver;
+    private $resultCacheDriver;
 
-    public function __construct($router, $em, array $excludeScanRoutes = array())
+    public function __construct($container, $router, $em, $route, $metadataCacheDriver, $queryCacheDriver, $resultCacheDriver)
     {
+        $this->container = $container;
         $this->router = $router;
         $this->em = $em;
         $this->excludeScanRoutes = array_merge(array(
@@ -22,8 +29,11 @@ class Menu
             '^p_admin_config',
             '^fos_user',
             '^fos_oauth',
-            ), $excludeScanRoutes
+            ), $route['exclude']
         );
+        $this->metadataCacheDriver = $metadataCacheDriver;
+        $this->queryCacheDriver = $queryCacheDriver;
+        $this->resultCacheDriver = $resultCacheDriver;
     }
 
     public function getRootMenus()
@@ -33,11 +43,17 @@ class Menu
             ->andWhere('am.enabled = 1')
             ->orderBy('am.sort', 'asc')
             ->getQuery()
-            ->useResultCache(true, 86400, 'admin_menus')
+            ->useResultCache(true, 86400, self::CACHE_REGION)
             ->getResult()
             ;
         return $result;
 
+    }
+
+    public function clearCache()
+    {
+        $this->resultCacheDriver->delete(self::CACHE_REGION);
+        $this->container->get('logger')->info('clear menu cache');
     }
 
     public function scan()
@@ -45,6 +61,10 @@ class Menu
         $routes = $this->router->getRouteCollection()->all();
 
         foreach($routes as $name => $route) {
+            $options = $route->getOptions();
+            if(array_key_exists('default', $options)) {
+                continue;
+            }
             $excluded = false;
             foreach($this->excludeScanRoutes as $exclude) {
                 if(preg_match(sprintf("/%s/", $exclude), $name)) {

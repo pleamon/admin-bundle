@@ -1,0 +1,5 @@
+services:
+    p.admin.website.info.config:
+        class: P\AdminBundle\Component\Website\Info
+        tags:
+            - { name: p.admin.config }

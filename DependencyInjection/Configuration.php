@@ -25,18 +25,6 @@ class Configuration implements ConfigurationInterface
         // more information on that topic.
         $rootNode
             ->children()
-                ->scalarNode('favicon')
-                    ->defaultValue('P Admin')
-                ->end()
-                ->scalarNode('title')
-                    ->defaultValue('P Admin System')
-                ->end()
-                ->scalarNode('description')
-                    ->defaultValue('P Admin System Description')
-                ->end()
-                ->scalarNode('copyright')
-                    ->defaultValue('PAdmin we app framework base on Symfony 3 © 2017')
-                ->end()
                 ->scalarNode('base_template')
                     ->defaultValue('PAdminBundle:layout:layout.html.twig')
                 ->end()

@@ -37,4 +37,3 @@ class TaskRunner
         return $this->id;
     }
 }
-

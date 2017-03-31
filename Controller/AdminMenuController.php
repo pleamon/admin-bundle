@@ -166,7 +166,7 @@ class AdminMenuController extends Controller
 
         $menus = $em->getRepository('PAdminBundle:AdminMenu')->findBy(array('enabled' => 0), array('sort' => 'asc'));
 
-        $menusJson = $this->get('p.admin.pool')->entityToJson($menus);
+        $menusJson = $this->get('p.admin.core')->entityToJson($menus);
 
         return new Response($menusJson);
     }

@@ -1,0 +1,5 @@
+services:
+    p.admin.filesystem:
+        class: P\AdminBundle\Component\Filesystem\Filesystem
+        arguments:
+            - '@service_container'

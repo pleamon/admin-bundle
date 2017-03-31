@@ -1,6 +1,6 @@
 services:
     p.paginator:
-        class: P\AdminBundle\Service\Paginator
+        class: P\AdminBundle\Component\Paginator\Paginator
         arguments:
             - "@service_container"
             - "@templating"

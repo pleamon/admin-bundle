@@ -37,4 +37,3 @@ class TaskGroup
         return $this->id;
     }
 }
-

@@ -31,6 +31,40 @@ new P\AdminBundle\PAdminBundle(),
 mkdir app/config/p app/config/fos
 ```
 
+- config.yml
+
+```
+# app/config/p/admin.yml
+
+parameters:
+    locale: zh_CN
+
+framework:
+    translator:      { fallbacks: ["%locale%"] }
+
+twig:
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
+
+doctrine:
+    orm:
+        metadata_cache_driver:
+            cache_provider: metadata_cache_driver
+        query_cache_driver:
+            cache_provider: query_cache_driver
+        result_cache_driver:
+            cache_provider: result_cache_driver
+
+doctrine_cache:
+    providers:
+        metadata_cache_driver:
+            type: file_system
+        query_cache_driver:
+            type: file_system
+        result_cache_driver:
+            type: file_system
+```
+
 - padmin.yml
 
 ```
@@ -39,6 +73,7 @@ mkdir app/config/p app/config/fos
 p_admin:
     favicon: # type string, default 'p admin'
     title: # type string default 'p admin'
+    copyright: ~
     search:
         route: search_route # type string default null
         text: 搜索框 # type string default ''

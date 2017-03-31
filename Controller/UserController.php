@@ -24,6 +24,8 @@ class UserController extends Controller
     public function indexAction(Request $request, $page = 1)
     {
 
+        $group = $request->get('group');
+
         $em = $this->getDoctrine()->getManager();
 
         $qb = $em->getRepository('PUserBundle:User')->createQueryBuilder('user');
@@ -38,7 +40,6 @@ class UserController extends Controller
 
         $form = $this->createFormBuilder($user)
             ->add('username', null, array('label' => 'user.username', 'required' => false, 'translation_domain' => 'PUserBundle'))
-            ->add('groups', null, array('label' => 'user.group', 'required' => false, 'translation_domain' => 'PUserBundle'))
             ->add('submit', SubmitType::class, array('label' => 'query', 'attr' => array('class' => 'btn btn-primary')))
             ->setAction($this->generateUrl('user'))
             ->setMethod('POST')
@@ -53,20 +54,23 @@ class UserController extends Controller
                     ->setParameter('username', $user->getUsername())
                     ;
             }
-            if(count($user->getGroups())) {
-                $qb->join('user.groups', 'g')
-                    ->andWhere('g in (:groups)')
-                    ->setParameter('groups', $user->getGroups())
-                    ;
-            }
+        }
+        if($group) {
+            $qb->join('user.groups', 'g')
+                ->andWhere('g in (:groups)')
+                ->setParameter('groups', $group)
+                ;
         }
 
         list($entities, $pagination) = $this->get('p.paginator')->query($qb, $page, null, $count);
         $tools = $this->get('p.paginator')->renderView($pagination);
 
+        $groups = $em->getRepository('PUserBundle:Group')->findAll();
+
 
         return $this->render('PAdminBundle:User:index.html.twig', array(
             'entities' => $entities,
+            'groups' => $groups,
             'tools' => $tools,
             'form' => $form->createView(),
         ));

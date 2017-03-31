@@ -1,10 +1,11 @@
+{% trans_default_domain 'PAdminBundle' %}
 <!DOCTYPE html>
 <html>
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block favicon %}{{ padmin.favicon }}{% endblock %}</title>
+    <title>{% block favicon %}{{ pconfig.get('Website', 'title') }}{% endblock %}</title>
 
     {% stylesheets filter="cssrewrite"
     '@PAdminBundle/Resources/public/css/bootstrap.min.css'
@@ -54,13 +55,13 @@
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             {% block brand_list %}
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="{{ path("fos_user_security_logout") }}">Logout</a></li>
                             {% endblock %}
                         </ul>
                     </div>
                     <div class="logo-element">
                         {% block title %}
-                        {{ padmin.title }}
+                        {{ pconfig.get('Website', 'name') }}
                         {% endblock %}
                     </div>
                 </li>
@@ -106,7 +107,18 @@
             {% block content %}{% endblock %}
         </div>
         <div class="footer">
-            {% block footer %}{% endblock %}
+            {% block footer %}
+            <div class="pull-right">
+                {% block footer_right %}
+                {{ padmin.diskFreeSpace }} of <strong>{{ padmin.diskTotalSpace }}</strong> Free.
+                {% endblock %}
+            </div>
+            <div>
+                {% block footer_left %}
+                <strong>Copyright</strong> {{ pconfig.get('Website', 'copyright') }}
+                {% endblock %}
+            </div>
+            {% endblock %}
         </div>
 
         {% block sidebar %}

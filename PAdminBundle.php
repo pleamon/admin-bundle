@@ -6,6 +6,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use P\AdminBundle\DependencyInjection\Compiler\TwigCompilerPass;
 use P\AdminBundle\DependencyInjection\Compiler\AssetCompilerPass;
+use P\AdminBundle\DependencyInjection\Compiler\DoctrineCompilerPass;
+use P\AdminBundle\DependencyInjection\Compiler\ConfigCompilerPass;
 
 class PAdminBundle extends Bundle
 {
@@ -14,5 +16,7 @@ class PAdminBundle extends Bundle
         parent::build($container);
         $container->addCompilerPass(new TwigCompilerPass());
         $container->addCompilerPass(new AssetCompilerPass());
+        $container->addCompilerPass(new DoctrineCompilerPass());
+        $container->addCompilerPass(new ConfigCompilerPass());
     }
 }

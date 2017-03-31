@@ -37,4 +37,3 @@ class Task
         return $this->id;
     }
 }
-

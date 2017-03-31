@@ -37,4 +37,3 @@ class TaskPlan
         return $this->id;
     }
 }
-

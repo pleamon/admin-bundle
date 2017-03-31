@@ -20,10 +20,5 @@ services:
         class: P\AdminBundle\Component\TwigExtension\PAdminVariable
         arguments:
             - "@service_container"
-            - "@doctrine.orm.default_entity_manager"
-            - "%p.admin.favicon%"
-            - "%p.admin.title%"
-            - "%p.admin.description%"
-            - "%p.admin.copyright%"
             - "%p.admin.search%"
             - "%p.admin.base_template%"

@@ -5,10 +5,38 @@
 {% endblock %}
 
 {% block content %}
-<div class="middle-box text-center">
-    <h3 class="font-bold">欢迎使用 p admin</h3>
-    <div class="error-desc">
-        
+{{ form_start(form) }}
+<div class="row">
+<div class="col-sm-12">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>配置管理</h5>
+            <div class="ibox-tools">
+                <span>
+                    {{ form_widget(form.submit) }}
+                    <a href="{{ path("p_admin_config_clear_cache") }}" class="btn btn-outline btn-info">{{ 'clear cache'|trans }}</a>
+                </span>
+            </div>
+        </div>
     </div>
 </div>
+
+</div>
+<div class="row">
+    {% for name, formItem in form if name not in ['submit', '_token'] %}
+    <div class="col-sm-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>{{ form_label(formItem) }}</h5>
+                <div class="ibox-tools">
+                </div>
+            </div>
+            <div class="ibox-content">
+                {{ form_widget(formItem) }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{{ form_end(form) }}
 {% endblock %}

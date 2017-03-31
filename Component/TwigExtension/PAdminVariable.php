@@ -3,31 +3,22 @@
 namespace P\AdminBundle\Component\TwigExtension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
 
 class PAdminVariable
 {
     private $container;
     private $em;
-    private $favicon;
-    private $title;
-    private $copyright;
-    private $description;
     private $search;
     private $template;
+    private $fs;
 
-    public function __construct(ContainerInterface $container, $em, $favicon, $title, $description, $copyright, $search, $template)
+    public function __construct(ContainerInterface $container, $search, $template)
     {
         $this->container = $container;
-        $this->favicon = $favicon;
-        $this->title = $title;
-        $this->description = $description;
-        $this->copyright = $copyright;
         $this->search = $search;
-        $this->template;
+        $this->template = $template;
+        $this->fs = $container->get('p.admin.filesystem');
     }
 
     public function get($name)
@@ -40,24 +31,9 @@ class PAdminVariable
         return $this->container->getParameter($name);
     }
 
-    public function getFavicon()
+    public function getConfig($name, $group)
     {
-        return $this->favicon;
-    }
-
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    public function getCopyright()
-    {
-        return $this->copyright;
+        return $this->container->get('p.admin.core')->getConfig($name, $group);
     }
 
     public function getSearch()
@@ -65,21 +41,24 @@ class PAdminVariable
         return $this->search;
     }
 
-    public function getMenuParents()
+    public function getDiskTotalSpace()
     {
-        $result = $this->em->getRepository('PAdminBundle:AdminMenu')->getRoots();
-        return $result;
+        return $this->fs->bytesToSize(disk_total_space('/'));
     }
 
-    public function entityToJson($source)
+    public function getDiskFreeSpace()
     {
-        $encoders = array(new XmlEncoder(), new JsonEncoder());
-        $normalizers = array(new ObjectNormalizer());
+        return $this->fs->bytesToSize(disk_free_space('/'));
+    }
 
-        $serializer = new Serializer($normalizers, $encoders);   
-
-        $jsonContent = $serializer->serialize($source, 'json');
-
-        return $jsonContent;
+    public function getColors()
+    {
+        return array(
+            'navy',
+            'danger',
+            'primary',
+            'info',
+            'warning',
+        );
     }
 }

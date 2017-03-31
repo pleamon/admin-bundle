@@ -14,5 +14,11 @@ menu config: 菜单配置
 user config: 用户配置
 group config: 用户组配置
 role config: 权限配置
-admin config: 后台配置
-Admin Config: 后台配置
+admin config: 配置管理
+Admin Config: 配置管理
+Log out: 登出
+enabled list: 使用中列表
+unabled list: 未使用列表
+sort edit: 编辑排序
+scan routes: 扫描路由
+clear cache: 清除缓存

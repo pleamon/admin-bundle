@@ -10,6 +10,10 @@ p_admin_config:
     path:    /config
     defaults: { _controller: PAdminBundle:AdminConfig:index }
 
+p_admin_config_clear_cache:
+    path:    /config/clearcache
+    defaults: { _controller: PAdminBundle:AdminConfig:clearCache }
+
 p_admin_user:
     resource: "@PAdminBundle/Resources/config/routing/user.yml"
     prefix:   /user

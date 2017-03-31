@@ -12,3 +12,8 @@ services:
             - {name: kernel.event_subscriber}
         arguments:
             - "@service_container"
+
+    p.admin.config:
+        class: P\AdminBundle\Component\Amqp\Config
+        tags:
+            - { name: p.admin.config }

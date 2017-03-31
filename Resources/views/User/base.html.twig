@@ -1,0 +1,58 @@
+{% extends admin_base_template %}
+{% trans_default_domain 'PAdminBundle' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block page_heading %}
+{% include 'PAdminBundle:AdminConfig:header.html.twig' %}
+{% endblock %}
+
+{% block content -%}
+<div class="row">
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content mailbox-content">
+                <div class="file-manager">
+                    <a class="btn btn-block btn-primary compose-mail" href="mail_compose.html">添加新用户</a>
+                    <div class="space-25"></div>
+                    <h5>用户组</h5>
+                    <ul class="folder-list m-b-md" style="padding: 0">
+                        </li>
+                        {% for idx, group in groups %}
+                        <li>
+                            <a href="{{ path("user", {group: group.id}) }}">
+                                {{ group.name }}
+                                {% if group.users|length > 0 %}
+                                <span class="label label-info pull-right">{{ group.users|length }}</span>
+                                {% endif %}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if form.children|length > 2 %}
+    <div class="col-lg-9">
+        <div class="ibox collapsed">
+            <div class="ibox-title collapse-link">
+                <h5>{{ 'query'|trans({}, 'messages') }}</h5>
+                <div class="ibox-tools">
+                    <i class="fa fa-chevron-up"></i>
+                </div>
+            </div>
+            <div class="ibox-content">
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="col-lg-9">
+        {% block right_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
