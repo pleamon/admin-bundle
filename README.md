@@ -1,3 +1,14 @@
+## 添加composer源
+
+```
+# composer.json
+"repositories": [
+    { "packagist": false },
+    { "type": "composer", "url": "https://packagist.phpcomposer.com" },
+    { "type": "composer", "url": "https://satis.pleamon.com" }
+]
+```
+
 ## 安装bundle
 
 ```
@@ -145,6 +156,19 @@ fos_oauth_server:
     auth_code_class:     P\OAuthBundle\Entity\OAuthAuthCode
 ```
 
+- app/config/config.yml
+
+```
+imports:
+    - { resource: fos/user.yml }
+    - { resource: fos/oauth.yml }
+    - { resource: p/user.yml }
+    - { resource: p/admin.yml }
+    #- { resource: p/home.yml }
+    - { resource: p/assets.yml }
+
+```
+
 ## 路由
 
 
@@ -242,46 +266,236 @@ security:
         - { path: ^/admin/.*, roles: [ IS_AUTHENTICATED_FULLY ] }
 ```
 
-## 初始化数据
 
-- 加载`icon`数据
+## Usage
 
-```
-./bin/console p:load:icon
-```
-
-- 加载`地理信息`数据
+1. 修改配置文件
 
 ```
-./bin/console p:load:region
+# app/config/parameters.yml
+
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
 ```
 
-- 加载`用户权限`数据
+2. 建立数据库
 
 ```
-./bin/console p:load:user:role
+./bin/console doctrine:database:create
 ```
 
-- 加载`用户组`数据
+3. 更新数据库结构
 
 ```
-./bin/console p:load:user:group
+./bin/console doctrine:schema:update --force
 ```
 
-- 创建用户
+4. 加载初始化数据
+
+ - 加载`icon`数据
+
+ ```
+ ./bin/console p:load:icon
+ ```
+ 
+ - 加载`地理信息`数据
+ 
+ ```
+ ./bin/console p:load:region
+ ```
+ 
+ - 加载`用户权限`数据
+ 
+ ```
+ ./bin/console p:load:user:role
+ ```
+ 
+ - 加载`用户组`数据
+ 
+ ```
+ ./bin/console p:load:user:group
+ ```
+ 
+ - 创建用户
+ 
+ ```
+ ./bin/consle p:user:create {username} {email} {password}
+ ```
+ 
+ - 分配用户组
+ 
+ ```
+ ./bin/console p:user:promote {username}
+ ```
+ 
+ - 测试发送邮件
+ 
+ ```
+ ./bin/console swiftmailer:email:send --from li@pleamon.com --to=sh-lbl@919yi.com --subject="hello" --body="this is test mail"
+ ```
+
+2. 导出静态文件
 
 ```
-./bin/consle p:user:create {username} {email} {password}
+./bin/console assetic:dump
+./bin/console assetic:install
 ```
 
-- 分配用户组
+3. 定义entities yml文件
 
 ```
-./bin/console p:user:promote {username}
+# AppBundle/Resources/config/doctrine/PictureCategory.orm.yml
+
+AppBundle\Entity\PictureCategory:
+    type: entity
+    table: picture_category
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    oneToMany:
+        pictures:
+            targetEntity: Picture
+            mappedBy: category
+
+    fields:
+        name:
+            type: string
+            length: 255
 ```
 
-- 测试发送邮件
+```
+# AppBundle/Resources/config/doctrine/PictureTag.orm.yml
+
+AppBundle\Entity\PictureTag:
+    type: entity
+    table: picture_tag
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToMany:
+        pictures:
+            targetEntity: Picture
+            mappedBy: tags
+    fields:
+        name:
+            type: string
+            length: 255
+```
 
 ```
-./bin/console swiftmailer:email:send --from li@pleamon.com --to=sh-lbl@919yi.com --subject="hello" --body="this is test mail"
+# AppBundle/Resources/config/doctrine/Picture.orm.yml
+
+AppBundle\Entity\Picture:
+    type: entity
+    table: admin_config
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToOne:
+        category:
+            targetEntity: PictureCategory
+            inversedBy: pictures
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+        file:
+            targetEntity: P\AdminBundle\Entity\File
+            joinColumn:
+                name: file_id
+                referencedColumnName: id
+    manyToMany:
+        tags:
+            targetEntity: PictureTag
+            inversedBy: pictures
+            joinTable:
+                name: picture_tags
+                joinColumns:
+                    picture_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    tag_id:
+                        referencedColumnName: id
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: text
+```
+
+4. 生成entities php文件
+
+```
+./bin/console doctrine:generate:entities AppBundle
+```
+
+5. 更新数据结构到数据库
+
+```
+./bin/console doctrine:schema:update --force
+```
+
+6. 创建crud
+
+```
+# 生成过程中，`AppBundle/Resouces/config/routing.yml`文件不能被重复修改，每次生成后会在命令行中输出无法添加的routing配置，需要手动添加到`AppBundle/Resources/config/routing.yml`文件中
+# 自动生成的view文件会放在`app/Resources/views`目录中，需要移动到`AppBundle/Resources/views`目录，并根据Entity的命名修改大小
+./bin/console p:generate:crud
+or
+./bin/console p:generate:crud --with-write --format=yml --overwrite -n --entity AppBundle:PictureTag
+./bin/console p:generate:crud --with-write --format=yml --overwrite -n --entity AppBundle:PictureCategory
+./bin/console p:generate:crud --with-write --format=yml --overwrite -n --entity AppBundle:Picture
+```
+
+## OAuth
+
+1. 生成client_id
+
+```
+./bin/console p:oauth:client:create
+
+# 输出生成的client_id与secret_id
+# client_id: 2_3kkl1m19ll8g4o0swogsswwoscw84cc0oss0cwgk4sckc48808
+# secret: 9mmx0ub07lkwc00g84gks8gkw0c40gs08wsgogk8oc0ockwow
+```
+
+2. 创建controller，并将路由挂载到/api下，可根据需要自行修改
+
+3. 测试oauth
+
+```
+# vendor/p/UserBundle/Tests/oauth_test.py
+# 修改下面变量
+
+# domain = "local.example.com"
+# url = "/api/test"
+# client_id = ""
+# secret_id = ""
+# username = ""
+# password = ""
+
+python vendor/p/UserBundle/Tests/oauth_test.py
 ```
