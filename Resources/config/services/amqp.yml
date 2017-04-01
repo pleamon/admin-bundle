@@ -3,7 +3,7 @@ services:
         class: P\AdminBundle\Component\Amqp\Amqp
         arguments:
             - "@service_container"
-            - '@p.curl'
+            - '@p.http'
             - "@event_dispatcher"
 
     p.amqp.subscriber:

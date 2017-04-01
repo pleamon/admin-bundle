@@ -6,6 +6,13 @@
 
 {% block ibox_title -%}{{ 'edit'|trans({}, 'messages') }}{% endblock %}
 {% block ibox_tools -%}
+{% if workflow_can(entity, 'reject') %}
+    <a class="btn btn-outline btn-info" href="{{ path("article_reject", {id: entity.id}) }}">{{ 'reject'|trans({}, 'messages') }}</a>
+{% endif %}
+
+{% if workflow_can(entity, 'publish') %}
+    <a class="btn btn-outline btn-info" href="{{ path("article_publish", {id: entity.id}) }}">{{ 'publish'|trans({}, 'messages') }}</a>
+{% endif %}
 <a class="btn btn-outline btn-info" href="{{ path("article") }}">{{ 'back to list'|trans({}, 'messages') }}</a>
 {% endblock %}
 

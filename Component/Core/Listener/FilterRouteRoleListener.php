@@ -8,17 +8,21 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class FilterRouteRoleListener
 {
+    private $container;
     private $em;
     private $authorizationChecker;
     private $request;
-    public function __construct($em, $authorizationChecker, $requestStack) {
+    public function __construct($container, $em, $authorizationChecker, $requestStack) {
+        $this->container = $container;
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
         $this->request = $requestStack->getCurrentRequest();
     }
 
     public function onKernelController(FilterControllerEvent $event) {
-        $this->checkRouteRole($event);
+        if($this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $this->checkRouteRole($event);
+        }
     }
 
     public function checkRouteRole(FilterControllerEvent $event) {
@@ -36,13 +40,13 @@ class FilterRouteRoleListener
             return;
         }
 
-        $roles = array('ROLE_USER');
+        $roles = array();
         foreach($menu->getRoles() as $role) {
             array_push($roles, $role->getName());
         }
 
         if (false === $this->authorizationChecker->isGranted($roles)) {
-            throw new AccessDeniedException();
+            //throw new AccessDeniedException();
         }
     }
 }

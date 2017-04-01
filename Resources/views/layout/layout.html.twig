@@ -4,8 +4,18 @@
 {% set route = app.request.get('_route') %}
 {% set active = 0 %}
 {% for parent in padmin.get('p.admin.menu').RootMenus %}
-    {% if active == 0 %}
-        {% for menu in parent.items %}
+    {% set menus = [] %}
+    {% for menu in parent.items %}
+        {% if menu.roles.count > 0 %}
+        {% for role in menu.roles %}
+            {% if is_granted(role.name) %}
+                {% set menus = menus|merge([menu]) %}
+            {% endif %}
+        {% endfor %}
+        {% else %}
+            {% set menus = menus|merge([menu]) %}
+        {% endif %}
+        {% if active == 0 %}
             {% if menu.route == route %}
                 {% set active = 1 %}
             {% endif %}
@@ -17,8 +27,9 @@
                     {% endif %}
                 {% endfor %}
             {% endif %}
-        {% endfor %}
-    {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% if menus|length > 0 %}
     <li class="{% if parent.route == route or active == 1 %}active{% endif %}">
         <a href="{{ parent.route ? path(parent.route) : '#' }}">
             {% if parent.icon %}
@@ -31,7 +42,7 @@
         </a>
         {% if parent.items|length > 0 %}
         <ul class="nav nav-second-level collapse">
-            {% for menu in parent.items %}
+            {% for menu in menus %}
             <li class="{% if active == 1 and menu.route == route %}active{% set active = 2 %}{% endif %}">
                 <a href="{{ path(menu.route) }}">
                     {% if menu.icon %}
@@ -44,6 +55,7 @@
         </ul>
         {% endif %}
     </li>
+    {% endif %}
 {% endfor %}
 {% endblock %}
 

@@ -37,7 +37,6 @@ class Amqp
             CURLOPT_USERPWD => 'guest:guest',
         ));
         return json_decode($result);
-
     }
 
     public function getChannel()

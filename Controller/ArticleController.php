@@ -146,6 +146,7 @@ class ArticleController extends Controller
 
         $entity = $em->getRepository('PAdminBundle:Article')->find($id);
 
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Article entity.');
         }
@@ -273,5 +274,39 @@ class ArticleController extends Controller
             ->add('submit', SubmitType::class, array('label' => 'delete', 'translation_domain' => 'messages', 'attr' => array('class' => 'btn btn-danger delete-action')))
             ->getForm()
         ;
+    }
+
+    public function rejectAction($id) {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('PAdminBundle:Article')->find($id);
+
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Article entity.');
+        }
+
+        $stateMachine = $this->container->get( 'state_machine.article_publishing' );
+        $stateMachine->apply($entity, 'reject');
+        $em->persist($entity);
+        $em->flush();
+        return $this->redirectToRoute('article_edit', array('id' => $id));
+    }
+
+    public function publishAction($id) {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('PAdminBundle:Article')->find($id);
+
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Article entity.');
+        }
+
+        $stateMachine = $this->container->get( 'state_machine.article_publishing' );
+        $stateMachine->apply($entity, 'publish');
+        $em->persist($entity);
+        $em->flush();
+        return $this->redirectToRoute('article_edit', array('id' => $id));
     }
 }

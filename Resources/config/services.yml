@@ -6,7 +6,7 @@ imports:
     - { resource: services/amqp.yml }
     - { resource: services/assetic.yml }
     - { resource: services/baidu.yml }
-    - { resource: services/curl.yml }
+    - { resource: services/http.yml }
     - { resource: services/markdown.yml }
     - { resource: services/notification.yml }
     - { resource: services/paginator.yml }

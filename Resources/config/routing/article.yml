@@ -42,3 +42,11 @@ article_delete:
     methods:  [POST, DELETE]
     options:
         default: article
+
+article_reject:
+    path:     /{id}/reject
+    defaults: { _controller: "PAdminBundle:Article:reject" }
+ 
+article_publish:
+    path:     /{id}/publish
+    defaults: { _controller: "PAdminBundle:Article:publish" }

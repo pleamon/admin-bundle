@@ -76,6 +76,13 @@
                         {% for first in entities %}
                         <li class="dd-item" data-id="{{ first.id }}">
                             <div class="dd-handle">
+                                    {% for first_role in first.roles %}
+                                    <span class="pull-right">
+                                        <span class="label label-warning">
+                                            {{ first_role.name }}
+                                        </span>
+                                    </span>
+                                    {% endfor %}
                                 {% if first.icon %}
                                 <span class="label label-info"><i class="{{ first.icon.name }}"></i></span>
                                 {% endif %}
@@ -86,6 +93,13 @@
                                 {% for secondary in first.items %}
                                 <li class="dd-item" data-id="{{ secondary.id}}">
                                     <div class="dd-handle">
+                                        {% for secondary_role in secondary.roles %}
+                                        <span class="pull-right">
+                                            <span class="label label-warning">
+                                                {{ secondary_role.name }}
+                                            </span>
+                                        </span>
+                                        {% endfor %}
                                         {% if secondary.icon %}
                                         <span class="label label-info"><i class="{{ secondary.icon.name }}"></i></span>
                                         {% endif %}
@@ -96,6 +110,13 @@
                                         {% for third in secondary.items %}
                                         <li class="dd-item" data-id="{{ third.id}}">
                                             <div class="dd-handle">
+                                                {% for third_role in third.roles %}
+                                                <span class="pull-right">
+                                                    <span class="label label-warning">
+                                                        {{ third_role.name }}
+                                                    </span>
+                                                </span>
+                                                {% endfor %}
                                                 {% if third.icon %}
                                                 <span class="label label-info"><i class="{{ third.icon.name }}"></i></span>
                                                 {% endif %}
@@ -153,6 +174,13 @@
                         {% for unabledMenu in unabledMenus %}
                         <li class="dd-item" data-id="{{ unabledMenu.id }}">
                             <div class="dd-handle">
+                                {% for unabledMenuRole in unabledMenu.roles %}
+                                <span class="pull-right">
+                                    <span class="label label-warning">
+                                        {{ unabledMenuRole.name }}
+                                    </span>
+                                </span>
+                                {% endfor %}
                                 {% if unabledMenu.icon %}
                                 <span class="label label-warning"><i class="{{ unabledMenu.icon.name }}"></i></span>
                                 {% endif %}
@@ -250,8 +278,17 @@ $(document).ready(function(){
                 $("#unableds").html("");
                 console.log(json);
                 $(json).each(function(k, v) {
+                    var roleLabel = '';
+                    $(v.roles).each(function(k, v){
+                        roleLabel += '<span class="pull-right">' +
+                            '<span class="label label-warning">' +
+                                v.name
+                            '</span>' +
+                        '</span>';
+                    });
                     var dditem = '<li class="dd-item" data-id="' + v.id + '">' +
                                     '<div class="dd-handle">' +
+                                        roleLabel +
                                         (v.icon ? '<span class="label label-warning"><i class="' + v.icon.name + '"></i></span>' : '') +
                                         v.text + '[ ' + v.route + ' ]' +
                                     '</div>' +

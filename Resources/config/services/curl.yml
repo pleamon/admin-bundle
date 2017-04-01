@@ -1,3 +1,0 @@
-services:
-    p.curl:
-        class: P\AdminBundle\Component\Curl\Curl

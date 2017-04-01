@@ -2,6 +2,7 @@ services:
     p.admin.listener.filter_route_role:
         class: P\AdminBundle\Component\Core\Listener\FilterRouteRoleListener
         arguments:
+            - '@service_container'
             - '@doctrine.orm.default_entity_manager'
             - '@security.authorization_checker'
             - '@request_stack'

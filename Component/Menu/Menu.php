@@ -38,16 +38,20 @@ class Menu
 
     public function getRootMenus()
     {
+        $token = $this->container->get('security.token_storage')->getToken();
+        $logger = $this->container->get('logger');
+
         $result = $this->em->getRepository('PAdminBundle:AdminMenu')->createQueryBuilder('am')
-            ->where('am.parent IS NULL')
-            ->andWhere('am.enabled = 1')
+            ->where('am.parent IS NULL AND am.enabled = 1')
+            ->leftJoin('am.roles', 'r')
+            ->andWhere('r.name in (:roles) OR r.id IS NULL')
+            ->setParameter('roles', array_map(function($role) {return $role->getRole();}, $token->getRoles()))
             ->orderBy('am.sort', 'asc')
             ->getQuery()
-            ->useResultCache(true, 86400, self::CACHE_REGION)
+            //->useResultCache(true, 86400, self::CACHE_REGION)
             ->getResult()
             ;
         return $result;
-
     }
 
     public function clearCache()

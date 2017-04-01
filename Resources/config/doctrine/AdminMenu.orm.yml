@@ -17,7 +17,7 @@ P\AdminBundle\Entity\AdminMenu:
             joinTable:
                 name: admin_menu_role
                 joinColumns:
-                    group_id:
+                    menu_id:
                         referencedColumnName: id
                 inverseJoinColumns:
                     role_id:

@@ -316,4 +316,33 @@ class Article
     {
         return $this->comments;
     }
+    /**
+     * @var string
+     */
+    private $marking;
+
+
+    /**
+     * Set marking
+     *
+     * @param string $marking
+     *
+     * @return Article
+     */
+    public function setMarking($marking)
+    {
+        $this->marking = $marking;
+
+        return $this;
+    }
+
+    /**
+     * Get marking
+     *
+     * @return string
+     */
+    public function getMarking()
+    {
+        return $this->marking;
+    }
 }

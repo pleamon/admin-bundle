@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use P\AdminBundle\DataFixtures\ORM\LoadUserGroupData;
+use P\UserBundle\DataFixtures\ORM\LoadUserGroupData;
 
 /**
  * @author Antoine Pleamon <pleamon.li@gmail.com>

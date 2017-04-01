@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use P\AdminBundle\DataFixtures\ORM\LoadUserRoleData;
+use P\UserBundle\DataFixtures\ORM\LoadUserRoleData;
 
 /**
  * @author Antoine Pleamon <pleamon.li@gmail.com>
