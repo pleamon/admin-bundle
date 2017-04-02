@@ -19,6 +19,7 @@ composer require symfony/assetic-bundle
 composer require friendsofsymfony/user-bundle ~2.0@dev
 composer require friendsofsymfony/oauth-server-bundle
 
+composer require p/http-bundle
 composer require p/user-bundle
 composer require p/admin-bundle
 // composer require p/home-bundle 前端bundle
@@ -49,7 +50,7 @@ mkdir app/config/p app/config/fos
 # app/config/p/admin.yml
 
 parameters:
-    locale: zh_CN
+    locale: en
 
 framework:
     translator:      { fallbacks: ["%locale%"] }
@@ -87,6 +88,10 @@ p_admin:
         route: search_route # type string default null
         text: 搜索框 # type string default ''
     base_template: "PAdminBundle:layout:standard_layout.html.twig" # type twig file default "PAdminBundle:layout:standard_layout.html.twig"
+    languages:
+        en: english
+        zh_CN: 简体中文
+        zh_TW: 繁体中文
 ```
 
 - puser.yml
