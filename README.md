@@ -12,6 +12,7 @@
 ## 安装bundle
 
 ```
+composer require doctrine/doctrine-cache-bundle
 composer require doctrine/doctrine-fixtures-bundle
 composer require symfony/assetic-bundle
 

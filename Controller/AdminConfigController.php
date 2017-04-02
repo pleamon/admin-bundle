@@ -42,6 +42,8 @@ class AdminConfigController extends Controller
                     ;
             }
         }
+        dump($groups);
+        exit;
         $form = $formBuilder->getForm();
 
         $form->handleRequest($request);
