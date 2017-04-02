@@ -64,4 +64,10 @@ class AdminConfigController extends Controller
         $this->get('p.admin.core.config')->clearCache();
         return $this->redirectToRoute('p_admin_config');
     }
+
+    public function languageAction(Request $request, $locale) 
+    {
+        $request->setLocale($locale);
+        return $this->redirect($request->headers->get('referer'));
+    }
 }

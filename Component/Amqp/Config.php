@@ -6,7 +6,7 @@ use P\AdminBundle\Entity\AdminConfig;
 
 class Config
 {
-    public function getConfigs()
+    public function registerConfig()
     {
         return array(
             new AdminConfig('amqp', 'host', null, null, '', 'amqp server host'),

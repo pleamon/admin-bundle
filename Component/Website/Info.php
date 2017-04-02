@@ -6,7 +6,7 @@ use P\AdminBundle\Entity\AdminConfig;
 
 class Info
 {
-    public function getConfigs()
+    public function registerConfig()
     {
         return array(
             new AdminConfig('Website', 'title', null, null, 'P Admin', '浏览器标签名称'),

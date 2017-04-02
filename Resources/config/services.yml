@@ -1,5 +1,7 @@
 imports:
     - { resource: services/core.yml }
+    - { resource: services/dashboard.yml }
+    - { resource: services/locale.yml }
     - { resource: services/website.yml }
     - { resource: services/form.yml }
     - { resource: services/menu.yml }
@@ -12,6 +14,7 @@ imports:
     - { resource: services/paginator.yml }
     - { resource: services/twig.yml }
     - { resource: services/filesystem.yml }
+    - { resource: services/crontab.yml }
 
 parameters:
     p.notification.levels: ['info', 'debug', 'warning', 'error', 'fatal']

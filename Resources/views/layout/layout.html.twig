@@ -1,63 +1,131 @@
 {% extends 'PAdminBundle:layout:base.html.twig' %}
 
 {% block menus %}
-{% set route = app.request.get('_route') %}
-{% set active = 0 %}
-{% for parent in padmin.get('p.admin.menu').RootMenus %}
-    {% set menus = [] %}
-    {% for menu in parent.items %}
-        {% if menu.roles.count > 0 %}
-        {% for role in menu.roles %}
-            {% if is_granted(role.name) %}
-                {% set menus = menus|merge([menu]) %}
-            {% endif %}
-        {% endfor %}
-        {% else %}
-            {% set menus = menus|merge([menu]) %}
-        {% endif %}
-        {% if active == 0 %}
-            {% if menu.route == route %}
-                {% set active = 1 %}
-            {% endif %}
-            {% if menu.items|length > 0 %}
-                {% for item in menu.items %}
-                    {% if item.route == route %}
-                        {% set active = 1 %}
-                        {% set route = menu.route %}
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        {% endif %}
-    {% endfor %}
-    {% if menus|length > 0 %}
-    <li class="{% if parent.route == route or active == 1 %}active{% endif %}">
-        <a href="{{ parent.route ? path(parent.route) : '#' }}">
-            {% if parent.icon %}
-            <i class="{{ parent.icon.name }}"></i>
-            {% endif %}
-            <span class="nav-label">{{ parent.text }}</span>
-            {% if parent.items|length > 0 %}
-            <span class="fa arrow"></span>
-            {% endif %}
-        </a>
-        {% if parent.items|length > 0 %}
-        <ul class="nav nav-second-level collapse">
-            {% for menu in menus %}
-            <li class="{% if active == 1 and menu.route == route %}active{% set active = 2 %}{% endif %}">
-                <a href="{{ path(menu.route) }}">
-                    {% if menu.icon %}
-                        <i class="{{ menu.icon.name }}"></i>
-                    {% endif %}
-                    {{ menu.text }}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    </li>
-    {% endif %}
-{% endfor %}
+{% import "PAdminBundle:layout:menu.html.twig" as menu %}
+{{ menu.render(padmin.get('p.admin.menu').RootMenus) }}
+{% endblock %}
+
+{% block brand_img %}<img alt="image" class="img-circle" src="{{ app.user.email|gravatar }}">{% endblock %}
+{% block brand_title %}{{ app.user.username }}{% endblock %}
+{% block brand_desc %}{{ app.user.username }}{% endblock %}
+
+{% block brand_list %}
+<li><a href="{{ path("user_profile") }}">{{ 'profile'|trans }}</a></li>
+{% endblock %}
+
+{% block title %}
+{{ pconfig.get('Website', 'name') }}
 {% endblock %}
 
 {% block page_heading %}
+{% endblock %}
+
+{% block footer_right %}
+{{ padmin.diskFreeSpace }} of <strong>{{ padmin.diskTotalSpace }}</strong> Free.
+{% endblock %}
+
+{% block footer_left %}
+<strong>Copyright</strong> {{ pconfig.get('Website', 'copyright') }}
+{% endblock %}
+
+{% block sidebar_tab_count %}3{% endblock %}
+{% block sidebar_tab %}
+    <li class="active"><a data-toggle="tab" href="#tab-1"> Notes </a></li>
+    <li><a data-toggle="tab" href="#tab-2"> Projects </a></li>
+    <li class=""><a data-toggle="tab" href="#tab-3"> <i class="fa fa-gear"></i></a></li>
+{% endblock %}
+
+{% block sidebar_content %}
+<div id="tab-1" class="tab-pane active">
+    <div class="sidebar-title">
+        <h3> <i class="fa fa-comments-o"></i> Latest Notes</h3>
+        <small><i class="fa fa-tim"></i> You have 14 projects. 10 not completed.</small>
+    </div>
+    <div class="sidebar-message">
+        <a href="#">
+            <div class="pull-left text-center">
+                <img alt="image" class="img-circle message-avatar" src="">
+
+                <div class="m-t-xs">
+                    <i class="fa fa-star text-warning"></i>
+                    <i class="fa fa-star text-warning"></i>
+                </div>
+            </div>
+            <div class="media-body">
+
+                There are many variations of passages of Lorem Ipsum available.
+                <br>
+                <small class="text-muted">Today 4:21 pm</small>
+            </div>
+        </a>
+    </div>
+</div>
+<div id="tab-2" class="tab-pane">
+    <div class="sidebar-title">
+        <h3> <i class="fa fa-cube"></i> Latest projects</h3>
+        <small><i class="fa fa-tim"></i> You have 14 projects. 10 not completed.</small>
+    </div>
+</div>
+<div id="tab-3" class="tab-pane">
+    <div class="sidebar-title">
+        <h3> <i class="fa fa-gears"></i> {{ 'Widget Settings'|trans }} </h3>
+        <small><i class="fa fa-tim"></i> {{ 'Widget Setting Description'|trans }} </small>
+    </div>
+    {% for widget in padmin.get('p.admin.dashboard').getWidgets() %}
+    <div class="setings-item">
+        <span>
+            {{ widget.widgetName }}
+        </span>
+        <div class="switch">
+            <div class="onoffswitch">
+                <input type="checkbox" name="collapsemenu"
+                class="onoffswitch-checkbox widget-switch"
+                id="widget_switch_{{ widget.uniqid }}"
+                data-uniqid="{{ widget.uniqid }}"
+                data-widget-id="{{ widget.widgetId }}"
+                {% if widget.enabled %}checked{% endif %}
+                >
+                <label class="onoffswitch-label" for="widget_switch_{{ widget.uniqid }}">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="sidebar-content">
+        <h4>{{ 'Widget Settings'|trans }}</h4>
+        <div class="small">
+            {{ 'widget setting content'|trans }}
+        </div>
+    </div>
+</div>
+    <script>
+function toggleWidget(widgetId, uniqid, enabled) {
+    $.post("{{ path("p_dashboard_widget_switch") }}", {widgetId: widgetId, enabled: enabled}, function(json) {
+        if(json.status == 'success') {
+            var el = $("#widget_" +  uniqid);
+            if(enabled) {
+                el.removeClass('hide');
+            } else {
+                el.addClass('hide');
+            }
+        }
+    }, 'json');
+}
+    $(".widget-switch").on("click", function(e) {
+        var uniqid = $(this).data("uniqid");
+        var widgetId = $(this).data("widget-id");
+        var enabled = $(this).is(":checked");
+        toggleWidget(widgetId, uniqid, enabled);
+        console.log('test');
+    });
+    $(".widget-close").on("click", function(e) {
+        var widget = $(this).parents(".widget");
+        var uniqid = widget.data('uniqid');
+        var widgetId = widget.data('widget-id');
+
+        $("#widget_switch_" + uniqid).click();
+    });
+    </script>
 {% endblock %}

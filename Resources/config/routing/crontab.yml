@@ -1,0 +1,44 @@
+crontab:
+    path:     /{page}
+    defaults: { _controller: "PAdminBundle:Crontab:index", page: 1}
+    requirements:
+        page: \d*
+
+crontab_show:
+    path:     /{id}/show
+    defaults: { _controller: "PAdminBundle:Crontab:show" }
+    options:
+        default: crontab
+
+crontab_new:
+    path:     /new
+    defaults: { _controller: "PAdminBundle:Crontab:new" }
+    options:
+        default: crontab
+
+crontab_create:
+    path:     /create
+    defaults: { _controller: "PAdminBundle:Crontab:create" }
+    methods:  POST
+    options:
+        default: crontab
+
+crontab_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PAdminBundle:Crontab:edit" }
+    options:
+        default: crontab
+
+crontab_update:
+    path:     /{id}/update
+    defaults: { _controller: "PAdminBundle:Crontab:update" }
+    methods:  [POST, PUT]
+    options:
+        default: crontab
+
+crontab_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PAdminBundle:Crontab:delete" }
+    methods:  [POST, DELETE]
+    options:
+        default: crontab

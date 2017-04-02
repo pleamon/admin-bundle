@@ -1,0 +1,58 @@
+{% macro render(menus) %}
+{% set route = app.request.get('_route') %}
+{% set active = 0 %}
+{% for parent in menus %}
+    {% set menus = [] %}
+    {% for menu in parent.items %}
+        {% if menu.roles.count > 0 %}
+        {% for role in menu.roles %}
+            {% if is_granted(role.name) %}
+                {% set menus = menus|merge([menu]) %}
+            {% endif %}
+        {% endfor %}
+        {% else %}
+            {% set menus = menus|merge([menu]) %}
+        {% endif %}
+        {% if active == 0 %}
+            {% if menu.route == route %}
+                {% set active = 1 %}
+            {% endif %}
+            {% if menu.items|length > 0 %}
+                {% for item in menu.items %}
+                    {% if item.route == route %}
+                        {% set active = 1 %}
+                        {% set route = menu.route %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% if parent.route or menus|length > 0 %}
+    <li class="{% if parent.route == route or active == 1 %}active{% endif %}">
+        <a href="{{ parent.route ? path(parent.route) : '#' }}">
+            {% if parent.icon %}
+            <i class="{{ parent.icon.name }}"></i>
+            {% endif %}
+            <span class="nav-label">{{ parent.text }}</span>
+            {% if menus|length > 0 %}
+            <span class="fa arrow"></span>
+            {% endif %}
+        </a>
+        {% if parent.items|length > 0 %}
+        <ul class="nav nav-second-level collapse">
+            {% for menu in menus %}
+            <li class="{% if active == 1 and menu.route == route %}active{% set active = 2 %}{% endif %}">
+                <a href="{{ path(menu.route) }}">
+                    {% if menu.icon %}
+                        <i class="{{ menu.icon.name }}"></i>
+                    {% endif %}
+                    {{ menu.text }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </li>
+    {% endif %}
+{% endfor %}
+{% endmacro %}

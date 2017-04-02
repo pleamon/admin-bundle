@@ -8,6 +8,7 @@ use P\AdminBundle\DependencyInjection\Compiler\TwigCompilerPass;
 use P\AdminBundle\DependencyInjection\Compiler\AssetCompilerPass;
 use P\AdminBundle\DependencyInjection\Compiler\DoctrineCompilerPass;
 use P\AdminBundle\DependencyInjection\Compiler\ConfigCompilerPass;
+use P\AdminBundle\DependencyInjection\Compiler\DashboardCompilerPass;
 
 class PAdminBundle extends Bundle
 {
@@ -18,5 +19,6 @@ class PAdminBundle extends Bundle
         $container->addCompilerPass(new AssetCompilerPass());
         $container->addCompilerPass(new DoctrineCompilerPass());
         $container->addCompilerPass(new ConfigCompilerPass());
+        $container->addCompilerPass(new DashboardCompilerPass());
     }
 }

@@ -13,7 +13,7 @@ class ArrayExtension extends \Twig_Extension
 
     public function getName()
     {
-        return 'p_admin_extension';
+        return 'p_array_extension';
     }
 }
 

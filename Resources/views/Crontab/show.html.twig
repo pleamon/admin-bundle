@@ -1,0 +1,67 @@
+{% extends 'PAdminBundle:layout:ibox.html.twig' %}
+{% trans_default_domain 'PAdminBundle' %}
+
+
+{% block ibox_title -%} {{ 'edit'|trans({}, 'messages') }}{% endblock %}
+
+{% block ibox_tools -%}
+    <a class="btn btn-outline btn-info" href="{{ path("crontab") }}">{{ 'back to list'|trans({}, 'messages') }}</a>
+{% endblock %}
+
+
+{% block ibox_content -%}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>{{ 'crontab.id'|trans }}</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+
+            <tr>
+                <th>{{ 'crontab.schedule'|trans }}</th>
+                <td>{{ entity.schedule }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'crontab.type'|trans }}</th>
+                <td>{{ entity.type }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'crontab.execute'|trans }}</th>
+                <td>{{ entity.execute }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'crontab.parameter'|trans }}</th>
+                <td>{{ entity.parameter|json_encode() }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'crontab.status'|trans }}</th>
+                <td>{{ entity.status }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'crontab.createdAt'|trans }}</th>
+                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+
+                <th>{{ 'crontab.updatedAt'|trans }}</th>
+                <td>{{ entity.updatedAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+
+            <tr>
+
+                <th>{{ 'crontab.lastExecuteAt'|trans }}</th>
+                <td>{{ entity.lastExecuteAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a class="btn btn-primary" href="{{ path('crontab_edit', { 'id': entity.id }) }}"> {{ 'edit'|trans({}, 'messages') }} </a>
+{{ form(delete_form, {attr: {style:"display: inline-block;", "class": "delete-action"}}) }}
+
+{% endblock %}
+

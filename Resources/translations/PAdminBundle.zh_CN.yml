@@ -109,4 +109,14 @@ role:
     name: 权限名称
     childrens: 子级权限
 
+crontab:
+    id: id
+    schedule: 秒 分 时 日 月 周
+    type: 类型
+    execute: 执行内容
+    parameter: 参数
+    status: 状态
+    createdAt: 创建时间
+    updatedAt: 更新时间
+    lastExecuteAt: 最后执行时间
 

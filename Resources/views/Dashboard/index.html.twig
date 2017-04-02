@@ -1,1 +1,17 @@
 {% extends admin_base_template %}
+
+{% block content %}
+<div class="row"  id="sortable-view">
+{% for widget in widgets %}
+{{ widget.render()|raw }}
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+$(document).ready(function(){
+    WinMove();
+});
+    </script>
+{% endblock %}

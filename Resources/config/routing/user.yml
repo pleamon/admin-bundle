@@ -42,3 +42,7 @@ user_delete:
     methods:  [POST, DELETE]
     options:
         default: user
+
+user_profile:
+    path: /profile
+    defaults: { _controller: "PAdminBundle:User:profile" }

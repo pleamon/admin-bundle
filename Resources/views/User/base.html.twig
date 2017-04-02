@@ -12,9 +12,9 @@
         <div class="ibox float-e-margins">
             <div class="ibox-content mailbox-content">
                 <div class="file-manager">
-                    <a class="btn btn-block btn-primary compose-mail" href="mail_compose.html">添加新用户</a>
+                    <a class="btn btn-block btn-primary compose-mail" href="mail_compose.html">{{ 'new user'|trans }}</a>
                     <div class="space-25"></div>
-                    <h5>用户组</h5>
+                    <h5>{{ 'user group'|trans }}</h5>
                     <ul class="folder-list m-b-md" style="padding: 0">
                         </li>
                         {% for idx, group in groups %}

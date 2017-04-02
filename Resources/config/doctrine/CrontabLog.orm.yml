@@ -1,0 +1,21 @@
+P\AdminBundle\Entity\CrontabLog:
+    type: entity
+    table: crontab_log
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToOne:
+        crontab:
+            targetEntity: Crontab
+            joinColumn:
+                name: cron_id
+                referencedColumnName: id
+    fields:
+        status:
+            type: integer
+        result:
+            type: text
+        createdAt:
+            type: datetime

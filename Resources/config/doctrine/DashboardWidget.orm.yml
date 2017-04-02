@@ -1,0 +1,33 @@
+P\AdminBundle\Entity\DashboardWidget:
+    type: entity
+    table: dashboard_widget
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    manyToMany:
+        users:
+            targetEntity: P\UserBundle\Entity\User
+            joinTable:
+                name: dashboard_widget_user_setting
+                joinColumns:
+                    dashboard_widget_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    user_id:
+                        referencedColumnName: id
+ 
+    fields:
+        widgetId:
+            type: string
+            length: 255
+        widgetName:
+            type: string
+            length: 255
+        enabled:
+            type: boolean
+        sort:
+            type: integer
+            options:
+                default: 0

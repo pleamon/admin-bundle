@@ -13,7 +13,7 @@ services:
         arguments:
             - "@service_container"
 
-    p.admin.config:
+    p.amqp.config:
         class: P\AdminBundle\Component\Amqp\Config
         tags:
             - { name: p.admin.config }

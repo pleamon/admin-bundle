@@ -8,15 +8,16 @@ class NotificationRepository extends EntityRepository
 {
     public function getCount($level = null, $nkey = null)
     {
-        $qb = $this->getEntityManager()->createQueryBuilder('n')
-            ->select('COUNT(n.id)')
+        $qb = $this->getEntityManager()->getRepository('PAdminBundle:Notification')->createQueryBuilder('n')
+            ->select('COUNT(n.id) as notification_count')
             ;
         if($level) {
             $qb->where("n.level = ${level}");
         }
         if($nkey) {
             $qb->leftJoin('n.category', 'c')
-                ->where("c.nkey = '${nkey}'");
+                ->andWhere("c.nkey = :nkey")
+                ->setParameter('nkey', $nkey);
         }
         return $qb->getQuery()
             ->getSingleScalarResult();
@@ -24,13 +25,14 @@ class NotificationRepository extends EntityRepository
 
     public function getMessages($level = null, $nkey = null)
     {
-        $qb = $this->getEntityManager()->createQueryBuilder('n')
+        $qb = $this->getEntityManager()->getRepository('PAdminBundle:Notification')->createQueryBuilder('n');
         if($level) {
             $qb->where("n.level = ${level}");
         }
         if($nkey) {
             $qb->leftJoin('n.category', 'c')
-                ->where("c.nkey = '${nkey}'");
+                ->andWhere("c.nkey = :nkey")
+                ->setParameter('nkey', $nkey);
         }
         return $qb->getQuery()
             ->getResult();

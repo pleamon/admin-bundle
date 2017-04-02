@@ -1,0 +1,6 @@
+services:
+    p.admin.dashboard:
+        class: P\AdminBundle\Component\Dashboard\Dashboard
+        arguments:
+            - '@service_container'
+            - '@templating'

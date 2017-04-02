@@ -6,8 +6,6 @@ services:
             - '@router'
             - '@doctrine.orm.default_entity_manager'
             - '%p.admin.route%'
-            - '@doctrine_cache.providers.metadata_cache_driver'
-            - '@doctrine_cache.providers.query_cache_driver'
             - '@doctrine_cache.providers.result_cache_driver'
 
     p.admin.menu.subscriber:
@@ -16,3 +14,10 @@ services:
             - '@service_container'
         tags: 
             - { name: doctrine.event_subscriber }
+
+    p.admin.menu.load.listener:
+        class: P\AdminBundle\Component\Menu\EventListener\MenuLoadListener
+        arguments:
+            - '@service_container'
+        tags: 
+            - { name: kernel.event_listener, event: p.menu.load, method: onMenuLoad }

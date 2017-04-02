@@ -24,13 +24,12 @@ class PAdminExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('p.languages', $config['languages']);
         $container->setParameter('p.admin.search', $config['search']);
         $container->setParameter('p.admin.modal', $config['modal']);
         $container->setParameter('p.admin.base_template', $config['base_template']);
         $container->setParameter('p.admin.route', $config['route']);
         $container->setParameter('p.paginator.template', $config['paginator_template']);
-        $container->setParameter('p.amqp.credentials', $config['amqp']);
-        $container->setParameter('p.baidu', $config['baidu']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

@@ -1,4 +1,19 @@
 services:
     p.baidu.geocoder:
-        class: P\Component\Baidu\Geocoder
-        arguments: ["%p.baidu%"]
+        class: P\AdminBundle\Component\Baidu\Geocoder
+        arguments: ["@p.admin.core.config"]
+
+    p.baidu.config:
+        class: P\AdminBundle\Component\Baidu\Config
+        tags:
+            - { name: p.admin.config }
+
+    p.baidu.widget.map:
+        class: P\AdminBundle\Component\Dashboard\Widget
+        tags:
+            - { name: p.admin.dashboard.widget, view: 'PAdminBundle:Widget:BaiduMap.html.twig', widget_name: 'baidu地图' }
+
+    p.baidu.widget.map1:
+        class: P\AdminBundle\Component\Dashboard\Widget
+        tags:
+            - { name: p.admin.dashboard.widget, view: 'PAdminBundle:Widget:BaiduMap.html.twig', widget_name: 'baidu地图2', enabled: false }

@@ -1,4 +1,11 @@
 services:
+    p.admin.twig.variable:
+        class: P\AdminBundle\Component\TwigExtension\PAdminVariable
+        arguments:
+            - "@service_container"
+            - "%p.admin.search%"
+            - "%p.admin.base_template%"
+
     p.admin.twig.icon_extension:
         class: P\AdminBundle\Component\TwigExtension\IconExtension
         tags:
@@ -16,9 +23,7 @@ services:
         arguments:
             - "@p.admin.markdown.parsedown"
 
-    p.admin.twig.variable:
-        class: P\AdminBundle\Component\TwigExtension\PAdminVariable
-        arguments:
-            - "@service_container"
-            - "%p.admin.search%"
-            - "%p.admin.base_template%"
+    p.admin.twig.gravatar_extension:
+        class: P\AdminBundle\Component\TwigExtension\GravatarExtension
+        tags:
+            - { name: twig.extension }

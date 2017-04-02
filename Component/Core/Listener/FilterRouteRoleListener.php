@@ -2,9 +2,8 @@
 
 namespace P\AdminBundle\Component\Core\Listener;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class FilterRouteRoleListener
 {
@@ -19,24 +18,22 @@ class FilterRouteRoleListener
         $this->request = $requestStack->getCurrentRequest();
     }
 
-    public function onKernelController(FilterControllerEvent $event) {
-        if($this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
+    public function onKernelRequest(GetResponseEvent $event) {
+        $token = $this->container->get('security.token_storage')->getToken();
+        if($token && $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->checkRouteRole($event);
         }
     }
 
-    public function checkRouteRole(FilterControllerEvent $event) {
-
-        $controllers = $event->getController();
-        $controller = $controllers[0];
-        if(!$controller instanceof Controller) {
-            return;
-        }
-
+    public function checkRouteRole(GetResponseEvent $event) {
         $route = $this->request->get('_route');
         $menu = $this->em->getRepository('PAdminBundle:AdminMenu')->findOneByRoute($route);
 
         if(empty($menu)) {
+            return;
+        }
+
+        if(empty(count($menu->getRoles()))) {
             return;
         }
 
@@ -46,7 +43,7 @@ class FilterRouteRoleListener
         }
 
         if (false === $this->authorizationChecker->isGranted($roles)) {
-            //throw new AccessDeniedException();
+            throw new AccessDeniedException();
         }
     }
 }

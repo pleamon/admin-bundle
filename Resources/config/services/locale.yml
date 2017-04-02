@@ -1,0 +1,8 @@
+services:
+    p.locale.listener:
+        class: P\AdminBundle\Component\Locale\EventListener\LocaleListener
+        arguments: 
+            - '@service_container'
+            - '%p.languages%'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 17 }

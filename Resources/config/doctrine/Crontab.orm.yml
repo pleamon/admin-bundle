@@ -1,0 +1,28 @@
+P\AdminBundle\Entity\Crontab:
+    type: entity
+    table: crontab
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        schedule:
+            type: string
+        type:
+            type: integer
+        execute:
+            type: text
+        parameter:
+            type: json_array
+            nullable: true
+        status:
+            type: boolean
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+            nullable: true
+        lastExecuteAt:
+            type: datetime
+            nullable: true

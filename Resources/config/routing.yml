@@ -10,9 +10,21 @@ p_admin_config:
     path:    /config
     defaults: { _controller: PAdminBundle:AdminConfig:index }
 
+p_admin_choice_language:
+    path:    /language/{locale}
+    defaults: { _controller: PAdminBundle:AdminConfig:language }
+
 p_admin_config_clear_cache:
     path:    /config/clearcache
     defaults: { _controller: PAdminBundle:AdminConfig:clearCache }
+
+p_admin_dashboard:
+    resource: "@PAdminBundle/Resources/config/routing/dashboard.yml"
+    prefix:   /dashboard
+
+p_admin_crontab:
+    resource: "@PAdminBundle/Resources/config/routing/crontab.yml"
+    prefix:   /crontab
 
 p_admin_user:
     resource: "@PAdminBundle/Resources/config/routing/user.yml"

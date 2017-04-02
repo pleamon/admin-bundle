@@ -20,7 +20,10 @@ class Config
 
     public function register($service, $serviceName, $attributes)
     {
-        $configs = $service->getConfigs();
+        if(!method_exists($service, 'registerConfig')) {
+            return;
+        }
+        $configs = $service->registerConfig();
         foreach($configs as $idx => $config) {
             $group = $config->getGroup();
             $key = $config->getKey();

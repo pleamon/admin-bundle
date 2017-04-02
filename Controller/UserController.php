@@ -5,10 +5,11 @@ namespace P\AdminBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+use P\AdminBundle\Component\Gravatar\Gravatar;
 use P\UserBundle\Entity\User;
 use P\AdminBundle\Form\UserType;
-
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * User controller.
@@ -266,5 +267,15 @@ class UserController extends Controller
             ->add('submit', SubmitType::class, array('label' => 'delete', 'translation_domain' => 'messages', 'attr' => array('class' => 'btn btn-danger delete-action')))
             ->getForm()
         ;
+    }
+
+    public function profileAction()
+    {
+        $email = 'pleamon.li@gmail.com';
+        $default = '';
+        $size = 40;
+        $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+        dump($grav_url);exit;
+        return $this->render('PAdminBundle:User:profile.html.twig');
     }
 }

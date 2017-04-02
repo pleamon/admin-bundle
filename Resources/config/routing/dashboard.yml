@@ -1,0 +1,4 @@
+p_dashboard_widget_switch:
+    path:     /widget/switch
+    defaults: { _controller: PAdminBundle:Dashboard:widgetSwitch }
+    methods: POST

@@ -1,0 +1,24 @@
+{% block stylesheets %}
+{% endblock %}
+
+<div class="col-lg-6 widget {% if not widget.enabled %}hide{% endif %}" data-uniqid="{{ widget.uniqid }}" data-widget-id="{{ widget.widgetId }}" id="widget_{{ widget.uniqid }}">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>{% block ibox_title %}{% endblock %}</h5>
+            <div class="ibox-tools">
+                {% block ibox_tools %}
+                {% endblock %}
+                <a class="widget-close">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        {% block ibox_content %}
+        {% endblock %}
+        {% block ibox_footer %}
+        {% endblock %}
+    </div>
+</div>
+
+{% block javascripts %}
+{% endblock %}

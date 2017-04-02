@@ -26,16 +26,17 @@
             <div>
                 <h1 class="logo-name">{% block logo_name %}PAD{% endblock %}</h1>
             </div>
+
             {% block form_header %}
             <h2>{{ pconfig.get('Website', 'name') }}</h2>
             <p>{{ pconfig.get('Website', 'description') }}</p>
             {% endblock %}
 
+            
             <span class="text-danger">
                 {% block form_error %}
                 {% endblock %}
             </span>
-
             <form class="m-t" method="post" role="form" action="{% block form_action %}{% endblock %}">
                 {% block form_body %}
                 {% endblock %}
@@ -47,14 +48,33 @@
             {% block form_footer %}
             <p class="m-t"> <small> {{ pconfig.get('Website', 'copyright') }} </small> </p>
             {% endblock %}
+            <span class="dropdown dropup pull-right">
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                    {{ padmin.getParameter('p.languages')[app.request.locale] }}
+                </a>
+                <ul class="dropdown-menu ">
+                    {% for locale, name in padmin.getParameter('p.languages') %}
+                    <li>
+                        <a href="{{ path(app.request.get('_route'), {_locale: locale}) }}">
+                            <div>
+                                <span class="text-muted small">{{ name }}</span>
+                            </div>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </span>
         </div>
+
+
+
     </div>
 
     <!-- Mainly scripts -->
     {% javascripts
-        '@PAdminBundle/Resources/public/js/jquery-2.1.1.js'
-        '@PAdminBundle/Resources/public/js/bootstrap.min.js'
-        '@PAdminBundle/Resources/public/js/plugins/iCheck/icheck.min.js'
+    '@PAdminBundle/Resources/public/js/jquery-2.1.1.js'
+    '@PAdminBundle/Resources/public/js/bootstrap.min.js'
+    '@PAdminBundle/Resources/public/js/plugins/iCheck/icheck.min.js'
     %}
     <script type="text/javascript" src="{{ asset(asset_url) }}"></script>
     {% endjavascripts %}
